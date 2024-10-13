@@ -1,14 +1,23 @@
 import reflex as rx
 
+from ..data.firestore import posts, updated, Announcement
+
 
 class NavState(rx.State):
     links: dict[str, str] = {
         'Schedule': '/',
         'Activities': '/activities',
         'Announcements': '/announcements',
-        'Merch': '/merch',
-        'Survey': '/survey',
+        'Merch': 'https://rhythm-of-the-river-merch.printify.me/products',
+        'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSdzPeKeD19qWza9q-Q8SpsKwCL7SnfrsO0Gdxauv1vVi3Co6w/viewform?usp=sf_link',
     }
+    last_post: int = 0
+    announcements: list[Announcement] = posts
+
+    def on_poll(self, date=None):
+        if int(self.last_post) < updated[0]:
+            self.announcements = posts
+            self.last_post = updated[0]
 
 
 def navbar_link(link: list) -> rx.Component:
@@ -23,6 +32,11 @@ def menu_item(link: list) -> rx.Component:
 
 def navbar() -> rx.Component:
     return rx.box(
+        rx.moment(
+            interval=1000,
+            on_change=NavState.on_poll,
+            display='none',
+        ),
         rx.desktop_only(
             rx.hstack(
                 rx.hstack(

@@ -1,5 +1,7 @@
 from datetime import datetime
 
+import pytz
+
 import reflex as rx
 
 from ..template import template
@@ -23,7 +25,8 @@ class BandInfo(rx.Base):
     yt: str = None
 
     def initialize(self):
-        self.date = datetime.now().strftime('%Y-%m-%d')  # Spoofing date for testing
+        self.date = datetime.now(  # Spoofing date for testing
+            pytz.timezone('America/Chicago')).strftime('%Y-%m-%d')
         self.startms = datetime.fromisoformat(
             f'{self.date}T{self.start}-05:00').timestamp()
         self.endms = datetime.fromisoformat(
@@ -57,7 +60,7 @@ class ScheduleState(rx.State):
             date='2024-07-12',
             start='18:00:00',
             end='18:30:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 John’s that guy on the bus who sits quietly, looking tired like
                 the rest of us. The difference is he is sitting there composing
@@ -99,7 +102,7 @@ class ScheduleState(rx.State):
             date='2024-07-12',
             start='19:30:00',
             end='20:00:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 """,
             img='https://scontent-msp1-1.xx.fbcdn.net/v/t39.30808-6/421957323_887298633395209_6722306594685577459_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=foX9hmf7OZgQ7kNvgEBR9V7&_nc_ht=scontent-msp1-1.xx&_nc_gid=AixLAh5ixoc9ggmCbE2VUtr&oh=00_AYBvLw0Na00KDmYFG11tptYrY7FwaJ6OETG4tRSV2KR6aQ&oe=67108BFB',
@@ -145,7 +148,7 @@ class ScheduleState(rx.State):
             date='2024-07-12',
             start='21:00:00',
             end='21:30:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 Jaik Willis is a strumming & drumming One Man Band,  a wild
                 fire-breathing freakshow; playing an 11 piece drum set with his
@@ -222,13 +225,13 @@ class ScheduleState(rx.State):
             date='2024-07-13',
             start='13:30:00',
             end='14:00:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 Which crowd?
                 """,
             img='',
             web='',
-            fb='https://www.facebook.com/corpserevivermpls/',
+            fb='',
             insta='',
             spotify='',
             apple='',
@@ -245,7 +248,7 @@ class ScheduleState(rx.State):
                 """,
             img='https://scontent-msp1-1.xx.fbcdn.net/v/t39.30808-6/241683366_494526511811494_1154546161558859416_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=B4mxl_4U7tEQ7kNvgHJ2-Ew&_nc_ht=scontent-msp1-1.xx&_nc_gid=AdMroc68Bkx_oPyPe_KIqwf&oh=00_AYCazSwsAJFgFbrYquLlx09XGzz0yRCluWdDBTupqugswg&oe=67109AF1',
             web='',
-            fb='',
+            fb='https://www.facebook.com/corpserevivermpls/',
             insta='',
             spotify='',
             apple='',
@@ -255,7 +258,7 @@ class ScheduleState(rx.State):
             date='2024-07-13',
             start='15:00:00',
             end='15:30:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 A gifted song-writer, two of Matt's songs were recently
                 included on Jonathan Byrd and the Pick Up Cowboys' Latest album
@@ -298,7 +301,7 @@ class ScheduleState(rx.State):
             date='2024-07-13',
             start='16:30:00',
             end='17:00:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 Tommy Edwin is a singer-songwriter currently based in
                 Brookings, South Dakota.
@@ -319,7 +322,7 @@ class ScheduleState(rx.State):
             apple='https://music.apple.com/us/artist/tommy-edwin/1632861800',
             yt='https://www.youtube.com/playlist?app=desktop&list=PL44fpVKgATb3DWPlxjhDAuplWADLXVuSR'),
         BandInfo(
-            name='Erin McCawwley\'s Harrison St. Band',
+            name='Erin McCawley\'s Harrison St. Band',
             date='2024-07-13',
             start='17:00:00',
             end='18:00:00',
@@ -353,7 +356,7 @@ class ScheduleState(rx.State):
             date='2024-07-13',
             start='18:00:00',
             end='18:30:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 3 musicians who like to mostly play music found on Harry
                 Smith’s Anthology of American Folk Music
@@ -391,7 +394,7 @@ class ScheduleState(rx.State):
             date='2024-07-13',
             start='19:30:00',
             end='20:00:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 Mal Murphy is a Mankato, MN-based singer-songwriter who
                 released her first, and highly anticipated, EP in December of
@@ -407,7 +410,7 @@ class ScheduleState(rx.State):
                 new light into well loved classic covers, or to hear her
                 traverse new landscapes with her original songs.
                 """,
-            img='',
+            img='https://malmurphymusic.com/wp-content/uploads/2023/12/IMG_6001-768x1024.jpg',
             web='https://malmurphymusic.com/',
             fb='https://www.facebook.com/MalMurphyMusic/',
             insta='https://www.instagram.com/malsarahmurphy/',
@@ -449,7 +452,7 @@ class ScheduleState(rx.State):
             date='2024-07-13',
             start='21:00:00',
             end='21:30:00',
-            stage='Side',
+            stage='Church',
             bio="""
                 Rooting from rural Minnesota, Strictly Herbal is a reggae group
                 bringing sounds that illustrate their love and passion for
@@ -511,9 +514,10 @@ def time_slot(band: BandInfo):
     return rx.cond(
         band.startms,
         rx.text(
-            rx.moment(band.startms * 1000, format='h:mma'),
+            rx.moment(
+                band.startms * 1000, format='h:mma', tz='America/Chicago'),
             rx.text(' - ', as_='span'),
-            rx.moment(band.endms * 1000, format='h:mma')
+            rx.moment(band.endms * 1000, format='h:mma', tz='America/Chicago')
         ),
         rx.skeleton(
             rx.text('10:00am - 10:00pm'),
@@ -596,7 +600,7 @@ def band_entry(band: BandInfo) -> rx.Component:
             rx.dialog.content(
                 rx.dialog.title(band.name),
                 rx.cond(band.img, rx.image(src=band.img)),
-                rx.dialog.description(band.bio, margin='12px'),
+                rx.dialog.description(band.bio, margin='12px 0px'),
                 rx.flex(
                     rx.cond(
                         band.web,
@@ -643,7 +647,7 @@ def band_entry(band: BandInfo) -> rx.Component:
                         rx.link(
                             rx.hstack(
                                 rx.icon(tag='apple'),
-                                rx.text('Apple')
+                                rx.text('iTunes')
                             ),
                             href=band.apple
                         )

@@ -1,2 +1,4 @@
 from .pages import (
-    schedule)
+    schedule,
+    announcements,
+    floyd)

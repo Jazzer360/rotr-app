@@ -1,1 +1,6 @@
+cryptography==43.0.1
+firebase-admin==6.5.0
+grpcio-status==1.66.2
+pytz==2024.2
+
 reflex==0.6.2.post1

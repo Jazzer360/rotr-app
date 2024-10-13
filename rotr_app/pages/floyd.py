@@ -1,0 +1,171 @@
+import reflex as rx
+
+from ..template import template
+from ..components.navbar import NavState
+from ..data.firestore import save_post, Announcement, validate_user
+
+
+class FloydState(rx.State):
+    logged_in: bool = False
+    user: str = None
+    message: str = ''
+
+    def login(self, form_data: dict):
+        if validate_user(form_data.get('user'), form_data.get('password')):
+            self.user = form_data['user']
+            self.logged_in = True
+        else:
+            return rx.toast.error('Nice try...')
+
+    def make_post(self, form_data: dict):
+        if form_data['message']:
+            save_post(self.user, form_data['message'])
+            self.message = ''
+            return rx.toast.success('The masses have been notified!')
+
+
+def post(data: Announcement) -> rx.Component:
+    return rx.text(data.message)
+
+
+def login() -> rx.Component:
+    return rx.card(
+        rx.form(
+            rx.vstack(
+                rx.center(
+                    rx.heading(
+                        "Sign in",
+                        size="6",
+                        as_="h2",
+                        text_align="center",
+                        width="100%",
+                    ),
+                    direction="column",
+                    spacing="5",
+                    width="100%",
+                ),
+                rx.vstack(
+                    rx.text(
+                        "Who is this?",
+                        size="3",
+                        weight="medium",
+                        text_align="left",
+                        width="100%",
+                    ),
+                    rx.input(
+                        rx.input.slot(rx.icon("user")),
+                        placeholder="Probably not Floyd",
+                        name='user',
+                        type="text",
+                        size="3",
+                        width="100%",
+                    ),
+                    spacing="2",
+                    width="100%",
+                ),
+                rx.vstack(
+                    rx.hstack(
+                        rx.text(
+                            "What's the password?",
+                            size="3",
+                            weight="medium",
+                        ),
+                        justify="between",
+                        width="100%",
+                    ),
+                    rx.input(
+                        rx.input.slot(rx.icon("lock")),
+                        placeholder="Probably your pet",
+                        name='password',
+                        type="password",
+                        size="3",
+                        width="100%",
+                    ),
+                    spacing="2",
+                    width="100%",
+                ),
+                rx.button("Sign in", type='submit', size="3", width="100%"),
+                spacing="6",
+                width="100%",
+            ),
+            on_submit=FloydState.login
+        ),
+        max_width="28em",
+        size="4",
+        width="100%",
+    )
+
+
+def post_form() -> rx.Component:
+    return rx.card(
+        rx.flex(
+            rx.hstack(
+                rx.badge(
+                    rx.icon(tag="megaphone", size=32),
+                    color_scheme="blue",
+                    radius="full",
+                    padding="0.65rem",
+                ),
+                rx.vstack(
+                    rx.heading(
+                        "Make an announcement",
+                        size="4",
+                        weight="bold",
+                    ),
+                    spacing="1",
+                    height="100%",
+                ),
+                height="100%",
+                spacing="4",
+                align_items="center",
+                width="100%",
+            ),
+            rx.form.root(
+                rx.flex(
+                    rx.flex(
+                        rx.text(
+                            "Message",
+                            style={
+                                "fontSize": "15px",
+                                "fontWeight": "500",
+                                "lineHeight": "35px",
+                            },
+                        ),
+                        rx.text_area(
+                            value=FloydState.message,
+                            placeholder="Spread the good gospel of Floyd here",
+                            name="message",
+                            resize="vertical",
+                            on_change=FloydState.set_message,
+                            height="250px"
+                        ),
+                        direction="column",
+                        spacing="1",
+                    ),
+                    rx.form.submit(
+                        rx.button("Submit"),
+                        as_child=True,
+                    ),
+                    direction="column",
+                    spacing="2",
+                    width="100%",
+                ),
+                on_submit=FloydState.make_post,
+                reset_on_submit=False,
+            ),
+            width="100%",
+            direction="column",
+            spacing="4",
+        ),
+        size="3",
+    )
+
+
+@rx.page(route='/floyd', title="Floyd's Happy Place")
+@template
+def floyd():
+    return rx.cond(
+        FloydState.logged_in,
+        post_form(),
+        login()
+    )
