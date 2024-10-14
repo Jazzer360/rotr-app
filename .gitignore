@@ -4,3 +4,5 @@
 .web
 __pycache__/
 assets/external/
+backend.zip
+frontend.zip

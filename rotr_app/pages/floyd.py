@@ -1,8 +1,7 @@
 import reflex as rx
 
 from ..template import template
-from ..components.navbar import NavState
-from ..data.firestore import save_post, Announcement, validate_user
+from ..data.firestore import save_post, validate_user
 
 
 class FloydState(rx.State):
@@ -22,10 +21,6 @@ class FloydState(rx.State):
             save_post(self.user, form_data['message'])
             self.message = ''
             return rx.toast.success('The masses have been notified!')
-
-
-def post(data: Announcement) -> rx.Component:
-    return rx.text(data.message)
 
 
 def login() -> rx.Component:
