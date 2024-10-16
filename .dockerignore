@@ -1,5 +1,7 @@
 .web
+!.web/_static
 .git
 __pycache__/*
 Dockerfile
+frontend.Dockerfile
 uploaded_files

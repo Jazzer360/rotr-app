@@ -28,8 +28,8 @@ FROM python:3.11 as init
 ARG uv=/root/.cargo/bin/uv
 
 # Install `uv` for faster package boostrapping
-ADD --chmod=755 https://astral.sh/uv/install.sh /install.sh
-RUN /install.sh && rm /install.sh
+# ADD https://astral.sh/uv/install.sh /install.sh
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Copy local context to `/app` inside container (see .dockerignore)
 WORKDIR /app
@@ -57,8 +57,13 @@ RUN apt-get update -y && apt-get install -y libpq-dev && rm -rf /var/lib/apt/lis
 USER reflex
 ENV PATH="/app/.venv/bin:$PATH" PYTHONUNBUFFERED=1
 
+# Optionally set up for redis backend
+# env REDIS_URL="redis://10.41.139.3:6379"
+
 # Needed until Reflex properly passes SIGTERM on backend.
 STOPSIGNAL SIGKILL
+
+run printenv
 
 # Always apply migrations before starting the backend.
 CMD [ -d alembic ] && reflex db migrate; \

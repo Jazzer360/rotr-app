@@ -1,0 +1,53 @@
+steps:
+  - id: Build Frontend
+    name: gcr.io/cloud-builders/docker
+    args: [build, -t, gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA, ., -f, frontend.Dockerfile]
+  - id: Run Frontend
+    name: gcr.io/cloud-builders/docker
+    args: [run, --name, temp, gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA]
+  - id: Gather Static Site
+    name: gcr.io/cloud-builders/docker
+    args: [cp, temp:/app/.web/_static, /workspace/output]
+  - id: Clear Storage
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gsutil
+    args: [-m, rm, gs://$_BUCKET_NAME/**]
+  - id: Copy to Storage
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gsutil
+    args: [-m, cp, -r, /workspace/output/*, gs://$_BUCKET_NAME/]
+  - id: Build Backend
+    name: gcr.io/cloud-builders/docker
+    args: [build, -t, gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA, .]
+  - id: Push Backend
+    name: gcr.io/cloud-builders/docker
+    args: [push, gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA]
+  - id: Deploy Backend
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args: 
+      - run
+      - deploy
+      - $_SERVICE_NAME
+      - --image
+      - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
+      - --region
+      - $_DEPLOY_REGION
+      - --memory
+      - $_MEMORY
+  - id: Invalidate CDN Cache
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args: [compute, url-maps, invalidate-cdn-cache, $_LOAD_BALANCER, --path, /*, --async]
+images:
+  - gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA
+  - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
+options:
+  substitutionOption: ALLOW_LOOSE
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _SERVICE_NAME: rotr-app
+  _BUCKET_NAME: rotr-app
+  _LOAD_BALANCER: rotr-lb
+  _DEPLOY_REGION: us-central1
+  _MEMORY: 512Mi
