@@ -6,8 +6,9 @@ from firebase_admin import firestore
 
 import reflex as rx
 
-cred = credentials.Certificate('rotr_app/data/rotr-app-0cd1090931bf.json')
-app = firebase_admin.initialize_app(cred)
+print('Initializing firebase...')
+app = firebase_admin.initialize_app(options={'projectId': 'rotr-app'})
+print('Acquiring firestore client...')
 db = firestore.client()
 
 
@@ -55,10 +56,13 @@ def on_snapshot(col_snapshot, changes, read_time):
     posts.sort(key=lambda x: x.time, reverse=True)
     updated[0] = int(datetime.now().timestamp())
     print(f'Callback finished {updated[0]}')
+    print(f'Updated announcements from callback...')
 
 
+print('Creating announcements query...')
 col_query = db.collection("announcements")
 
+print('Registering announcements watcher...')
 query_watch = col_query.on_snapshot(on_snapshot)
 
 

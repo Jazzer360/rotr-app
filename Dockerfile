@@ -63,7 +63,7 @@ ENV PATH="/app/.venv/bin:$PATH" PYTHONUNBUFFERED=1
 # Needed until Reflex properly passes SIGTERM on backend.
 STOPSIGNAL SIGKILL
 
-run printenv
+RUN printenv
 
 # Always apply migrations before starting the backend.
 CMD [ -d alembic ] && reflex db migrate; \

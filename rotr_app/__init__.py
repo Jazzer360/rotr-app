@@ -1,4 +1,5 @@
 from .pages import (
     schedule,
     announcements,
-    floyd)
+    floyd,
+    activities)
