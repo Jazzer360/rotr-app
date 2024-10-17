@@ -1,9 +1,14 @@
+import asyncio
+from datetime import datetime
+
 import reflex as rx
 
-from ..data.firestore import posts, updated, Announcement
+from ..data.firestore import posts, Announcement
 
 
 class NavState(rx.State):
+    now: int = None
+    running: bool = False
     links: dict[str, str] = {
         'Schedule': '/',
         'Activities': '/activities',
@@ -12,12 +17,19 @@ class NavState(rx.State):
         'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSdzPeKeD19qWza9q-Q8SpsKwCL7SnfrsO0Gdxauv1vVi3Co6w/viewform?usp=sf_link',
     }
     last_post: int = 0
+    last_read: str = rx.Cookie("0")
     announcements: list[Announcement] = posts
 
-    def on_poll(self, date=None):
-        if int(self.last_post) < updated[0]:
-            self.announcements = posts
-            self.last_post = updated[0]
+    @rx.background
+    async def update(self):
+        async with self:
+            if self.running:
+                return
+            self.running = True
+        while True:
+            async with self:
+                self.now = int(datetime.now().timestamp())
+            await asyncio.sleep(5)
 
 
 def navbar_link(link: list) -> rx.Component:
@@ -32,11 +44,6 @@ def menu_item(link: list) -> rx.Component:
 
 def navbar() -> rx.Component:
     return rx.box(
-        rx.moment(
-            interval=1000,
-            on_change=NavState.on_poll,
-            display='none',
-        ),
         rx.desktop_only(
             rx.hstack(
                 rx.hstack(

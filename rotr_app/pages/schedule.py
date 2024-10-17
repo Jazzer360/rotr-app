@@ -1,20 +1,23 @@
 from datetime import datetime
+from typing import Type, TypeVar
 
 import pytz
 
 import reflex as rx
 
+from ..components.navbar import NavState
 from ..template import template
+from ..util.utils import production, get_start_end
+
+T = TypeVar('B', bound='BandInfo')
 
 
 class BandInfo(rx.Base):
     name: str
-    date: str
-    start: str
-    startms: int = None
-    end: str
-    endms: int = None
+    time: str
     stage: str
+    start: int
+    end: int
     img: str = None
     bio: str = None
     web: str = None
@@ -24,23 +27,31 @@ class BandInfo(rx.Base):
     apple: str = None
     yt: str = None
 
-    def initialize(self):
-        self.date = datetime.now(  # Spoofing date for testing
-            pytz.timezone('America/Chicago')).strftime('%Y-%m-%d')
-        self.startms = datetime.fromisoformat(
-            f'{self.date}T{self.start}-05:00').timestamp()
-        self.endms = datetime.fromisoformat(
-            f'{self.date}T{self.end}-05:00').timestamp()
+    @classmethod
+    def create(cls: Type[T], *, name: str, day: str, time: str, stage: str,
+               **kwargs: dict[str, str]) -> T:
+        if production():
+            fri = '2024-07-12'
+            sat = '2024-07-13'
+        else:
+            fri = datetime.now(
+                pytz.timezone('America/Chicago')).strftime('%Y-%m-%d')
+            sat = fri
+        date = fri if day == 'F' else sat
+        return BandInfo(
+            name=name,
+            time=time,
+            stage=stage,
+            **(kwargs | get_start_end(date, time))
+        )
 
 
-class ScheduleState(rx.State):
-    now: int = None
+class ScheduleState(NavState):
     friday: list[BandInfo] = [
-        BandInfo(
+        BandInfo.create(
             name='The MilBillies',
-            date='2024-07-12',
-            start='17:00:00',
-            end='18:00:00',
+            day='F',
+            time='5:00pm - 6:00pm',
             stage='Main',
             bio="""
                 WAMI nominated New Artist of the Year (2020), The MilBillies
@@ -55,11 +66,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/2wbuJcfeMTnL8sGXLS84Nd?si=OcNMYDFISuaqUGFTbE2ykw',
             apple='https://music.apple.com/us/artist/the-milbillies/1537873710',
             yt='https://youtube.com/channel/UCOxURCRCWCF2Ioc3Cg3sadg?si=w2aMAFu5hzoK_I7c'),
-        BandInfo(
+        BandInfo.create(
             name='John Louis',
-            date='2024-07-12',
-            start='18:00:00',
-            end='18:30:00',
+            day='F',
+            time='6:00pm - 6:30pm',
             stage='Church',
             bio="""
                 John’s that guy on the bus who sits quietly, looking tired like
@@ -76,11 +86,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/3wQFhoGQTCK3iCqPfYEMXa?si=wDwUMVlcQ7uFbu2y8heMWQ',
             apple='https://itunes.apple.com/artist/john-louis/1047028603',
             yt='https://www.youtube.com/channel/UCON9fn8_sPPijB8zYeRZOTA'),
-        BandInfo(
+        BandInfo.create(
             name='Chicago Farmer & The Fieldnotes',
-            date='2024-07-12',
-            start='18:30:00',
-            end='19:30:00',
+            day='F',
+            time='6:30pm - 7:30pm',
             stage='Main',
             bio="""
                 The son of a small town farming community, Cody Diekhoff logged
@@ -97,11 +106,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/69MACpHHQg9ovd1retYWPq?si=Tbk22e4jShm8WL8D-5Stkw',
             apple='https://music.apple.com/us/artist/chicago-farmer/106319987',
             yt='https://www.youtube.com/channel/UCuYIdyf6wz-fBH_Y3G9hI2A'),
-        BandInfo(
+        BandInfo.create(
             name='Caitlen Nicol-Thomas',
-            date='2024-07-12',
-            start='19:30:00',
-            end='20:00:00',
+            day='F',
+            time='7:30pm - 8:00pm',
             stage='Church',
             bio="""
                 """,
@@ -110,11 +118,10 @@ class ScheduleState(rx.State):
             insta='https://www.instagram.com/officialcnt/',
             apple='https://music.apple.com/us/artist/caitlin-nicol-thomas/1091723790',
             yt='https://youtube.com/channel/UCG2yUWeXJIhudh-ll0kzWrQ?si=Zz4cWXPOJqbECJFP'),
-        BandInfo(
+        BandInfo.create(
             name='The Fretliners',
-            date='2024-07-12',
-            start='20:00:00',
-            end='21:00:00',
+            day='F',
+            time='8:00pm - 9:00pm',
             stage='Main',
             bio="""
                 It is rare for there to exist a defining moment that changes
@@ -143,11 +150,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/4iMEdosOM4PPgZrreSoWJn',
             apple='https://music.apple.com/us/artist/the-fretliners/1706384107',
             yt='https://www.youtube.com/channel/UCfSoSTwH4ffhK9Dc74Iz1Gw'),
-        BandInfo(
+        BandInfo.create(
             name='Jaik Willis',
-            date='2024-07-12',
-            start='21:00:00',
-            end='21:30:00',
+            day='F',
+            time='9:00pm - 9:30pm',
             stage='Church',
             bio="""
                 Jaik Willis is a strumming & drumming One Man Band,  a wild
@@ -167,11 +173,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/3BD4ZAvWQ5aWqNsmKPd2Un',
             apple='https://music.apple.com/us/artist/jaik-willis/268673250',
             yt='https://youtube.com/@jaikwillis?si=dpMhDsuaPGZmJHo0'),
-        BandInfo(
+        BandInfo.create(
             name='The Big Wu',
-            date='2024-07-12',
-            start='21:30:00',
-            end='23:00:00',
+            day='F',
+            time='9:30pm - 11:00pm',
             stage='Main',
             bio="""
                 Jam band the Big Wu formed on the campus of St. Olaf College in
@@ -198,11 +203,10 @@ class ScheduleState(rx.State):
             yt='https://www.youtube.com/channel/UCpKmpKnY8ttL1nXE72AzUFA')
     ]
     saturday: list[BandInfo] = [
-        BandInfo(
+        BandInfo.create(
             name='Thomas Sticha',
-            date='2024-07-13',
-            start='12:30:00',
-            end='13:30:00',
+            day='s',
+            time='12:30pm - 1:30pm',
             stage='Main',
             bio="""
                 Thomas Sticha is a Country & Folk Music Artist from Saint Paul,
@@ -220,11 +224,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/0l16reYqmLwCXePRrQKpf4?si=qESimPEVR_OhsSW43LOe2Q',
             apple='https://music.apple.com/jm/artist/thomas-sticha/1724228680',
             yt='https://www.youtube.com/channel/UCje7Q3W3xbCrK8X0xwe5vOg'),
-        BandInfo(
+        BandInfo.create(
             name='The Crowd',
-            date='2024-07-13',
-            start='13:30:00',
-            end='14:00:00',
+            day='s',
+            time='1:30pm - 2:00pm',
             stage='Church',
             bio="""
                 Which crowd?
@@ -236,11 +239,10 @@ class ScheduleState(rx.State):
             spotify='',
             apple='',
             yt=''),
-        BandInfo(
+        BandInfo.create(
             name='Corpse Reviver',
-            date='2024-07-13',
-            start='14:00:00',
-            end='15:00:00',
+            day='s',
+            time='2:00pm - 3:00pm',
             stage='Main',
             bio="""
                 3 musicians who like to mostly play music found on Harry
@@ -253,11 +255,10 @@ class ScheduleState(rx.State):
             spotify='',
             apple='',
             yt=''),
-        BandInfo(
+        BandInfo.create(
             name='Matt Fockler',
-            date='2024-07-13',
-            start='15:00:00',
-            end='15:30:00',
+            day='s',
+            time='3:00pm - 3:30pm',
             stage='Church',
             bio="""
                 A gifted song-writer, two of Matt's songs were recently
@@ -273,11 +274,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/0gn4HeOEGhmcSHWxNJD0Ti',
             apple='https://music.apple.com/us/artist/matt-fockler/1606026635',
             yt='https://www.youtube.com/c/MattFockler'),
-        BandInfo(
+        BandInfo.create(
             name='City Mouse',
-            date='2024-07-13',
-            start='15:30:00',
-            end='16:30:00',
+            day='s',
+            time='3:30pm - 4:30pm',
             stage='Main',
             bio="""
                 This band has played around Mankato since 1971. Almost every
@@ -296,11 +296,10 @@ class ScheduleState(rx.State):
             spotify='',
             apple='',
             yt=''),
-        BandInfo(
+        BandInfo.create(
             name='Tommy Edwin',
-            date='2024-07-13',
-            start='16:30:00',
-            end='17:00:00',
+            day='s',
+            time='4:30pm - 5:00pm',
             stage='Church',
             bio="""
                 Tommy Edwin is a singer-songwriter currently based in
@@ -321,11 +320,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/7JC6zYIGqnRHswK8l3dk7L',
             apple='https://music.apple.com/us/artist/tommy-edwin/1632861800',
             yt='https://www.youtube.com/playlist?app=desktop&list=PL44fpVKgATb3DWPlxjhDAuplWADLXVuSR'),
-        BandInfo(
+        BandInfo.create(
             name='Erin McCawley\'s Harrison St. Band',
-            date='2024-07-13',
-            start='17:00:00',
-            end='18:00:00',
+            day='s',
+            time='5:00pm - 6:00pm',
             stage='Main',
             bio="""
                 Singing, songwriting, sass-bringing Erin McCawley and her
@@ -351,11 +349,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/3sec2YUyotC0clXzZPZBkg',
             apple='https://music.apple.com/us/artist/harrison-street-band/1413560621',
             yt=''),
-        BandInfo(
+        BandInfo.create(
             name='Corpse Reviver',
-            date='2024-07-13',
-            start='18:00:00',
-            end='18:30:00',
+            day='s',
+            time='6:00pm - 6:30pm',
             stage='Church',
             bio="""
                 3 musicians who like to mostly play music found on Harry
@@ -368,11 +365,10 @@ class ScheduleState(rx.State):
             spotify='',
             apple='',
             yt=''),
-        BandInfo(
+        BandInfo.create(
             name='The Foxgloves',
-            date='2024-07-13',
-            start='18:30:00',
-            end='19:30:00',
+            day='s',
+            time='6:30pm - 7:30pm',
             stage='Main',
             bio="""
                 The Foxgloves are an Americana/newgrass band from Minneapolis.
@@ -389,11 +385,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/0cyz3380h6MXubEEDO6FX2',
             apple='https://music.apple.com/us/artist/the-foxgloves/1566701441',
             yt='https://www.youtube.com/channel/UCiAI1hLP-AcBZRPOHn2cGNw'),
-        BandInfo(
+        BandInfo.create(
             name='Mal Murphy',
-            date='2024-07-13',
-            start='19:30:00',
-            end='20:00:00',
+            day='s',
+            time='7:30pm - 8:00pm',
             stage='Church',
             bio="""
                 Mal Murphy is a Mankato, MN-based singer-songwriter who
@@ -417,11 +412,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/00f7TsKCR9BYqaQTyI5ZX8',
             apple='https://music.apple.com/us/artist/mal-murphy/1715533736',
             yt='https://www.youtube.com/channel/UCO6c5UsusP7IkgJizm_XjIQ'),
-        BandInfo(
+        BandInfo.create(
             name='Katy Guillen & the Drive',
-            date='2024-07-13',
-            start='20:00:00',
-            end='21:00:00',
+            day='s',
+            time='8:00pm - 9:00pm',
             stage='Main',
             bio="""
                 Through the course of writing, refining and recording their
@@ -447,11 +441,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/3Kps5aNWnobww08SmdfzRh?autoplay=true',
             apple='https://music.apple.com/us/artist/katy-guillen-the-drive/1496004202',
             yt='https://www.youtube.com/channel/UCB8Edq_HOnE1WmxospznNBw?feature=gws_kp_artist&feature=gws_kp_artist'),
-        BandInfo(
+        BandInfo.create(
             name='Strictly Herbal',
-            date='2024-07-13',
-            start='21:00:00',
-            end='21:30:00',
+            day='s',
+            time='9:00pm - 9:30pm',
             stage='Church',
             bio="""
                 Rooting from rural Minnesota, Strictly Herbal is a reggae group
@@ -466,11 +459,10 @@ class ScheduleState(rx.State):
             spotify='https://open.spotify.com/artist/4FpiKF2ADxzDFvInQnOOy1?si=GgpeacsiTMid8C5ONo8rIg',
             apple='',
             yt=''),
-        BandInfo(
+        BandInfo.create(
             name='Jon Sullivan Band',
-            date='2024-07-13',
-            start='21:30:00',
-            end='23:00:00',
+            day='s',
+            time='9:30pm - 11:00pm',
             stage='Main',
             bio="""
                 There are a lot of bands performing and releasing music to the
@@ -494,45 +486,45 @@ class ScheduleState(rx.State):
             yt='https://www.youtube.com/channel/UC6M-1lUR3oQMK6kcPjPzp7A?feature=gws_kp_artist&feature=gws_kp_artist')
     ]
 
-    def initialize(self):
-        self.update()
-        for band in self.friday:
-            band.initialize()
-        for band in self.saturday:
-            band.initialize()
-        return rx.toast.info(
+    def show_toast(self):
+        yield rx.toast.info(
             'Click a band to learn more about them.',
             duration=5000,
             close_button=True
         )
-
-    def update(self, date=None):
-        self.now = datetime.now().timestamp()
+        return NavState.update
 
 
-def time_slot(band: BandInfo):
+def time_left_text(band: BandInfo) -> rx.Component:
     return rx.cond(
-        band.startms,
-        rx.text(
-            rx.moment(
-                band.startms * 1000, format='h:mma', tz='America/Chicago'),
-            rx.text(' - ', as_='span'),
-            rx.moment(band.endms * 1000, format='h:mma', tz='America/Chicago')
+        band.start < ScheduleState.now,
+        rx.cond(
+            band.end > ScheduleState.now,
+            rx.text(
+                (band.end - ScheduleState.now) // 60,
+                ' minutes left',
+                align='right',
+                flex_grow='1'
+            ),
+            rx.fragment()
         ),
-        rx.skeleton(
-            rx.text('10:00am - 10:00pm'),
-            loading=True
-        )
+        rx.fragment()
     )
 
 
-def time_left_text(band: BandInfo):
-    secsleft = band.endms - ScheduleState.now
-    return rx.text(
-        secsleft // 60, ' minutes left', align='right', flex_grow='1')
+def badge(band: BandInfo) -> rx.Component:
+    return rx.cond(
+        band.start < ScheduleState.now,
+        rx.cond(
+            band.end > ScheduleState.now,
+            rx.badge('On Stage', align_self='flex-end'),
+            rx.fragment()
+        ),
+        rx.fragment()
+    )
 
 
-def build_card(band: BandInfo) -> rx.Component:
+def band_card(band: BandInfo) -> rx.Component:
     return rx.card(
         rx.hstack(
             rx.text(
@@ -545,28 +537,12 @@ def build_card(band: BandInfo) -> rx.Component:
                 rx.hstack(
                     rx.text(band.name),
                     rx.spacer(),
-                    rx.cond(
-                        band.startms < ScheduleState.now,
-                        rx.cond(
-                            band.endms > ScheduleState.now,
-                            rx.badge('On Stage', align_self='flex-end'),
-                            rx.fragment()
-                        ),
-                        rx.fragment()
-                    ),
+                    badge(band),
                     width='100%'
                 ),
                 rx.hstack(
-                    time_slot(band),
-                    rx.cond(
-                        band.startms < ScheduleState.now,
-                        rx.cond(
-                            band.endms > ScheduleState.now,
-                            time_left_text(band),
-                            rx.fragment()
-                        ),
-                        rx.fragment()
-                    ),
+                    rx.text(band.time),
+                    time_left_text(band),
                     width='100%'
                 ),
                 width='100%'
@@ -575,19 +551,86 @@ def build_card(band: BandInfo) -> rx.Component:
             justify='start'
         ),
         rx.cond(
-            band.startms < ScheduleState.now,
+            band.start < ScheduleState.now,
             rx.cond(
-                band.endms > ScheduleState.now,
+                band.end > ScheduleState.now,
                 rx.progress(
-                    value=((ScheduleState.now - band.startms) / 
-                           (band.endms - band.startms) * 100),
+                    value=((ScheduleState.now - band.start) / 
+                           (band.end - band.start) * 100),
                     margin_top='8px'
                 ),
                 rx.fragment()
             ),
             rx.fragment()
         ),
-        color=rx.cond(band.endms < ScheduleState.now, 'gray', '')
+        color=rx.cond(band.end < ScheduleState.now, 'gray', '')
+    )
+
+
+def links(band: BandInfo) -> rx.Component:
+    return rx.flex(
+        rx.cond(
+            band.web,
+            rx.link(
+                rx.hstack(
+                    rx.icon(tag='globe'),
+                    rx.text('Website')
+                ),
+                href=band.web
+            )
+        ),
+        rx.cond(
+            band.fb,
+            rx.link(
+                rx.hstack(
+                    rx.icon(tag='facebook'),
+                    rx.text('Facebook')
+                ),
+                href=band.fb
+            )
+        ),
+        rx.cond(
+            band.insta,
+            rx.link(
+                rx.hstack(
+                    rx.icon(tag='instagram'),
+                    rx.text('Instagram')
+                ),
+                href=band.insta
+            )
+        ),
+        rx.cond(
+            band.spotify,
+            rx.link(
+                rx.hstack(
+                    rx.icon(tag='audio-lines'),
+                    rx.text('Spotify')
+                ),
+                href=band.spotify
+            )
+        ),
+        rx.cond(
+            band.apple,
+            rx.link(
+                rx.hstack(
+                    rx.icon(tag='apple'),
+                    rx.text('iTunes')
+                ),
+                href=band.apple
+            )
+        ),
+        rx.cond(
+            band.yt,
+            rx.link(
+                rx.hstack(
+                    rx.icon(tag='youtube'),
+                    rx.text('YouTube')
+                ),
+                href=band.yt
+            )
+        ),
+        wrap='wrap',
+        spacing='4'
     )
 
 
@@ -595,76 +638,13 @@ def band_entry(band: BandInfo) -> rx.Component:
     return rx.container(
         rx.dialog.root(
             rx.dialog.trigger(
-                build_card(band)
+                band_card(band)
             ),
             rx.dialog.content(
                 rx.dialog.title(band.name),
                 rx.cond(band.img, rx.image(src=band.img)),
                 rx.dialog.description(band.bio, margin='12px 0px'),
-                rx.flex(
-                    rx.cond(
-                        band.web,
-                        rx.link(
-                            rx.hstack(
-                                rx.icon(tag='globe'),
-                                rx.text('Website')
-                            ),
-                            href=band.web
-                        )
-                    ),
-                    rx.cond(
-                        band.fb,
-                        rx.link(
-                            rx.hstack(
-                                rx.icon(tag='facebook'),
-                                rx.text('Facebook')
-                            ),
-                            href=band.fb
-                        )
-                    ),
-                    rx.cond(
-                        band.insta,
-                        rx.link(
-                            rx.hstack(
-                                rx.icon(tag='instagram'),
-                                rx.text('Instagram')
-                            ),
-                            href=band.insta
-                        )
-                    ),
-                    rx.cond(
-                        band.spotify,
-                        rx.link(
-                            rx.hstack(
-                                rx.icon(tag='audio-lines'),
-                                rx.text('Spotify')
-                            ),
-                            href=band.spotify
-                        )
-                    ),
-                    rx.cond(
-                        band.apple,
-                        rx.link(
-                            rx.hstack(
-                                rx.icon(tag='apple'),
-                                rx.text('iTunes')
-                            ),
-                            href=band.apple
-                        )
-                    ),
-                    rx.cond(
-                        band.yt,
-                        rx.link(
-                            rx.hstack(
-                                rx.icon(tag='youtube'),
-                                rx.text('YouTube')
-                            ),
-                            href=band.yt
-                        )
-                    ),
-                    wrap='wrap',
-                    spacing='4'
-                ),
+                links(band),
                 rx.dialog.close(
                     rx.button('Close', margin_top='24px')
                 )
@@ -678,16 +658,10 @@ def band_entry(band: BandInfo) -> rx.Component:
 @rx.page(
     route='/',
     title='Live Schedule',
-    on_load=ScheduleState.initialize)
+    on_load=ScheduleState.show_toast)
 @template
 def schedule() -> rx.Component:
     return rx.vstack(
-        rx.moment(
-            interval=1000,
-            on_change=ScheduleState.update,
-            display='none',
-            width='100%'
-        ),
         rx.heading('Friday'),
         rx.box(
             rx.foreach(ScheduleState.friday, band_entry),
