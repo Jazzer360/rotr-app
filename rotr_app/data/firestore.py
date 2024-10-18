@@ -1,13 +1,20 @@
+print('import datetime')
 from datetime import datetime
 
+print('import firebase_admin')
 import firebase_admin
+print('import credentials')
 from firebase_admin import credentials
+print('import firestore')
 from firebase_admin import firestore
 
+print('import reflex')
 import reflex as rx
 
+cred = credentials.Certificate('rotr_app/data/rotr-app-0cd1090931bf.json')
+app = firebase_admin.initialize_app(cred)
 print('Initializing firebase...')
-app = firebase_admin.initialize_app(options={'projectId': 'rotr-app'})
+# app = firebase_admin.initialize_app(options={'projectId': 'rotr-app'})
 print('Acquiring firestore client...')
 db = firestore.client()
 
