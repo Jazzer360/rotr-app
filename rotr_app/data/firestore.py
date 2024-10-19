@@ -6,8 +6,10 @@ from firebase_admin import firestore
 
 import reflex as rx
 
+cred = credentials.Certificate('rotr_app/data/rotr-app-0cd1090931bf.json')
+app = firebase_admin.initialize_app(cred)
 print('Initializing firebase...')
-app = firebase_admin.initialize_app(options={'projectId': 'rotr-app'})
+# app = firebase_admin.initialize_app(options={'projectId': 'rotr-app'})
 print('Acquiring firestore client...')
 db = firestore.client()
 
