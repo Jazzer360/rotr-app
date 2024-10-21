@@ -36,7 +36,6 @@ class NavState(rx.State):
         while True:
             async with self:
                 self.now = int(datetime.now().timestamp())
-            print('Checking announcements')
             if self.last_post != get_manager().last_post:
                 async with self:
                     print('Found new announcements')
