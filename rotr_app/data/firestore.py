@@ -1,22 +1,23 @@
-print('import datetime')
 from datetime import datetime
+from functools import cache
 
-print('import firebase_admin')
 import firebase_admin
-print('import credentials')
-from firebase_admin import credentials
-print('import firestore')
 from firebase_admin import firestore
 
-print('import reflex')
 import reflex as rx
 
-cred = credentials.Certificate('rotr_app/data/rotr-app-0cd1090931bf.json')
-app = firebase_admin.initialize_app(cred)
-print('Initializing firebase...')
-# app = firebase_admin.initialize_app(options={'projectId': 'rotr-app'})
-print('Acquiring firestore client...')
-db = firestore.client()
+from ..util.utils import no_compile
+
+
+@no_compile((None, None))
+@cache
+def get_client():
+    print('Initializing firebase client...')
+    app = firebase_admin.initialize_app(options={'projectId': 'rotr-app'})
+    return app, firestore.client()
+
+
+app, db = get_client()
 
 
 class Announcement(rx.Base):
