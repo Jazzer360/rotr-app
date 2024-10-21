@@ -47,3 +47,7 @@ substitutions:
   _LOAD_BALANCER: rotr-lb
   _DEPLOY_REGION: us-central1
   _MEMORY: 512Mi
+tags:
+  - gcp-cloud-build-deploy-cloud-run
+  - gcp-cloud-build-deploy-cloud-run-managed
+  - rotr-app
