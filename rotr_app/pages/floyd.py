@@ -145,6 +145,7 @@ def post_form() -> rx.Component:
                             type="text",
                             size="3",
                             width="100%",
+                            on_change=FloydState.set_subject
                         ),
                         rx.text(
                             "Message",
