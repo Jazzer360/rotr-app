@@ -8,7 +8,7 @@ def make_card(data: Announcement):
     return rx.card(
             rx.vstack(
                 rx.hstack(
-                    rx.heading(data.user),
+                    rx.heading(data.subject),
                     rx.spacer(),
                     rx.badge(
                         rx.moment(
@@ -20,6 +20,11 @@ def make_card(data: Announcement):
                     width='100%'
                 ),
                 rx.text(f'"{data.message}"', font_style='italic'),
+                rx.box(
+                    rx.text(f'- {data.user}', align='right'),
+                    padding_right='1em',
+                    width='100%'
+                ),
                 width='100%'
             ),
             width='100%'

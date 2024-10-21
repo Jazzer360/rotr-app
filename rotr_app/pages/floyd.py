@@ -7,6 +7,7 @@ from ..data.firestore import save_post, validate_user
 class FloydState(rx.State):
     logged_in: bool = False
     user: str = None
+    subject: str = ''
     message: str = ''
     loading: bool = False
 
@@ -28,6 +29,7 @@ class FloydState(rx.State):
         if message:
             save_post(user=self.user, subject=subject, message=message)
             self.message = ''
+            self.subject = ''
             yield rx.toast.success('The masses have been notified!')
         self.loading = False
 
@@ -128,6 +130,22 @@ def post_form() -> rx.Component:
             rx.form.root(
                 rx.flex(
                     rx.flex(
+                        rx.text(
+                            "Subject",
+                            style={
+                                "fontSize": "15px",
+                                "fontWeight": "500",
+                                "lineHeight": "35px",
+                            },
+                        ),
+                        rx.input(
+                            value=FloydState.subject,
+                            placeholder="The deets.",
+                            name='subject',
+                            type="text",
+                            size="3",
+                            width="100%",
+                        ),
                         rx.text(
                             "Message",
                             style={

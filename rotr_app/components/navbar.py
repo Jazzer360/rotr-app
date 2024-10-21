@@ -62,7 +62,16 @@ def navbar_link(link: list) -> rx.Component:
 
 
 def menu_item(link: list) -> rx.Component:
-    return rx.menu.item(link[0], on_select=rx.redirect(link[1]))
+    return rx.menu.item(
+        link[0],
+        on_select=rx.redirect(link[1]),
+        color=rx.cond(
+            (link[0] == 'Announcements') & (
+                NavState.last_read.to(int) < NavState.last_post),
+            'red',
+            ''
+        )
+    )
 
 
 def navbar() -> rx.Component:
@@ -94,7 +103,22 @@ def navbar() -> rx.Component:
                 ),
                 rx.menu.root(
                     rx.menu.trigger(
-                        rx.icon("menu", size=30)
+                        rx.box(
+                            rx.icon("menu", size=30),
+                            rx.cond(
+                                NavState.last_read.to(int) < NavState.last_post,
+                                rx.icon(
+                                    'megaphone',
+                                    position='absolute',
+                                    top='.75em',
+                                    right='.65em',
+                                    size=20,
+                                    background='red',
+                                    border_radius='10px',
+                                    padding='2px'
+                                )
+                            )
+                        )
                     ),
                     rx.menu.content(
                         rx.foreach(NavState.links, menu_item)
