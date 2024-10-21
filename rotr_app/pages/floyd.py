@@ -10,15 +10,19 @@ class FloydState(rx.State):
     message: str = ''
 
     def login(self, form_data: dict):
-        if validate_user(form_data.get('user'), form_data.get('password')):
-            self.user = form_data['user']
+        user = form_data.get('user')
+        pw = form_data.get('password')
+        if user and pw and validate_user(user, pw):
+            self.user = user
             self.logged_in = True
         else:
             return rx.toast.error('Nice try...')
 
     def make_post(self, form_data: dict):
-        if form_data['message']:
-            save_post(self.user, form_data['message'])
+        message = form_data.get('message')
+        subject = form_data.get('subject')
+        if message:
+            save_post(user=self.user, subject=subject, message=message)
             self.message = ''
             return rx.toast.success('The masses have been notified!')
 
