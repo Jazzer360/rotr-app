@@ -3,7 +3,14 @@ from datetime import datetime
 
 import reflex as rx
 
-from ..data.firestore import posts, Announcement
+from ..data.firestore import manager
+
+
+class Announcement(rx.Base):
+    time: int
+    user: str
+    subject: str
+    message: str
 
 
 class NavState(rx.State):
@@ -18,7 +25,7 @@ class NavState(rx.State):
     }
     last_post: int = 0
     last_read: str = rx.Cookie("0")
-    announcements: list[Announcement] = posts
+    announcements: list[Announcement] = []
 
     @rx.background
     async def update(self):
@@ -29,6 +36,19 @@ class NavState(rx.State):
         while True:
             async with self:
                 self.now = int(datetime.now().timestamp())
+            print('Checking announcements')
+            if self.last_post != manager.last_post:
+                async with self:
+                    print('Found new announcements')
+                    self.last_post = manager.last_post
+                    posts = [Announcement(
+                        time=k,
+                        user=v.get('user', ' '),
+                        subject=v.get('subject', ' '),
+                        message=v.get('message', ' '))
+                        for k, v in manager.posts.items()]
+                    posts.sort(key=lambda x: x.time, reverse=True)
+                    self.announcements = posts
             await asyncio.sleep(5)
 
 

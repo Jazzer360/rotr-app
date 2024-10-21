@@ -4,8 +4,6 @@ from functools import cache
 import firebase_admin
 from firebase_admin import firestore
 
-import reflex as rx
-
 from ..util.utils import no_compile
 
 
@@ -20,60 +18,54 @@ def get_client():
 app, db = get_client()
 
 
-class Announcement(rx.Base):
-    time: int
-    user: str
-    message: str
-
-    def __eq__(self, other):
-        return self.time == other.time
-
-    def __repr__(self):
-        return f'({self.time}, {self.user}, {self.message})'
-
-
-posts = []
-updated = [0]
-
-
-def wrap_post(fsdoc):
-    data = fsdoc.to_dict()
-    return Announcement(
-        time=int(fsdoc.id),
-        user=data.get('user'),
-        message=data.get('message'))
-
-
-def save_post(user, message):
-    data = {'user': user, 'message': message}
-    doc = db.collection('announcements').document(
-        str(int(datetime.now().timestamp())))
-    doc.set(data)
-
-
-def on_snapshot(col_snapshot, changes, read_time):
+def announcement_watcher(col_snapshot, changes, read_time):
     for change in changes:
-        doc = wrap_post(change.document)
         if change.type.name == "ADDED":
-            posts.append(doc)
+            manager.add(change.document)
         elif change.type.name == "MODIFIED":
-            posts.remove(doc)
-            posts.append(doc)
+            manager.modify(change.document)
         elif change.type.name == "REMOVED":
-            posts.remove(doc)
-    posts.sort(key=lambda x: x.time, reverse=True)
-    updated[0] = int(datetime.now().timestamp())
-    print(f'Callback finished {updated[0]}')
-    print(f'Updated announcements from callback...')
+            manager.remove(change.document)
+    print('Updated announcements from callback...')
 
 
-print('Creating announcements query...')
-col_query = db.collection("announcements")
+class AnnouncementManager:
+    def __init__(self):
+        print('Initializing announcements manager...')
+        self.posts = {}
+        self.last_post = 0
+        if db:
+            query = db.collection('announcements')
+            print('Registering callback handler...')
+            query.on_snapshot(announcement_watcher)
 
-print('Registering announcements watcher...')
-query_watch = col_query.on_snapshot(on_snapshot)
+    def add(self, doc):
+        self.posts[doc.id] = doc.to_dict()
+        self.update_time()
+
+    def modify(self, doc):
+        self.add(doc)
+
+    def remove(self, doc):
+        del self.posts[doc.id]
+
+    def update_time(self):
+        self.last_post = now()
+
+
+manager = AnnouncementManager()
+
+
+def save_post(*, user, subject, message):
+    data = {'user': user, 'message': message, 'subject': subject}
+    doc = db.collection('announcements').document(str(now()))
+    doc.set(data)
 
 
 def validate_user(name, pw):
     doc = db.collection('users').document(name).get()
     return doc.exists and doc.to_dict().get('pet') == pw
+
+
+def now():
+    return int(datetime.now().timestamp())

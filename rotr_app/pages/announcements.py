@@ -1,8 +1,7 @@
 import reflex as rx
 
 from ..template import template
-from ..components.navbar import NavState
-from ..data.firestore import Announcement
+from ..components.navbar import NavState, Announcement
 
 
 def make_card(data: Announcement):
