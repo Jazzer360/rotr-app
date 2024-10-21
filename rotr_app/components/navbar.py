@@ -3,7 +3,7 @@ from datetime import datetime
 
 import reflex as rx
 
-from ..data.firestore import manager
+from ..data.firestore import get_manager
 
 
 class Announcement(rx.Base):
@@ -37,19 +37,23 @@ class NavState(rx.State):
             async with self:
                 self.now = int(datetime.now().timestamp())
             print('Checking announcements')
-            if self.last_post != manager.last_post:
+            if self.last_post != get_manager().last_post:
                 async with self:
                     print('Found new announcements')
-                    self.last_post = manager.last_post
+                    self.last_post = get_manager().last_post
                     posts = [Announcement(
                         time=k,
                         user=v.get('user', ' '),
                         subject=v.get('subject', ' '),
                         message=v.get('message', ' '))
-                        for k, v in manager.posts.items()]
+                        for k, v in get_manager().posts.items()]
                     posts.sort(key=lambda x: x.time, reverse=True)
                     self.announcements = posts
             await asyncio.sleep(5)
+
+    def set_read(self):
+        self.last_read = str(self.last_post)
+        return NavState.update
 
 
 def navbar_link(link: list) -> rx.Component:

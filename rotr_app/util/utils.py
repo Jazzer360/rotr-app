@@ -1,5 +1,4 @@
-import os
-from functools import cache, wraps
+from functools import cache
 from datetime import datetime
 
 import pytz
@@ -13,11 +12,6 @@ def production():
     config = get_config()
     print(f'Running on: {config.api_url}')
     return not config.api_url.startswith('http://localhost')
-
-
-@cache
-def compiling():
-    return bool(os.environ.get('ROTR_COMPILE_ONLY'))
 
 
 @cache
@@ -42,12 +36,3 @@ def get_start_end(date: str, time_range: str) -> dict[str, int]:
         'start': int(get_datetime(date, start).timestamp()),
         'end': int(get_datetime(date, end).timestamp())
     }
-
-
-def no_compile(default=None):
-    def inner_decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            return default if compiling() else func(*args, **kwargs)
-        return wrapper
-    return inner_decorator

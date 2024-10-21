@@ -26,7 +26,10 @@ def make_card(data: Announcement):
         )
 
 
-@rx.page(route='/announcements', title="Announcements")
+@rx.page(
+    route='/announcements',
+    title="Announcements",
+    on_load=NavState.set_read)
 @template
 def announcements():
     return rx.box(

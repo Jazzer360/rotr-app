@@ -1,5 +1,4 @@
 """Welcome to Reflex! This file outlines the steps to create a basic app."""
-print('loading rotr_app')
 import reflex as rx
 
 app = rx.App(
@@ -17,5 +16,3 @@ app = rx.App(
         )
     ]
 )
-
-print('rotr_app loaded')
