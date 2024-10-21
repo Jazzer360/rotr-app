@@ -8,23 +8,28 @@ class FloydState(rx.State):
     logged_in: bool = False
     user: str = None
     message: str = ''
+    loading: bool = False
 
     def login(self, form_data: dict):
+        self.loading = True
         user = form_data.get('user')
         pw = form_data.get('password')
         if user and pw and validate_user(user, pw):
             self.user = user
             self.logged_in = True
         else:
-            return rx.toast.error('Nice try...')
+            yield rx.toast.error('Nice try...')
+        self.loading = False
 
     def make_post(self, form_data: dict):
+        self.loading = True
         message = form_data.get('message')
         subject = form_data.get('subject')
         if message:
             save_post(user=self.user, subject=subject, message=message)
             self.message = ''
-            return rx.toast.success('The masses have been notified!')
+            yield rx.toast.success('The masses have been notified!')
+        self.loading = False
 
 
 def login() -> rx.Component:
@@ -83,7 +88,8 @@ def login() -> rx.Component:
                     spacing="2",
                     width="100%",
                 ),
-                rx.button("Sign in", type='submit', size="3", width="100%"),
+                rx.button("Sign in", type='submit', size="3", width="100%",
+                          loading=FloydState.loading),
                 spacing="6",
                 width="100%",
             ),
@@ -142,7 +148,7 @@ def post_form() -> rx.Component:
                         spacing="1",
                     ),
                     rx.form.submit(
-                        rx.button("Submit"),
+                        rx.button("Submit", loading=FloydState.loading),
                         as_child=True,
                     ),
                     direction="column",
