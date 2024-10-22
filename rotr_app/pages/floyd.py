@@ -1,7 +1,7 @@
 import reflex as rx
 
 from ..template import template
-from ..data.firestore import save_post, validate_user
+from ..data.firestore import get_manager
 
 
 class FloydState(rx.State):
@@ -15,7 +15,7 @@ class FloydState(rx.State):
         self.loading = True
         user = form_data.get('user')
         pw = form_data.get('password')
-        if user and pw and validate_user(user, pw):
+        if user and pw and get_manager().validate_user(user, pw):
             self.user = user
             self.logged_in = True
         else:
@@ -27,7 +27,8 @@ class FloydState(rx.State):
         message = form_data.get('message')
         subject = form_data.get('subject')
         if message:
-            save_post(user=self.user, subject=subject, message=message)
+            get_manager().save_post(
+                user=self.user, subject=subject, message=message)
             self.message = ''
             self.subject = ''
             yield rx.toast.success('The masses have been notified!')
