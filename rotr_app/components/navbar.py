@@ -27,7 +27,8 @@ class NavState(rx.State):
 
     def update(self, _=None):
         self.now = int(datetime.now().timestamp())
-        if self.last_post != get_manager().last_post:
+        if (self.last_post != get_manager().last_post
+                or len(self.announcements) != len(get_manager().posts)):
             print('Found new announcements')
             last = get_manager().last_post
             posts = [Announcement(
@@ -39,9 +40,13 @@ class NavState(rx.State):
             posts.sort(key=lambda x: x.time, reverse=True)
             self.last_post = last
             self.announcements = posts
+            return NavState.show_announcement_toast
 
     def set_read(self):
         self.last_read = str(self.last_post)
+
+    def show_announcement_toast(self):
+        return rx.toast.warning('New announcements posted.')
 
 
 def get_messages(post_data: dict[str, str]) -> list[str]:
