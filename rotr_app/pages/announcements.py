@@ -19,7 +19,7 @@ def make_card(data: Announcement):
                     ),
                     width='100%'
                 ),
-                rx.text(f'"{data.message}"', font_style='italic'),
+                rx.foreach(data.message, message_paragraph),
                 rx.box(
                     rx.text(f'- {data.user}', align='right'),
                     padding_right='1em',
@@ -29,6 +29,10 @@ def make_card(data: Announcement):
             ),
             width='100%'
         )
+
+
+def message_paragraph(txt: str) -> rx.Component:
+    return rx.text(f'"{txt}"', font_style='italic')
 
 
 @rx.page(

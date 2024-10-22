@@ -10,7 +10,7 @@ class Announcement(rx.Base):
     time: int
     user: str
     subject: str
-    message: str
+    message: list[str]
 
 
 class NavState(rx.State):
@@ -44,7 +44,7 @@ class NavState(rx.State):
                         time=k,
                         user=v.get('user') or '',
                         subject=v.get('subject') or '',
-                        message=v.get('message') or '')
+                        message=get_messages(v))
                         for k, v in get_manager().posts.items()]
                     posts.sort(key=lambda x: x.time, reverse=True)
                     self.announcements = posts
@@ -53,6 +53,11 @@ class NavState(rx.State):
     def set_read(self):
         self.last_read = str(self.last_post)
         return NavState.update
+
+
+def get_messages(post_data: dict[str, str]) -> list[str]:
+    msg = post_data.get('message')
+    return msg.split('\n') if msg else ['']
 
 
 def navbar_link(link: list) -> rx.Component:
