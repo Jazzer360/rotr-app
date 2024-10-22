@@ -46,7 +46,7 @@ class BandInfo(rx.Base):
         )
 
 
-class ScheduleState(NavState):
+class ScheduleState(rx.State):
     friday: list[BandInfo] = [
         BandInfo.create(
             name='The MilBillies',
@@ -487,21 +487,21 @@ class ScheduleState(NavState):
     ]
 
     def show_toast(self):
-        yield rx.toast.info(
+        yield NavState.update
+        return rx.toast.info(
             'Click a band to learn more about them.',
             duration=5000,
             close_button=True
         )
-        return NavState.update
 
 
 def time_left_text(band: BandInfo) -> rx.Component:
     return rx.cond(
-        band.start < ScheduleState.now,
+        band.start < NavState.now,
         rx.cond(
-            band.end > ScheduleState.now,
+            band.end > NavState.now,
             rx.text(
-                (band.end - ScheduleState.now) // 60,
+                (band.end - NavState.now) // 60,
                 ' minutes left',
                 align='right',
                 flex_grow='1'
@@ -514,10 +514,26 @@ def time_left_text(band: BandInfo) -> rx.Component:
 
 def badge(band: BandInfo) -> rx.Component:
     return rx.cond(
-        band.start < ScheduleState.now,
+        band.start < NavState.now,
         rx.cond(
-            band.end > ScheduleState.now,
+            band.end > NavState.now,
             rx.badge('On Stage', align_self='flex-end'),
+            rx.fragment()
+        ),
+        rx.fragment()
+    )
+
+
+def progress(band: BandInfo) -> rx.Component:
+    return rx.cond(
+        band.start < NavState.now,
+        rx.cond(
+            band.end > NavState.now,
+            rx.progress(
+                value=((NavState.now - band.start) / 
+                       (band.end - band.start) * 100),
+                margin_top='8px'
+            ),
             rx.fragment()
         ),
         rx.fragment()
@@ -550,20 +566,8 @@ def band_card(band: BandInfo) -> rx.Component:
             align='center',
             justify='start'
         ),
-        rx.cond(
-            band.start < ScheduleState.now,
-            rx.cond(
-                band.end > ScheduleState.now,
-                rx.progress(
-                    value=((ScheduleState.now - band.start) / 
-                           (band.end - band.start) * 100),
-                    margin_top='8px'
-                ),
-                rx.fragment()
-            ),
-            rx.fragment()
-        ),
-        color=rx.cond(band.end < ScheduleState.now, 'gray', '')
+        progress(band),
+        color=rx.cond(band.end < NavState.now, 'gray', '')
     )
 
 

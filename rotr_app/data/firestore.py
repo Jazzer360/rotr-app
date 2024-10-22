@@ -16,7 +16,7 @@ def announcement_watcher(col_snapshot, changes, read_time):
     print('Updated announcements from callback...')
 
 
-class AnnouncementManager:
+class DataManager:
     def __init__(self):
         print('Initializing announcements manager...')
         self.posts = {}
@@ -42,21 +42,19 @@ class AnnouncementManager:
     def update_time(self):
         self.last_post = max(self.posts.keys())
 
+    def save_post(self, *, user, subject, message):
+        data = {'user': user, 'message': message, 'subject': subject}
+        doc = self.db.collection('announcements').document(str(now()))
+        doc.set(data)
+
+    def validate_user(self, name, pw):
+        doc = self.db.collection('users').document(name).get()
+        return doc.exists and doc.to_dict().get('pet') == pw
+
 
 @cache
 def get_manager():
-    return AnnouncementManager()
-
-
-def save_post(*, user, subject, message):
-    data = {'user': user, 'message': message, 'subject': subject}
-    doc = get_manager().db.collection('announcements').document(str(now()))
-    doc.set(data)
-
-
-def validate_user(name, pw):
-    doc = get_manager().db.collection('users').document(name).get()
-    return doc.exists and doc.to_dict().get('pet') == pw
+    return DataManager()
 
 
 def now():
