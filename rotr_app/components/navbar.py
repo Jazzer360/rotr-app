@@ -1,4 +1,3 @@
-import asyncio
 from datetime import datetime
 
 import reflex as rx
@@ -15,7 +14,6 @@ class Announcement(rx.Base):
 
 class NavState(rx.State):
     now: int = None
-    running: bool = False
     links: dict[str, str] = {
         'Schedule': '/',
         'Activities': '/activities',
@@ -27,32 +25,23 @@ class NavState(rx.State):
     last_read: str = rx.Cookie('0', max_age=60 * 60 * 24 * 30)
     announcements: list[Announcement] = []
 
-    @rx.background
-    async def update(self):
-        async with self:
-            if self.running:
-                return
-            self.running = True
-        while True:
-            async with self:
-                self.now = int(datetime.now().timestamp())
-            if self.last_post != get_manager().last_post:
-                async with self:
-                    print('Found new announcements')
-                    self.last_post = get_manager().last_post
-                    posts = [Announcement(
-                        time=k,
-                        user=v.get('user') or '',
-                        subject=v.get('subject') or '',
-                        message=get_messages(v))
-                        for k, v in get_manager().posts.items()]
-                    posts.sort(key=lambda x: x.time, reverse=True)
-                    self.announcements = posts
-            await asyncio.sleep(5)
+    def update(self, _=None):
+        self.now = int(datetime.now().timestamp())
+        if self.last_post != get_manager().last_post:
+            print('Found new announcements')
+            last = get_manager().last_post
+            posts = [Announcement(
+                time=k,
+                user=v.get('user') or '',
+                subject=v.get('subject') or '',
+                message=get_messages(v))
+                for k, v in get_manager().posts.items()]
+            posts.sort(key=lambda x: x.time, reverse=True)
+            self.last_post = last
+            self.announcements = posts
 
     def set_read(self):
         self.last_read = str(self.last_post)
-        return NavState.update
 
 
 def get_messages(post_data: dict[str, str]) -> list[str]:
@@ -100,6 +89,7 @@ def unread_badge() -> rx.Component:
 
 def navbar() -> rx.Component:
     return rx.box(
+        rx.moment(interval=5000, on_change=NavState.update, display='none'),
         rx.desktop_only(
             rx.hstack(
                 rx.hstack(

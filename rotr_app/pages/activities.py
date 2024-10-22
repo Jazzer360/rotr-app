@@ -38,7 +38,7 @@ class ActivityInfo(rx.Base):
         )
 
 
-class ActivityState(NavState):
+class ActivityState(rx.State):
     friday: list[ActivityInfo] = [
         ActivityInfo.create(
             name='Face Painting',
@@ -102,15 +102,15 @@ class ActivityState(NavState):
 
 def badge(activity: ActivityInfo) -> rx.Component:
     return rx.cond(  # Check if ended
-        activity.end < ActivityState.now,
+        activity.end < NavState.now,
         rx.fragment(),
         rx.cond(  # Check if started
-            activity.start < ActivityState.now,
+            activity.start < NavState.now,
             rx.badge('In Progress', align_self='flex-end'),
             rx.cond(  # Check if scheduled start
                 activity.start == activity.end,
                 rx.cond(
-                    activity.start - ActivityState.now < 3600,
+                    activity.start - NavState.now < 3600,
                     rx.badge(
                         'Starting Soon',
                         align_self='flex-end',
@@ -125,12 +125,12 @@ def badge(activity: ActivityInfo) -> rx.Component:
 
 def time_left_text(activity: ActivityInfo) -> rx.Component:
     return rx.cond(  # Check if ended
-        activity.end < ActivityState.now,
+        activity.end < NavState.now,
         rx.fragment(),
         rx.cond(  # Check if started
-            activity.start < ActivityState.now,
+            activity.start < NavState.now,
             rx.text(
-                (activity.end - ActivityState.now) // 60,
+                (activity.end - NavState.now) // 60,
                 ' minutes left',
                 align='right',
                 flex_grow='1'
@@ -138,10 +138,10 @@ def time_left_text(activity: ActivityInfo) -> rx.Component:
             rx.cond(  # Check if scheduled start
                 activity.start == activity.end,
                 rx.cond(
-                    activity.start - ActivityState.now < 3600,
+                    activity.start - NavState.now < 3600,
                     rx.text(
                         'Starts in ',
-                        (activity.start - ActivityState.now) // 60,
+                        (activity.start - NavState.now) // 60,
                         ' minutes',
                         align='right',
                         flex_grow='1'
@@ -156,11 +156,11 @@ def time_left_text(activity: ActivityInfo) -> rx.Component:
 
 def progress_bar(activity: ActivityInfo) -> rx.Component:
     return rx.cond(
-        activity.start < ActivityState.now,
+        activity.start < NavState.now,
         rx.cond(
-            activity.end > ActivityState.now,
+            activity.end > NavState.now,
             rx.progress(
-                value=((ActivityState.now - activity.start) / 
+                value=((NavState.now - activity.start) / 
                        (activity.end - activity.start) * 100),
                 margin_top='8px'
             ),
@@ -192,7 +192,7 @@ def activity_card(activity: ActivityInfo) -> rx.Component:
             justify='start'
         ),
         progress_bar(activity),
-        color=rx.cond(activity.end < ActivityState.now, 'gray', '')
+        color=rx.cond(activity.end < NavState.now, 'gray', '')
     )
 
 
@@ -207,7 +207,7 @@ def activity_entry(activity: ActivityInfo) -> rx.Component:
 @rx.page(
     route='/activities',
     title='Activity Schedule',
-    on_load=ActivityState.update)
+    on_load=NavState.update)
 @template
 def schedule() -> rx.Component:
     return rx.vstack(
