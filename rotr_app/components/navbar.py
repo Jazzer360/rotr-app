@@ -74,11 +74,27 @@ def menu_item(link: list) -> rx.Component:
         link[0],
         on_select=rx.redirect(link[1]),
         color=rx.cond(
-            (link[0] == 'Announcements') & (
-                NavState.last_read.to(int) < NavState.last_post),
+            (link[0] == 'Announcements') & unread_posts(),
             'red',
             ''
         )
+    )
+
+
+def unread_posts():
+    return NavState.last_read.to(int) < NavState.last_post
+
+
+def unread_badge() -> rx.Component:
+    return rx.icon(
+        'megaphone',
+        position='absolute',
+        top='.75em',
+        right='.65em',
+        size=20,
+        background='red',
+        border_radius='10px',
+        padding='2px'
     )
 
 
@@ -87,9 +103,7 @@ def navbar() -> rx.Component:
         rx.desktop_only(
             rx.hstack(
                 rx.hstack(
-                    rx.heading(
-                        "Rhythm of the River", size="7", weight="bold"
-                    ),
+                    rx.heading("Rhythm of the River", size="7", weight="bold"),
                     align_items="center",
                 ),
                 rx.hstack(
@@ -104,33 +118,17 @@ def navbar() -> rx.Component:
         rx.mobile_and_tablet(
             rx.hstack(
                 rx.hstack(
-                    rx.heading(
-                        "Rhythm of the River", size="6", weight="bold"
-                    ),
+                    rx.heading("Rhythm of the River", size="6", weight="bold"),
                     align_items="center",
                 ),
                 rx.menu.root(
                     rx.menu.trigger(
                         rx.box(
                             rx.icon("menu", size=30),
-                            rx.cond(
-                                NavState.last_read.to(int) < NavState.last_post,
-                                rx.icon(
-                                    'megaphone',
-                                    position='absolute',
-                                    top='.75em',
-                                    right='.65em',
-                                    size=20,
-                                    background='red',
-                                    border_radius='10px',
-                                    padding='2px'
-                                )
-                            )
+                            rx.cond(unread_posts(), unread_badge())
                         )
                     ),
-                    rx.menu.content(
-                        rx.foreach(NavState.links, menu_item)
-                    ),
+                    rx.menu.content(rx.foreach(NavState.links, menu_item)),
                     justify="end",
                 ),
                 justify="between",
