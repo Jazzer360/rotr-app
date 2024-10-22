@@ -24,7 +24,7 @@ class NavState(rx.State):
         'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSdzPeKeD19qWza9q-Q8SpsKwCL7SnfrsO0Gdxauv1vVi3Co6w/viewform?usp=sf_link',
     }
     last_post: int = 0
-    last_read: str = rx.Cookie("0")
+    last_read: str = rx.Cookie('0', max_age=60 * 60 * 24 * 30)
     announcements: list[Announcement] = []
 
     @rx.background
@@ -57,7 +57,10 @@ class NavState(rx.State):
 
 def get_messages(post_data: dict[str, str]) -> list[str]:
     msg = post_data.get('message')
-    return msg.split('\n') if msg else ['']
+    messages = [m for m in msg.strip().split('\n') if m] if msg else ['']
+    messages[0] = f'"{messages[0]}'
+    messages[-1] = f'{messages[-1]}"'
+    return messages
 
 
 def navbar_link(link: list) -> rx.Component:

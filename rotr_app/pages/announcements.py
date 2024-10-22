@@ -32,7 +32,7 @@ def make_card(data: Announcement):
 
 
 def message_paragraph(txt: str) -> rx.Component:
-    return rx.text(f'"{txt}"', font_style='italic')
+    return rx.text(txt, font_style='italic')
 
 
 @rx.page(
