@@ -524,6 +524,22 @@ def badge(band: BandInfo) -> rx.Component:
     )
 
 
+def progress(band: BandInfo) -> rx.Component:
+    return rx.cond(
+        band.start < ScheduleState.now,
+        rx.cond(
+            band.end > ScheduleState.now,
+            rx.progress(
+                value=((ScheduleState.now - band.start) / 
+                       (band.end - band.start) * 100),
+                margin_top='8px'
+            ),
+            rx.fragment()
+        ),
+        rx.fragment()
+    )
+
+
 def band_card(band: BandInfo) -> rx.Component:
     return rx.card(
         rx.hstack(
@@ -550,19 +566,7 @@ def band_card(band: BandInfo) -> rx.Component:
             align='center',
             justify='start'
         ),
-        rx.cond(
-            band.start < ScheduleState.now,
-            rx.cond(
-                band.end > ScheduleState.now,
-                rx.progress(
-                    value=((ScheduleState.now - band.start) / 
-                           (band.end - band.start) * 100),
-                    margin_top='8px'
-                ),
-                rx.fragment()
-            ),
-            rx.fragment()
-        ),
+        progress(),
         color=rx.cond(band.end < ScheduleState.now, 'gray', '')
     )
 
