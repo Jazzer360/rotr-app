@@ -13,6 +13,7 @@ class FloydState(rx.State):
 
     def login(self, form_data: dict):
         self.loading = True
+        yield
         user = form_data.get('user')
         pw = form_data.get('password')
         if user and pw and get_manager().validate_user(user, pw):
@@ -24,6 +25,7 @@ class FloydState(rx.State):
 
     def make_post(self, form_data: dict):
         self.loading = True
+        yield
         message = form_data.get('message')
         subject = form_data.get('subject')
         if message:
