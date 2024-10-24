@@ -22,14 +22,16 @@ class NavState(rx.State):
         'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSdzPeKeD19qWza9q-Q8SpsKwCL7SnfrsO0Gdxauv1vVi3Co6w/viewform?usp=sf_link',
     }
     last_post: int = 0
+    last_update: int = 0
     last_read: str = rx.Cookie('0', max_age=60 * 60 * 24 * 30)
     announcements: list[Announcement] = []
 
     def update(self, _=None):
         self.now = int(datetime.now().timestamp())
-        if self.last_post != get_manager().last_post:
+        if (self.last_update != get_manager().last_update):
             print('Found new announcements')
-            last = get_manager().last_post
+            self.last_update = get_manager().last_update
+            self.last_post = get_manager().last_post
             posts = [Announcement(
                 time=k,
                 user=v.get('user') or '',
@@ -37,11 +39,15 @@ class NavState(rx.State):
                 message=get_messages(v))
                 for k, v in get_manager().posts.items()]
             posts.sort(key=lambda x: x.time, reverse=True)
-            self.last_post = last
             self.announcements = posts
+            if int(self.last_read) < self.last_post:
+                return NavState.show_announcement_toast
 
     def set_read(self):
         self.last_read = str(self.last_post)
+
+    def show_announcement_toast(self):
+        return rx.toast.warning('New announcements posted.')
 
 
 def get_messages(post_data: dict[str, str]) -> list[str]:

@@ -1,27 +1,49 @@
 steps:
   - id: Build Frontend
     name: gcr.io/cloud-builders/docker
-    args: [build, -t, gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA, ., -f, frontend.Dockerfile]
+    args: 
+      - build
+      - -t
+      - gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA
+      - .
+      - -f
+      - frontend.Dockerfile
 
   - id: Run Frontend
     name: gcr.io/cloud-builders/docker
-    args: [run, --name, temp, gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA]
+    args: 
+      - run
+      - --name
+      - temp
+      - gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA
 
   - id: Gather Static Site
     name: gcr.io/cloud-builders/docker
-    args: [cp, temp:/app/.web/_static, /workspace/output]
+    args: 
+      - cp
+      - temp:/app/.web/_static
+      - /workspace/output
 
   - id: Firebase Hosting
     name: gcr.io/$PROJECT_ID/firebase
-    args: [deploy, --project=$PROJECT_ID, --only=hosting]    
+    args: 
+      - deploy
+      - --project=$PROJECT_ID
+      - --only=hosting    
 
   - id: Build Backend
     name: gcr.io/cloud-builders/docker
-    args: [build, -t, gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA, .]
+    args: 
+      - build
+      - -t
+      - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
+      - .
 
   - id: Push Backend
     name: gcr.io/cloud-builders/docker
-    args: [push, gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA]
+    args: 
+      - push
+      - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
 
   - id: Deploy Backend
     name: gcr.io/google.com/cloudsdktool/cloud-sdk

@@ -21,6 +21,7 @@ class DataManager:
         print('Initializing announcements manager...')
         self.posts = {}
         self.last_post = 0
+        self.last_update = 0
         self.app = firebase_admin.initialize_app(
             options={'projectId': 'rotr-app'})
         self.db = firestore.client()
@@ -40,7 +41,8 @@ class DataManager:
         self.update_time()
 
     def update_time(self):
-        self.last_post = max(self.posts.keys())
+        self.last_post = max(map(int, self.posts.keys()))
+        self.last_update = now()
 
     def save_post(self, *, user, subject, message):
         data = {'user': user, 'message': message, 'subject': subject}

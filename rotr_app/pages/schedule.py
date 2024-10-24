@@ -9,7 +9,7 @@ from ..components.navbar import NavState
 from ..template import template
 from ..util.utils import production, get_start_end
 
-T = TypeVar('B', bound='BandInfo')
+T = TypeVar('T', bound='BandInfo')
 
 
 class BandInfo(rx.Base):
@@ -495,48 +495,36 @@ class ScheduleState(rx.State):
         )
 
 
+def on_stage_component(component_function):
+    def wrapper(band: BandInfo):
+        return rx.cond(
+            (band.start < NavState.now) & (band.end > NavState.now),
+            component_function(band),
+            rx.fragment()
+        )
+    return wrapper
+
+
+@on_stage_component
 def time_left_text(band: BandInfo) -> rx.Component:
-    return rx.cond(
-        band.start < NavState.now,
-        rx.cond(
-            band.end > NavState.now,
-            rx.text(
-                (band.end - NavState.now) // 60,
-                ' minutes left',
-                align='right',
-                flex_grow='1'
-            ),
-            rx.fragment()
-        ),
-        rx.fragment()
+    return rx.text(
+            (band.end - NavState.now) // 60,
+            ' minutes left',
+            align='right',
+            flex_grow='1'
     )
 
 
+@on_stage_component
 def badge(band: BandInfo) -> rx.Component:
-    return rx.cond(
-        band.start < NavState.now,
-        rx.cond(
-            band.end > NavState.now,
-            rx.badge('On Stage', align_self='flex-end'),
-            rx.fragment()
-        ),
-        rx.fragment()
-    )
+    return rx.badge('On Stage', align_self='flex-end')
 
 
+@on_stage_component
 def progress(band: BandInfo) -> rx.Component:
-    return rx.cond(
-        band.start < NavState.now,
-        rx.cond(
-            band.end > NavState.now,
-            rx.progress(
-                value=((NavState.now - band.start) / 
-                       (band.end - band.start) * 100),
-                margin_top='8px'
-            ),
-            rx.fragment()
-        ),
-        rx.fragment()
+    return rx.progress(
+        value=((NavState.now - band.start) / (band.end - band.start) * 100),
+        margin_top='8px'
     )
 
 
@@ -571,68 +559,27 @@ def band_card(band: BandInfo) -> rx.Component:
     )
 
 
+def link(band: BandInfo, attr: str, icontag: str, text: str) -> rx.Component:
+    return rx.cond(
+        getattr(band, attr, None),
+        rx.link(
+            rx.hstack(
+                rx.icon(tag=icontag),
+                rx.text(text)
+            ),
+            href=getattr(band, attr)
+        )
+    )
+
+
 def links(band: BandInfo) -> rx.Component:
     return rx.flex(
-        rx.cond(
-            band.web,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='globe'),
-                    rx.text('Website')
-                ),
-                href=band.web
-            )
-        ),
-        rx.cond(
-            band.fb,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='facebook'),
-                    rx.text('Facebook')
-                ),
-                href=band.fb
-            )
-        ),
-        rx.cond(
-            band.insta,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='instagram'),
-                    rx.text('Instagram')
-                ),
-                href=band.insta
-            )
-        ),
-        rx.cond(
-            band.spotify,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='audio-lines'),
-                    rx.text('Spotify')
-                ),
-                href=band.spotify
-            )
-        ),
-        rx.cond(
-            band.apple,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='apple'),
-                    rx.text('iTunes')
-                ),
-                href=band.apple
-            )
-        ),
-        rx.cond(
-            band.yt,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='youtube'),
-                    rx.text('YouTube')
-                ),
-                href=band.yt
-            )
-        ),
+        link(band, 'web', 'globe', 'Website'),
+        link(band, 'fb', 'facebook', 'Facebook'),
+        link(band, 'insta', 'instagram', 'Instagram'),
+        link(band, 'spotify', 'audio-lines', 'Spotify'),
+        link(band, 'apple', 'apple', 'iTunes'),
+        link(band, 'yt', 'youtube', 'YouTube'),
         wrap='wrap',
         spacing='4'
     )
@@ -645,7 +592,11 @@ def band_entry(band: BandInfo) -> rx.Component:
                 band_card(band)
             ),
             rx.dialog.content(
-                rx.dialog.title(band.name),
+                rx.hstack(
+                    rx.dialog.title(band.name, padding_top='8px'),
+                    rx.spacer(),
+                    rx.dialog.close(rx.icon('x'))
+                ),
                 rx.cond(band.img, rx.image(src=band.img)),
                 rx.dialog.description(band.bio, margin='12px 0px'),
                 links(band),

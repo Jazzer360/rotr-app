@@ -9,7 +9,7 @@ from ..components.navbar import NavState
 from ..template import template
 from ..util.utils import production, get_start_end
 
-T = TypeVar('A', bound='ActivityInfo')
+T = TypeVar('T', bound='ActivityInfo')
 
 
 class ActivityInfo(rx.Base):
@@ -100,71 +100,58 @@ class ActivityState(rx.State):
     ]    
 
 
+def timing_component(component_function):
+    def wrapper(activity: ActivityInfo):
+        return rx.cond(
+            (activity.end > NavState.now) & (activity.start < NavState.now),
+            component_function(activity)[0],
+            rx.cond(
+                (
+                    (activity.start > NavState.now) &
+                    (activity.start == activity.end) &
+                    (activity.start - NavState.now < 3600)
+                ),
+                component_function(activity)[1],
+                rx.fragment()
+            )
+        )
+    return wrapper
+
+
+@timing_component
 def badge(activity: ActivityInfo) -> rx.Component:
-    return rx.cond(  # Check if ended
-        activity.end < NavState.now,
-        rx.fragment(),
-        rx.cond(  # Check if started
-            activity.start < NavState.now,
-            rx.badge('In Progress', align_self='flex-end'),
-            rx.cond(  # Check if scheduled start
-                activity.start == activity.end,
-                rx.cond(
-                    activity.start - NavState.now < 3600,
-                    rx.badge(
-                        'Starting Soon',
-                        align_self='flex-end',
-                        color_scheme='grass'),
-                    rx.fragment()
-                ),
-                rx.fragment()
-            )
-        )
+    return (
+        rx.badge('In Progress', align_self='flex-end'),
+        rx.badge('Starting Soon', align_self='flex-end', color_scheme='grass')
     )
 
 
+@timing_component
 def time_left_text(activity: ActivityInfo) -> rx.Component:
-    return rx.cond(  # Check if ended
-        activity.end < NavState.now,
-        rx.fragment(),
-        rx.cond(  # Check if started
-            activity.start < NavState.now,
-            rx.text(
-                (activity.end - NavState.now) // 60,
-                ' minutes left',
-                align='right',
-                flex_grow='1'
-            ),
-            rx.cond(  # Check if scheduled start
-                activity.start == activity.end,
-                rx.cond(
-                    activity.start - NavState.now < 3600,
-                    rx.text(
-                        'Starts in ',
-                        (activity.start - NavState.now) // 60,
-                        ' minutes',
-                        align='right',
-                        flex_grow='1'
-                    ),
-                    rx.fragment()
-                ),
-                rx.fragment()
-            )
+    return (
+        rx.text(
+            (activity.end - NavState.now) // 60,
+            ' minutes left',
+            align='right',
+            flex_grow='1'
+        ),
+        rx.text(
+            'Starts in ',
+            (activity.start - NavState.now) // 60,
+            ' minutes',
+            align='right',
+            flex_grow='1'
         )
     )
 
 
+@timing_component
 def progress_bar(activity: ActivityInfo) -> rx.Component:
-    return rx.cond(
-        activity.start < NavState.now,
-        rx.cond(
-            activity.end > NavState.now,
-            rx.progress(
-                value=((NavState.now - activity.start) / 
-                       (activity.end - activity.start) * 100),
-                margin_top='8px'
-            ),
-            rx.fragment()
+    return (
+        rx.progress(
+            value=((NavState.now - activity.start) / 
+                   (activity.end - activity.start) * 100),
+            margin_top='8px'
         ),
         rx.fragment()
     )
