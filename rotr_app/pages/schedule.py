@@ -592,7 +592,11 @@ def band_entry(band: BandInfo) -> rx.Component:
                 band_card(band)
             ),
             rx.dialog.content(
-                rx.dialog.title(band.name),
+                rx.hstack(
+                    rx.dialog.title(band.name, padding_top='8px'),
+                    rx.spacer(),
+                    rx.dialog.close(rx.icon('x'))
+                ),
                 rx.cond(band.img, rx.image(src=band.img)),
                 rx.dialog.description(band.bio, margin='12px 0px'),
                 links(band),
