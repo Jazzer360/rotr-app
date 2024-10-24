@@ -495,11 +495,11 @@ class ScheduleState(rx.State):
         )
 
 
-def on_stage_component(comp_func):
+def on_stage_component(component_function):
     def wrapper(band: BandInfo):
         return rx.cond(
             (band.start < NavState.now) & (band.end > NavState.now),
-            comp_func(band),
+            component_function(band),
             rx.fragment()
         )
     return wrapper

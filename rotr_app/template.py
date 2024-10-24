@@ -6,7 +6,9 @@ from .components.navbar import navbar
 
 
 def template(page: Callable[[], rx.Component]) -> rx.Component:
-    return rx.vstack(
-        navbar(),
-        page(),
-        align='center')
+    def wrapper():
+        return rx.vstack(
+            navbar(),
+            page(),
+            align='center')
+    return wrapper
