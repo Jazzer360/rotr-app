@@ -495,48 +495,36 @@ class ScheduleState(rx.State):
         )
 
 
+def on_stage_component(comp_func):
+    def wrapper(band: BandInfo):
+        return rx.cond(
+            (band.start < NavState.now) & (band.end > NavState.now),
+            comp_func(band),
+            rx.fragment()
+        )
+    return wrapper
+
+
+@on_stage_component
 def time_left_text(band: BandInfo) -> rx.Component:
-    return rx.cond(
-        band.start < NavState.now,
-        rx.cond(
-            band.end > NavState.now,
-            rx.text(
-                (band.end - NavState.now) // 60,
-                ' minutes left',
-                align='right',
-                flex_grow='1'
-            ),
-            rx.fragment()
-        ),
-        rx.fragment()
+    return rx.text(
+            (band.end - NavState.now) // 60,
+            ' minutes left',
+            align='right',
+            flex_grow='1'
     )
 
 
+@on_stage_component
 def badge(band: BandInfo) -> rx.Component:
-    return rx.cond(
-        band.start < NavState.now,
-        rx.cond(
-            band.end > NavState.now,
-            rx.badge('On Stage', align_self='flex-end'),
-            rx.fragment()
-        ),
-        rx.fragment()
-    )
+    return rx.badge('On Stage', align_self='flex-end')
 
 
+@on_stage_component
 def progress(band: BandInfo) -> rx.Component:
-    return rx.cond(
-        band.start < NavState.now,
-        rx.cond(
-            band.end > NavState.now,
-            rx.progress(
-                value=((NavState.now - band.start) / 
-                       (band.end - band.start) * 100),
-                margin_top='8px'
-            ),
-            rx.fragment()
-        ),
-        rx.fragment()
+    return rx.progress(
+        value=((NavState.now - band.start) / (band.end - band.start) * 100),
+        margin_top='8px'
     )
 
 
