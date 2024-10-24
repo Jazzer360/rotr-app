@@ -9,7 +9,7 @@ from ..components.navbar import NavState
 from ..template import template
 from ..util.utils import production, get_start_end
 
-T = TypeVar('B', bound='BandInfo')
+T = TypeVar('T', bound='BandInfo')
 
 
 class BandInfo(rx.Base):
@@ -571,68 +571,27 @@ def band_card(band: BandInfo) -> rx.Component:
     )
 
 
+def link(band: BandInfo, attr: str, icontag: str, text: str) -> rx.Component:
+    return rx.cond(
+        getattr(band, attr, None),
+        rx.link(
+            rx.hstack(
+                rx.icon(tag=icontag),
+                rx.text(text)
+            ),
+            href=getattr(band, attr)
+        )
+    )
+
+
 def links(band: BandInfo) -> rx.Component:
     return rx.flex(
-        rx.cond(
-            band.web,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='globe'),
-                    rx.text('Website')
-                ),
-                href=band.web
-            )
-        ),
-        rx.cond(
-            band.fb,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='facebook'),
-                    rx.text('Facebook')
-                ),
-                href=band.fb
-            )
-        ),
-        rx.cond(
-            band.insta,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='instagram'),
-                    rx.text('Instagram')
-                ),
-                href=band.insta
-            )
-        ),
-        rx.cond(
-            band.spotify,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='audio-lines'),
-                    rx.text('Spotify')
-                ),
-                href=band.spotify
-            )
-        ),
-        rx.cond(
-            band.apple,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='apple'),
-                    rx.text('iTunes')
-                ),
-                href=band.apple
-            )
-        ),
-        rx.cond(
-            band.yt,
-            rx.link(
-                rx.hstack(
-                    rx.icon(tag='youtube'),
-                    rx.text('YouTube')
-                ),
-                href=band.yt
-            )
-        ),
+        link(band, 'web', 'globe', 'Website'),
+        link(band, 'fb', 'facebook', 'Facebook'),
+        link(band, 'insta', 'instagram', 'Instagram'),
+        link(band, 'spotify', 'audio-lines', 'Spotify'),
+        link(band, 'apple', 'apple', 'iTunes'),
+        link(band, 'yt', 'youtube', 'YouTube'),
         wrap='wrap',
         spacing='4'
     )

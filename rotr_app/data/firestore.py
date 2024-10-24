@@ -40,7 +40,7 @@ class DataManager:
         self.update_time()
 
     def update_time(self):
-        self.last_post = max(self.posts.keys())
+        self.last_post = max(map(int, self.posts.keys()))
 
     def save_post(self, *, user, subject, message):
         data = {'user': user, 'message': message, 'subject': subject}

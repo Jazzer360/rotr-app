@@ -40,7 +40,7 @@ class NavState(rx.State):
             posts.sort(key=lambda x: x.time, reverse=True)
             self.last_post = last
             self.announcements = posts
-            if unread_posts():
+            if int(self.last_read) < self.last_post:
                 return NavState.show_announcement_toast
 
     def set_read(self):

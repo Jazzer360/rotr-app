@@ -9,7 +9,7 @@ from ..components.navbar import NavState
 from ..template import template
 from ..util.utils import production, get_start_end
 
-T = TypeVar('A', bound='ActivityInfo')
+T = TypeVar('T', bound='ActivityInfo')
 
 
 class ActivityInfo(rx.Base):
