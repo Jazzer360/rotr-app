@@ -10,7 +10,7 @@ steps:
       - --region=us-central1
       - --trigger-http
       - --runtime=python312
-      - --source=.
+      - --source=cloud-functions/ingest-survey
       - --entry-point=hello_http
 options:
   logging: CLOUD_LOGGING_ONLY
