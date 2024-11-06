@@ -12,3 +12,5 @@ steps:
       - --runtime=python312
       - --source=.
       - --entry-point=hello_http
+options:
+  logging: CLOUD_LOGGING_ONLY
