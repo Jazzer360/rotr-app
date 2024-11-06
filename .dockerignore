@@ -4,3 +4,4 @@ __pycache__/*
 Dockerfile
 frontend.Dockerfile
 uploaded_files
+/cloud-functions/
