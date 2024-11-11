@@ -1,9 +1,9 @@
 .git/
+.venv/
 .web/
 .firebase/
 .gitignore
 cloud-functions/
 cloudbuild.yaml
-requirements.txt
 Dockerfile
 firebase.json
