@@ -1,8 +1,4 @@
 steps:
-  - name: ubuntu
-    entrypoint: ls
-    args: [-a]
-
   # Install project dependencies and build frontend
   - name: python:3.12
     entrypoint: bash
@@ -16,10 +12,6 @@ steps:
         uv pip install -r requirements.txt
         export API_URL=https://rotr-app-763868835094.us-central1.run.app
         reflex export --no-zip --frontend-only
-
-  - name: ubuntu
-    entrypoint: ls
-    args: [-a]
 
   # Deploy to firebase hosting
   - name: gcr.io/$PROJECT_ID/firebase
