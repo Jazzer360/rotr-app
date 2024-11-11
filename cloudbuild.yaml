@@ -1,74 +1,61 @@
 steps:
-  - id: Build Frontend
-    name: gcr.io/cloud-builders/docker
-    args: 
-      - build
-      - -t
-      - gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA
-      - .
-      - -f
-      - frontend.Dockerfile
+  - name: ubuntu
+    entrypoint: ls
+    args: [-a]
 
-  - id: Run Frontend
-    name: gcr.io/cloud-builders/docker
-    args: 
-      - run
-      - --name
-      - temp
-      - gcr.io/$PROJECT_ID/$_SERVICE_NAME-front:$COMMIT_SHA
+  # Install project dependencies and build frontend
+  - name: python:3.12
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        source /builder/home/.local/bin/env
+        uv venv
+        source .venv/bin/activate
+        uv pip install -r requirements.txt
+        export API_URL=https://rotr-app-763868835094.us-central1.run.app
+        reflex export --no-zip --frontend-only
 
-  - id: Gather Static Site
-    name: gcr.io/cloud-builders/docker
-    args: 
-      - cp
-      - temp:/app/.web/_static
-      - /workspace/output
+  - name: ubuntu
+    entrypoint: ls
+    args: [-a]
 
-  - id: Firebase Hosting
-    name: gcr.io/$PROJECT_ID/firebase
+  # Deploy to firebase hosting
+  - name: gcr.io/$PROJECT_ID/firebase
     args: 
       - deploy
       - --project=$PROJECT_ID
-      - --only=hosting    
+      - --only=hosting
 
-  - id: Build Backend
-    name: gcr.io/cloud-builders/docker
-    args: 
-      - build
-      - -t
-      - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
-      - .
+  # Build backend container
+  - name: gcr.io/cloud-builders/docker
+    args: [build, -t, gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA, .]
 
-  - id: Push Backend
-    name: gcr.io/cloud-builders/docker
-    args: 
-      - push
-      - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
+  # Push backend container
+  - name: gcr.io/cloud-builders/docker
+    args: [push, gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA]
 
-  - id: Deploy Backend
-    name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    entrypoint: gcloud
+  # Deploy container to Cloud Run
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args: 
+      - gcloud
       - run
       - deploy
       - $_SERVICE_NAME
-      - --image
-      - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
-      - --region
-      - $_DEPLOY_REGION
-      - --memory
-      - $_MEMORY
-images:
-  - gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
+      - --image=gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA
+      - --region=$_DEPLOY_REGION
+      - --memory=$_MEMORY
+
 options:
   substitutionOption: ALLOW_LOOSE
   logging: CLOUD_LOGGING_ONLY
+
 substitutions:
   _SERVICE_NAME: rotr-app
-  _BUCKET_NAME: rotr-app
-  _LOAD_BALANCER: rotr-lb
   _DEPLOY_REGION: us-central1
   _MEMORY: 512Mi
+
 tags:
   - gcp-cloud-build-deploy-cloud-run
   - gcp-cloud-build-deploy-cloud-run-managed

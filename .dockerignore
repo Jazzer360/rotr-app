@@ -1,7 +1,9 @@
-.web
-.git
-__pycache__/*
+.git/
+.web/
+.firebase/
+.gitignore
+cloud-functions/
+cloudbuild.yaml
+requirements.txt
 Dockerfile
-frontend.Dockerfile
-uploaded_files
-/cloud-functions/
+firebase.json
