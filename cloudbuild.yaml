@@ -5,12 +5,8 @@ steps:
     args:
       - -c
       - |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-        source /builder/home/.local/bin/env
-        uv venv
-        source .venv/bin/activate
-        uv pip install -r requirements.txt
-        export API_URL=https://rotr-app-763868835094.us-central1.run.app
+        pip install --no-cache-dir -r requirements.txt
+        export API_URL=https://$_SERVICE_NAME-$PROJECT_NUMBER.$_DEPLOY_REGION.run.app
         reflex export --no-zip --frontend-only
 
   # Deploy to firebase hosting
@@ -40,10 +36,10 @@ steps:
       - --memory=$_MEMORY
 
 options:
-  substitutionOption: ALLOW_LOOSE
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
+  # This is the name of the cloud run service where the backend lives
   _SERVICE_NAME: rotr-app
   _DEPLOY_REGION: us-central1
   _MEMORY: 512Mi
