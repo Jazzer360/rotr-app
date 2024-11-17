@@ -23,8 +23,8 @@ class ActivityInfo(rx.Base):
     def create(cls: Type[T], *, name: str, day: str, time: str, loc: str,
                **kwargs: dict[str, str]) -> T:
         if production():
-            fri = '2024-07-12'
-            sat = '2024-07-13'
+            fri = '2025-07-11'
+            sat = '2025-07-12'
         else:
             fri = datetime.now(
                 pytz.timezone('America/Chicago')).strftime('%Y-%m-%d')
