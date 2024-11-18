@@ -283,12 +283,14 @@ class ScheduleState(rx.State):
             time='6:00pm - 7:15pm',
             stage='Main',
             bio="""
-                Music is my trade & performing it for people is my passion.
-                When I’m not in my studio writing songs and cutting records, or
-                on the road playing shows, I’m usually tending to our backyard
-                chickens, eating fresh veggies from my wife’s huge garden,
-                making syrup from our city maples, or doing one of my many
-                outdoor hobbies.
+                Dan Rodriguez is a Minneapolis-based singer-songwriter
+                originally from Detroit. Known for his soulful voice and
+                heartfelt lyrics, he's released several albums and EPs, and has
+                even had his music featured in commercials (Miller Lite) and
+                tourism campaigns (Explore Minnesota). Dan's a husband and
+                father who enjoys the outdoors, good food, and connecting with
+                people through his music. He's shared the stage with notable
+                artists like The Civil Wars, Andy Grammer, and Eric Hutchinson. 
                 """,
             img='https://storage.googleapis.com/rotr-app-assets/danrodriguez.jpg',
             web='https://www.danrodriguezmusic.com/',
