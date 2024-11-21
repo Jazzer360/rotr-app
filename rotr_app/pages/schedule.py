@@ -297,7 +297,7 @@ class ScheduleState(rx.State):
             fb='https://www.facebook.com/danrodriguezmusic/',
             insta='https://www.instagram.com/danrodriguezmusic',
             spotify='https://open.spotify.com/artist/5T7PSvUO7Sm6AskUrp9iER',
-            apple='https://music.apple.com/us/artist/dan-rodr%C3%ADguez/1453645877',
+            apple='https://music.apple.com/us/artist/dan-rodriguez/336324136',
             yt='https://www.youtube.com/channel/UCp70GsPgfZUn8IT3zYTITIQ'),
         BandInfo.create(
             name='',
