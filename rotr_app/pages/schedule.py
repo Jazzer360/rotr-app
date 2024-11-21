@@ -334,7 +334,7 @@ class ScheduleState(rx.State):
                 """,
             img='https://storage.googleapis.com/rotr-app-assets/josephhuber.jpg',
             web='http://www.josephhubermusic.com/',
-            fb='https://www.facebook.com/josephhubermusicprofile/',
+            fb='',
             insta='https://www.instagram.com/josephhubermusic',
             spotify='https://open.spotify.com/artist/2pzKzgyZZdp2u8e8r3T1qa',
             apple='https://music.apple.com/us/artist/joseph-huber-band/1743114017',
