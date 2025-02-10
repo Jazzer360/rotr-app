@@ -41,62 +41,22 @@ class ActivityInfo(rx.Base):
 class ActivityState(rx.State):
     friday: list[ActivityInfo] = [
         ActivityInfo.create(
-            name='Face Painting',
+            name='Delafield Documentary Film',
             day='F',
-            time='5:30pm - 7:00pm',
-            loc="Children's Tent"),
-        ActivityInfo.create(
-            name='Rock Painting',
-            day='F',
-            time='5:30pm - 7:00pm',
-            loc="Children's Tent"),
-        ActivityInfo.create(
-            name='History Tour with Mark Titus',
-            day='F',
-            time='6:30pm',
-            loc='Museum'),
+            time='5:30pm - 6:00pm',
+            loc='Church'),
     ]
     saturday: list[ActivityInfo] = [
         ActivityInfo.create(
-            name='Yoga',
+            name='Didgeridoo Workshop',
             day='S',
-            time='9:00am - 10:00am',
-            loc='Main Stage'),
+            time='4:00pm - 4:30pm',
+            loc='Church'),
         ActivityInfo.create(
-            name='Spoon Workshop',
+            name='Delafield Documentary Film',
             day='S',
-            time='12:00pm - 2:00pm',
-            loc='Information Booth'),
-        ActivityInfo.create(
-            name='Face Painting',
-            day='S',
-            time='1:30pm - 3:30pm',
-            loc="Children's Tent"),
-        ActivityInfo.create(
-            name='Prairie Ecology Bus Center',
-            day='S',
-            time='2:30pm - 3:30pm',
-            loc="Children's Tent"),
-        ActivityInfo.create(
-            name='History Tour with Mark Titus',
-            day='S',
-            time='2:30pm',
-            loc='Museum'),
-        ActivityInfo.create(
-            name='Flower Crowns',
-            day='S',
-            time='3:30pm - 4:30pm',
-            loc="Children's Tent"),
-        ActivityInfo.create(
-            name='Prairie Ecology Bus Center',
-            day='S',
-            time='4:30pm - 5:30pm',
-            loc="Children's Tent"),
-        ActivityInfo.create(
-            name='Costume Parade',
-            day='S',
-            time='6:00pm - 6:30pm',
-            loc="Children's Tent")
+            time='5:30pm - 6:00pm',
+            loc='Church'),
     ]    
 
 

@@ -8,7 +8,6 @@ from reflex.config import get_config
 
 @cache
 def production():
-    return False  # Remove this line for finished site
     config = get_config()
     print(f'Running on: {config.api_url}')
     return not config.api_url.startswith('http://localhost')

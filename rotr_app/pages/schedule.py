@@ -74,20 +74,6 @@ class ScheduleState(rx.State):
             apple='',
             yt='https://www.youtube.com/channel/UCfcjI9Hza-HCgZaYT7syl6w'),
         BandInfo.create(
-            name='',
-            day='F',
-            time='6:00pm - 6:30pm',
-            stage='Church',
-            bio="""
-                """,
-            img='',
-            web='',
-            fb='',
-            insta='',
-            spotify='',
-            apple='',
-            yt=''),
-        BandInfo.create(
             name='The Quantum Mechanics',
             day='F',
             time='6:30pm - 7:30pm',
@@ -108,11 +94,12 @@ class ScheduleState(rx.State):
             apple='',
             yt=''),
         BandInfo.create(
-            name='',
+            name='Reed Anderberg',
             day='F',
             time='7:30pm - 8:00pm',
             stage='Church',
             bio="""
+                Reed Anderberg is a local musician from Tea, South Dakota.
                 """,
             img='',
             fb='',
@@ -140,7 +127,7 @@ class ScheduleState(rx.State):
             apple='https://music.apple.com/us/artist/todd-partridge/1609807636',
             yt=''),
         BandInfo.create(
-            name='',
+            name='TBA',
             day='F',
             time='9:00pm - 9:30pm',
             stage='Church',
@@ -182,21 +169,27 @@ class ScheduleState(rx.State):
     ]
     saturday: list[BandInfo] = [
         BandInfo.create(
-            name='',
+            name='Harper & Midwest Kind Sound Journey',
             day='S',
             time='1:30pm - 2:30pm',
             stage='Main',
             bio="""
+                Harper & Midwest Kind Sound Journey is a musical project led by
+                Australian musician Peter D. Harper. It blends blues, roots,
+                and world music influences, often incorporating the didgeridoo,
+                an Aboriginal Australian instrument. Their performances offer a
+                unique and immersive sound experience, sometimes described as
+                "sound baths," that aim to promote relaxation and well-being.
                 """,
-            img='',
-            web='',
-            fb='',
-            insta='',
-            spotify='',
+            img='https://storage.googleapis.com/rotr-app-assets/harper.jpg',
+            web='https://harper.biz',
+            fb='https://www.facebook.com/HarperandMidwestKind/',
+            insta='https://instagram.com/harperandmidwestkind',
+            spotify='https://open.spotify.com/artist/0kqjMIDhc7wA1aoJD1aOuY',
             apple='',
-            yt=''),
+            yt='https://youtube.com/peterdharper'),
         BandInfo.create(
-            name='',
+            name='TBA',
             day='S',
             time='2:30pm - 3:00pm',
             stage='Church',
@@ -236,47 +229,30 @@ class ScheduleState(rx.State):
             apple='https://music.apple.com/us/artist/janice-gilbert/295352162',
             yt='https://www.youtube.com/@janicegilbertmusic'),
         BandInfo.create(
-            name='',
-            day='S',
-            time='4:00pm - 4:30pm',
-            stage='Church',
-            bio="""
-                """,
-            img='',
-            web='',
-            fb='',
-            insta='',
-            spotify='',
-            apple='',
-            yt=''),
-        BandInfo.create(
-            name='',
+            name='Squid City Slingers',
             day='S',
             time='4:30pm - 5:30pm',
             stage='Main',
             bio="""
+                Squid City Slingers are a dynamic trio hailing from the Twin
+                Cities, Minnesota, with a strong presence in the Twin Ports
+                area as well. They've carved out a niche for themselves with
+                their unique blend of folk, bluegrass, and gypsy jazz
+                influences. Think lively fiddle tunes, intricate guitar
+                picking, and soulful vocals, all wrapped up in a high-energy
+                performance style that gets audiences moving. They are known
+                for their engaging live shows, often playing breweries, pubs,
+                and festivals around the region. If you're looking for a band
+                that will bring a fun and eclectic mix of music to your event,
+                the Squid City Slingers might be just what you need.
                 """,
-            img='',
+            img='https://storage.googleapis.com/rotr-app-assets/squidcityslingers.jpg',
             web='',
-            fb='',
-            insta='',
+            fb='https://www.facebook.com/profile.php?id=61550201452681&mibextid=avESrC',
+            insta='https://www.instagram.com/squidcityslingers',
             spotify='',
             apple='',
-            yt=''),
-        BandInfo.create(
-            name='',
-            day='S',
-            time='5:30pm - 6:00pm',
-            stage='Church',
-            bio="""
-                """,
-            img='',
-            web='',
-            fb='',
-            insta='',
-            spotify='',
-            apple='',
-            yt=''),
+            yt='https://www.youtube.com/@SquidCitySlingers/videos'),
         BandInfo.create(
             name='Dan Rodriguez',
             day='S',
@@ -300,19 +276,31 @@ class ScheduleState(rx.State):
             apple='https://music.apple.com/us/artist/dan-rodriguez/336324136',
             yt='https://www.youtube.com/channel/UCp70GsPgfZUn8IT3zYTITIQ'),
         BandInfo.create(
-            name='',
+            name='Janice Gilbert',
             day='S',
             time='7:15pm - 7:45pm',
             stage='Church',
             bio="""
+                Janice Gilbert is a country singer-songwriter with a
+                down-to-earth style rooted in her South Dakota upbringing.
+                Her music blends contemporary country with touches of folk and
+                Americana, reflecting her rural roots and personal experiences.
+                Gilbert's songs often touch on themes of family, faith, and
+                life on the farm, with heartfelt lyrics and a warm vocal
+                delivery. She has earned recognition for her songwriting,
+                winning contests and placing songs on TV shows like "White Wall
+                Sessions." Although she spent time honing her craft in
+                Nashville, Gilbert now performs throughout the Midwest, sharing
+                her genuine stories and connecting with audiences through her
+                music.
                 """,
-            img='',
-            web='',
-            fb='',
-            insta='',
-            spotify='',
-            apple='',
-            yt=''),
+            img='https://storage.googleapis.com/rotr-app-assets/janicegilbert.jpg',
+            web='https://janicegilbert.com/',
+            fb='https://www.facebook.com/janicegilbertmusic',
+            insta='https://www.instagram.com/janicegilbert23',
+            spotify='https://open.spotify.com/artist/0XMI3C705bdTGHmck6mQ01',
+            apple='https://music.apple.com/us/artist/janice-gilbert/295352162',
+            yt='https://www.youtube.com/@janicegilbertmusic'),
         BandInfo.create(
             name='Joseph Huber',
             day='S',
@@ -340,19 +328,29 @@ class ScheduleState(rx.State):
             apple='https://music.apple.com/us/artist/joseph-huber-band/1743114017',
             yt='https://www.youtube.com/channel/UCku4bBFeP60zw_CdHkufd6g'),
         BandInfo.create(
-            name='',
+            name='Tim Fast',
             day='S',
             time='9:00pm - 9:30pm',
             stage='Church',
             bio="""
+                Tim Fast is an award-winning folk singer-songwriter from
+                Minnesota. He's known for his heartfelt lyrics, engaging
+                melodies, and intimate performances that connect with audiences
+                on a personal level. His music often draws inspiration from the
+                landscapes and stories of the Midwest, creating a sense of
+                warmth and familiarity. Fast is a skilled guitarist and
+                harmonica player, and his music has earned him recognition at
+                various festivals and venues. If you're a fan of authentic folk
+                music with a focus on storytelling, Tim Fast is definitely
+                worth checking out.
                 """,
-            img='',
-            web='',
-            fb='',
+            img='https://storage.googleapis.com/rotr-app-assets/timfast.jpg',
+            web='https://timfast.com/',
+            fb='https://www.facebook.com/timfastmusic',
             insta='',
-            spotify='',
+            spotify='https://open.spotify.com/artist/1ggS81qFjGR5kNQCzk2DHE',
             apple='',
-            yt=''),
+            yt='https://youtube.com/@timfastmusic'),
         BandInfo.create(
             name='Squeaky Feet',
             day='S',
@@ -433,7 +431,12 @@ def band_card(band: BandInfo) -> rx.Component:
             ),
             rx.vstack(
                 rx.hstack(
-                    rx.text(band.name),
+                    rx.text(
+                        band.name,
+                        font_weight=rx.cond(
+                            band.stage == 'Main', 'bold', 'normal'
+                        )
+                    ),
                     rx.spacer(),
                     badge(band),
                     width='100%'
@@ -449,7 +452,8 @@ def band_card(band: BandInfo) -> rx.Component:
             justify='start'
         ),
         progress(band),
-        color=rx.cond(band.end < NavState.now, 'gray', '')
+        color=rx.cond(band.end < NavState.now, 'gray', ''),
+        margin_left=rx.cond(band.stage == 'Main', '0px', '20px')
     )
 
 
