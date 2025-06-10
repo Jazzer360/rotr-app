@@ -1,13 +1,10 @@
-from datetime import datetime
 from typing import Type, TypeVar
-
-import pytz
 
 import reflex as rx
 
 from ..components.navbar import NavState
 from ..template import template
-from ..util.utils import production, get_start_end
+from ..util.utils import get_start_end
 
 T = TypeVar('T', bound='ActivityInfo')
 
@@ -22,13 +19,8 @@ class ActivityInfo(rx.Base):
     @classmethod
     def create(cls: Type[T], *, name: str, day: str, time: str, loc: str,
                **kwargs: dict[str, str]) -> T:
-        if production():
-            fri = '2025-07-11'
-            sat = '2025-07-12'
-        else:
-            fri = datetime.now(
-                pytz.timezone('America/Chicago')).strftime('%Y-%m-%d')
-            sat = fri
+        fri = '2025-07-11'
+        sat = '2025-07-12'
         date = fri if day == 'F' else sat
         return ActivityInfo(
             name=name,

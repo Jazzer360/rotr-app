@@ -1,13 +1,10 @@
-from datetime import datetime
 from typing import Type, TypeVar
-
-import pytz
 
 import reflex as rx
 
 from ..components.navbar import NavState
 from ..template import template
-from ..util.utils import production, get_start_end
+from ..util.utils import get_start_end
 
 T = TypeVar('T', bound='BandInfo')
 
@@ -30,13 +27,8 @@ class BandInfo(rx.Base):
     @classmethod
     def create(cls: Type[T], *, name: str, day: str, time: str, stage: str,
                **kwargs: dict[str, str]) -> T:
-        if production():
-            fri = '2025-07-11'
-            sat = '2025-07-12'
-        else:
-            fri = datetime.now(
-                pytz.timezone('America/Chicago')).strftime('%Y-%m-%d')
-            sat = fri
+        fri = '2025-07-11'
+        sat = '2025-07-12'
         date = fri if day == 'F' else sat
         return BandInfo(
             name=name,
@@ -127,16 +119,20 @@ class ScheduleState(rx.State):
             apple='https://music.apple.com/us/artist/todd-partridge/1609807636',
             yt=''),
         BandInfo.create(
-            name='TBA',
+            name='Life in Progress',
             day='F',
             time='9:00pm - 9:30pm',
             stage='Church',
             bio="""
+                Life in Progress is a local duo composed of Mike & Bailey Hobbs
+                from Dunnell, Minnesota who create uplifting lyrical harmonies
+                with acoustic guitar and Ukelele. They host an annual music
+                festival on their farm called Cornstalk.
                 """,
-            img='',
-            web='',
-            fb='',
-            insta='',
+            img='https://storage.googleapis.com/rotr-app-assets/lifeinprogress.jpg',
+            web='https://cornstalkconvergence.com/',
+            fb='https://www.facebook.com/profile.php?id=100063881920787',
+            insta='https://www.instagram.com/cornstalkconvergence',
             spotify='',
             apple='',
             yt=''),
@@ -189,19 +185,30 @@ class ScheduleState(rx.State):
             apple='',
             yt='https://youtube.com/peterdharper'),
         BandInfo.create(
-            name='TBA',
+            name='Emma Josephine',
             day='S',
             time='2:30pm - 3:00pm',
             stage='Church',
             bio="""
+                Emma Josephine is a singer-songwriter based in Mankato,
+                Minnesota, who also performs in the Twin Cities area. She is
+                known for her folk-inspired sound and soulful storytelling,
+                often performing as a solo act with her acoustic guitar.
+                Emma Josephine has gained recognition through performances at
+                festivals like the Rock Bend Folk Festival and has opened for
+                artists such as The Cactus Blossoms and Mary Jane Alm. Her
+                songwriting style is described as capturing the lyrical power
+                of Brandi Carlile, the folk flair of Emmylou Harris, and the
+                rich storytelling of Nanci Griffith. She also has experience
+                leading worship in churches.
                 """,
-            img='',
-            web='',
-            fb='',
-            insta='',
-            spotify='',
-            apple='',
-            yt=''),
+            img='https://storage.googleapis.com/rotr-app-assets/emmajosephine.jpg',
+            web='https://sites.google.com/view/justemmajomusic/home',
+            fb='https://www.facebook.com/emma.josephine.252982/',
+            insta='https://www.instagram.com/justemmajomusic/',
+            spotify='https://open.spotify.com/artist/7kIGLRUGjUCgKJQlHQ8174',
+            apple='https://music.apple.com/us/artist/emma-josephine/1645276407',
+            yt='https://www.youtube.com/@justemmajomusic'),
         BandInfo.create(
             name='Janice Gilbert',
             day='S',
