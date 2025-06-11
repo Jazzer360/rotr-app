@@ -35,10 +35,15 @@ class ActivityState(rx.State):
         ActivityInfo.create(
             name='Delafield Documentary Film',
             day='F',
-            time='5:30pm - 6:00pm',
+            time='6:00pm - 6:30pm',
             loc='Church'),
     ]
     saturday: list[ActivityInfo] = [
+        ActivityInfo.create(
+            name='Delafield Documentary Film',
+            day='S',
+            time='12:30pm - 1:00pm',
+            loc='Church'),
         ActivityInfo.create(
             name='Didgeridoo Workshop',
             day='S',
