@@ -17,6 +17,7 @@ class NavState(rx.State):
     links: dict[str, str] = {
         'Schedule': '/',
         'Activities': '/activities',
+        'Food': '/food',
         'Announcements': '/announcements',
         'Merch': 'https://rhythm-of-the-river-merch.printify.me/products',
         'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSdzPeKeD19qWza9q-Q8SpsKwCL7SnfrsO0Gdxauv1vVi3Co6w/viewform?usp=sf_link',
