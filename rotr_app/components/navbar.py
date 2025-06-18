@@ -13,7 +13,7 @@ class Announcement(rx.Base):
 
 
 class NavState(rx.State):
-    now: int = None
+    now: int = 0
     links: dict[str, str] = {
         'Schedule': '/',
         'Activities': '/activities',
@@ -24,7 +24,7 @@ class NavState(rx.State):
     }
     last_post: int = 0
     last_update: int = 0
-    last_read: str = rx.Cookie('0', max_age=60 * 60 * 24 * 30)
+    last_read: str = rx.Cookie('', max_age=60 * 60 * 24 * 30)
     announcements: list[Announcement] = []
 
     def update(self, _=None):

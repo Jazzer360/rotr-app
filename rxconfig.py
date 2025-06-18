@@ -5,5 +5,6 @@ import reflex as rx
 
 config = rx.Config(
     app_name="rotr_app",
-    redis_url=os.getenv('REDIS_URL')
+    redis_url=os.getenv('REDIS_URL'),
+    plugins=[rx.plugins.TailwindV3Plugin()]
 )
