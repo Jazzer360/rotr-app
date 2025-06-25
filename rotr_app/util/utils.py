@@ -1,5 +1,5 @@
 from functools import cache
-from datetime import datetime
+from datetime import datetime, date
 
 import pytz
 
@@ -8,7 +8,6 @@ from reflex.config import get_config
 
 @cache
 def production():
-    return True
     config = get_config()
     print(f'Running on: {config.api_url}')
     return not config.api_url.startswith('http://localhost')
@@ -36,3 +35,16 @@ def get_start_end(date: str, time_range: str) -> dict[str, int]:
         'start': int(get_datetime(date, start).timestamp()),
         'end': int(get_datetime(date, end).timestamp())
     }
+
+
+def date_from_day(day):
+    if production():
+        return '2025-07-11' if day == 'F' else '2025-07-12'
+    else:
+        return date.today().isoformat()
+
+
+def apply_start_end(data):
+    for dataset in data:
+        date = date_from_day(dataset['day'])
+        dataset |= get_start_end(date, dataset['time'])
