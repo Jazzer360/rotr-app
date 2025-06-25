@@ -5,6 +5,15 @@ import reflex as rx
 from ..data.firestore import get_manager
 
 
+links = {
+    'Schedule': '/',
+    'Activities': '/activities',
+    'Food': '/food',
+    'Announcements': '/announcements',
+    'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSfJk8QrLR7rRrqBstlCVw6CqGKKol7OIfiQcMVCOLXR54Qx7A/viewform?usp=header',
+}
+
+
 class Announcement(rx.Base):
     time: int
     user: str
@@ -14,19 +23,12 @@ class Announcement(rx.Base):
 
 class NavState(rx.State):
     now: int = 0
-    links: dict[str, str] = {
-        'Schedule': '/',
-        'Activities': '/activities',
-        'Food': '/food',
-        'Announcements': '/announcements',
-        'Merch': 'https://rhythm-of-the-river-merch.printify.me/products',
-        'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSdzPeKeD19qWza9q-Q8SpsKwCL7SnfrsO0Gdxauv1vVi3Co6w/viewform?usp=sf_link',
-    }
     last_post: int = 0
     last_update: int = 0
     last_read: str = rx.Cookie('', max_age=60 * 60 * 24 * 30)
     announcements: list[Announcement] = []
 
+    @rx.event
     def update(self, _=None):
         self.now = int(datetime.now().timestamp())
         if (self.last_update != get_manager().last_update):
@@ -44,9 +46,11 @@ class NavState(rx.State):
             if int(self.last_read) < self.last_post:
                 return NavState.show_announcement_toast
 
+    @rx.event
     def set_read(self):
         self.last_read = str(self.last_post)
 
+    @rx.event
     def show_announcement_toast(self):
         return rx.toast.warning('New announcements posted.')
 
@@ -104,7 +108,8 @@ def navbar() -> rx.Component:
                     align_items="center",
                 ),
                 rx.hstack(
-                    rx.foreach(NavState.links, navbar_link),
+                    [navbar_link((label, ref))
+                        for label, ref in links.items()],
                     justify="end",
                     spacing="5",
                 ),
@@ -125,7 +130,10 @@ def navbar() -> rx.Component:
                             rx.cond(unread_posts(), unread_badge())
                         )
                     ),
-                    rx.menu.content(rx.foreach(NavState.links, menu_item)),
+                    rx.menu.content(
+                        [menu_item((label, ref))
+                            for label, ref in links.items()]
+                    ),
                     justify="end",
                 ),
                 justify="between",
