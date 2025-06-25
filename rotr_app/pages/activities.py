@@ -15,16 +15,34 @@ friday = [
 
 saturday = [
     {
+        'name': 'Yoga with Mel Mikos',
+        'day': 'S',
+        'time': '11:00am - 12:00pm',
+        'location': 'Main Stage'
+    },
+    {
         'name': 'Delafield Documentary Film',
         'day': 'S',
         'time': '12:30pm - 1:00pm',
         'location': 'Church'
     },
     {
+        'name': 'Flower Crowns',
+        'day': 'S',
+        'time': '3:30pm - 5:00pm',
+        'location': 'Children\'s Tent'
+    },
+    {
         'name': 'Didgeridoo Workshop',
         'day': 'S',
         'time': '4:00pm - 4:30pm',
         'location': 'Church'
+    },
+    {
+        'name': 'Face Painting',
+        'day': 'S',
+        'time': '5:00pm - 6:30pm',
+        'location': 'Children\'s Tent'
     },
     {
         'name': 'Delafield Documentary Film',
