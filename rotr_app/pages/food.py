@@ -26,7 +26,7 @@ vendors = [
 
 
 def menu_item(item: dict) -> rx.Component:
-    return rx.vstack(
+    return [
         rx.text(item.get('item'), size='3'),
         rx.text(
             item.get('desc'),
@@ -34,7 +34,7 @@ def menu_item(item: dict) -> rx.Component:
             margin_left='2em',
             font_style='italic'
         )
-    )
+    ]
 
 
 def vendor_item(menu: dict) -> rx.Component:
