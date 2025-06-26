@@ -25,7 +25,7 @@ class NavState(rx.State):
     now: int = 0
     last_post: int = 0
     last_update: int = 0
-    last_read: str = rx.Cookie('t0', max_age=60 * 60 * 24 * 30)
+    last_post_read: str = rx.Cookie('t0', max_age=60 * 60 * 24 * 30)
     announcements: list[Announcement] = []
 
     @rx.event
@@ -43,12 +43,12 @@ class NavState(rx.State):
                 for k, v in get_manager().posts.items()]
             posts.sort(key=lambda x: x.time, reverse=True)
             self.announcements = posts
-            if int(self.last_read[1:]) < self.last_post:
+            if int(self.last_post_read[1:]) < self.last_post:
                 return NavState.show_announcement_toast
 
     @rx.event
     def set_read(self):
-        self.last_read = 't' + str(self.last_post)
+        self.last_post_read = 't' + str(self.last_post)
 
     @rx.event
     def show_announcement_toast(self):
@@ -82,7 +82,7 @@ def menu_item(link: list) -> rx.Component:
 
 
 def unread_posts():
-    return NavState.last_read[1:].to(int) < NavState.last_post
+    return NavState.last_post_read[1:].to(int) < NavState.last_post
 
 
 def unread_badge() -> rx.Component:
