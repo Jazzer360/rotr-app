@@ -1,3 +1,4 @@
+import os
 from functools import cache
 from datetime import datetime, date
 
@@ -8,9 +9,13 @@ from reflex.config import get_config
 
 @cache
 def production():
-    config = get_config()
-    print(f'Running on: {config.api_url}')
-    return not config.api_url.startswith('http://localhost')
+    api_url = os.getenv('API_URL')
+    if api_url:
+        print('Running in production mode.')
+        return True
+    else:
+        print('Running in development mode.')
+        return False
 
 
 @cache
