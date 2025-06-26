@@ -82,7 +82,7 @@ def menu_item(link: list) -> rx.Component:
 
 
 def unread_posts():
-    return NavState.last_read.to(int) < NavState.last_post
+    return NavState.last_read[1:].to(int) < NavState.last_post
 
 
 def unread_badge() -> rx.Component:
