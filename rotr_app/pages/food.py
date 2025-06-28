@@ -160,7 +160,7 @@ vendors = [
         ]
     },
     {
-        'vendor': 'Cup \'N Saucer',
+        'vendor': 'The Cup Truck',
         'menu': [
             {
                 'item': "The 'Simp' Smashie",
@@ -382,7 +382,47 @@ vendors = [
         'vendor': 'TNT Indian Style Tacos',
         'menu': [
             {
-                'item': 'Menu coming soon...'
+                'item': 'Indian Taco',
+                'options': [
+                    {
+                        'option': 'w/ Seasoned Beef',
+                        'price': '$10'
+                    },
+                    {
+                        'option': 'w/ Pinto Beans',
+                        'price': '$10'
+                    },
+                    {
+                        'option': 'w/ Beef & Beans',
+                        'price': '$11'
+                    }
+                ]
+            },
+            {
+                'item': 'Taco Salad w/ Seasoned Beef',
+                'price': '$10'
+            },
+            {
+                'item': 'Nacho Supreme w/ Seasoned Beef',
+                'price': '$10'
+            },
+            {
+                'item': 'Nachos (Chips & Cheese)',
+                'price': '$6'
+            },
+            {
+                'item': 'Elephant Ear (Fry Bread)',
+                'price': '$5',
+                'options': [
+                    {
+                        'option': 'w/ Ice Cream',
+                        'price': '$7'
+                    }
+                ]
+            },
+            {
+                'item': 'Pop & Water',
+                'price': '$2'
             }
         ]
     }
