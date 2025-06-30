@@ -110,6 +110,7 @@ def navbar() -> rx.Component:
                 rx.hstack(
                     [navbar_link((label, ref))
                         for label, ref in links.items()],
+                    rx.color_mode.button(),
                     justify="end",
                     spacing="5",
                 ),
@@ -122,7 +123,9 @@ def navbar() -> rx.Component:
                 rx.hstack(
                     rx.heading("Rhythm of the River", size="6", weight="bold"),
                     align_items="center",
+                    flex_grow='1'
                 ),
+                rx.color_mode.button(),
                 rx.menu.root(
                     rx.menu.trigger(
                         rx.box(
