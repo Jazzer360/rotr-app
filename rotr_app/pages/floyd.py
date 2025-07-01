@@ -1,7 +1,7 @@
 import reflex as rx
 
-from ..template import template
-from ..data.firestore import get_manager
+from rotr_app.template import template
+from rotr_app.data.firestore import get_manager
 
 
 class FloydState(rx.State):

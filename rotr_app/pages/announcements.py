@@ -1,7 +1,7 @@
 import reflex as rx
 
-from ..template import template
-from ..components.navbar import NavState, Announcement
+from rotr_app.template import template
+from rotr_app.components.navbar import NavState, Announcement
 
 
 def make_card(data: Announcement) -> rx.Component:

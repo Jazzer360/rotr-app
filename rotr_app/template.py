@@ -2,8 +2,8 @@ from typing import Callable
 
 import reflex as rx
 
-from .components import navbar, footer, survey_popup
-from .components.surveypopup import SurveyState
+from rotr_app.components import footer, navbar, survey_popup
+from rotr_app.components.surveypopup import SurveyState
 
 
 def template(page: Callable[[], rx.Component]) -> Callable[[], rx.Component]:

@@ -2,8 +2,8 @@ from datetime import date
 
 import reflex as rx
 
-from ..util.utils import date_from_day
-from .navbar import links
+from rotr_app.util.utils import date_from_day
+from rotr_app.components.navbar import links
 
 
 class SurveyState(rx.State):

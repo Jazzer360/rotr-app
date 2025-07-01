@@ -1,7 +1,7 @@
 import reflex as rx
 
-from ..components.navbar import NavState
-from ..template import template
+from rotr_app.components.navbar import NavState
+from rotr_app.template import template
 
 
 vendors = [
@@ -483,7 +483,7 @@ def vendor_item(menu: dict) -> rx.Component:
     title='Food Vendors',
     on_load=NavState.update)
 @template
-def schedule() -> rx.Component:
+def food_page() -> rx.Component:
     return rx.box(
         [vendor_item(vendor) for vendor in vendors],
         width='100%',

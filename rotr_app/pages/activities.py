@@ -2,9 +2,9 @@ from typing import Callable
 
 import reflex as rx
 
-from ..components.navbar import NavState
-from ..template import template
-from ..util.utils import apply_start_end
+from rotr_app.components.navbar import NavState
+from rotr_app.template import template
+from rotr_app.util import apply_start_end
 
 friday = [
     {
@@ -157,7 +157,7 @@ def activity_entry(activity: dict) -> rx.Component:
     title='Activity Schedule',
     on_load=NavState.update)
 @template
-def schedule() -> rx.Component:
+def activities_page() -> rx.Component:
     return rx.vstack(
         rx.heading('Friday'),
         rx.box(

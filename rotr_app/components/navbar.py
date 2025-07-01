@@ -3,7 +3,7 @@ from typing import Callable, Optional
 
 import reflex as rx
 
-from ..data.firestore import get_manager
+from rotr_app.data import get_manager
 
 
 links = {
@@ -74,7 +74,7 @@ def get_messages(post_data: dict[str, str]) -> list[str]:
 
 def get_survey_handler(link: str) -> Optional[Callable]:
     if link == 'Survey':
-        from .surveypopup import SurveyState
+        from rotr_app.components.surveypopup import SurveyState
         return SurveyState.mark_survey_clicked
     return None
 
