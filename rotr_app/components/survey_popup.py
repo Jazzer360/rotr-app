@@ -16,6 +16,8 @@ class SurveyState(rx.State):
     @rx.event
     def check_survey_status(self):
         if self.survey_clicked == "T":
+            if date.today().isoformat() < date_from_day("F"):
+                self.survey_clicked = "F"
             self.show_popup = False
             return
 
