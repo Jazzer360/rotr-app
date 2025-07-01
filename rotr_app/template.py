@@ -3,7 +3,7 @@ from typing import Callable
 import reflex as rx
 
 from .components import navbar, footer, survey_popup
-from .components.survey_popup import SurveyState
+from .components.surveypopup import SurveyState
 
 
 def template(page: Callable[[], rx.Component]) -> Callable[[], rx.Component]:

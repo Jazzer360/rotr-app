@@ -74,7 +74,7 @@ def get_messages(post_data: dict[str, str]) -> list[str]:
 
 def get_survey_handler(link: str) -> Optional[Callable]:
     if link == 'Survey':
-        from .survey_popup import SurveyState
+        from .surveypopup import SurveyState
         return SurveyState.mark_survey_clicked
     return None
 

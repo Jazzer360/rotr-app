@@ -3,7 +3,7 @@ from datetime import date
 import reflex as rx
 
 from ..util.utils import date_from_day
-from ..components.navbar import links
+from .navbar import links
 
 
 class SurveyState(rx.State):
