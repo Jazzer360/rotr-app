@@ -49,9 +49,10 @@ class DataManager:
         doc = self.db.collection('announcements').document(str(now()))
         doc.set(data)
 
-    def validate_user(self, name, pw):
+    def validate_user(self, name, pw=''):
         doc = self.db.collection('users').document(name).get()
-        return doc.exists and doc.to_dict().get('pet') == pw
+        doc_dict = doc.to_dict() if doc.exists else {}
+        return doc_dict is not None and doc_dict.get('pet') == pw
 
 
 @cache

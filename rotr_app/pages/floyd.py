@@ -6,11 +6,12 @@ from ..data.firestore import get_manager
 
 class FloydState(rx.State):
     logged_in: bool = False
-    user: str = None
+    user: str = ''
     subject: str = ''
     message: str = ''
     loading: bool = False
 
+    @rx.event
     def login(self, form_data: dict):
         self.loading = True
         yield
@@ -23,6 +24,7 @@ class FloydState(rx.State):
             yield rx.toast.error('Nice try...')
         self.loading = False
 
+    @rx.event
     def make_post(self, form_data: dict):
         self.loading = True
         yield
@@ -35,6 +37,14 @@ class FloydState(rx.State):
             self.subject = ''
             yield rx.toast.success('The masses have been notified!')
         self.loading = False
+
+    @rx.event
+    def set_subject(self, value: str):
+        self.subject = value
+
+    @rx.event
+    def set_message(self, value: str):
+        self.message = value
 
 
 def login() -> rx.Component:

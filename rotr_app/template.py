@@ -6,7 +6,7 @@ from .components.navbar import navbar
 from .components.footer import footer
 
 
-def template(page: Callable[[], rx.Component]) -> rx.Component:
+def template(page: Callable[[], rx.Component]) -> Callable[[], rx.Component]:
     def wrapper():
         return rx.vstack(
             navbar(),

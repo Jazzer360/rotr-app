@@ -431,7 +431,7 @@ vendors = [
 
 def menu_item(item: dict) -> rx.Component:
     if 'options' in item:
-        options = [menu_option(option) for option in item.get('options')]
+        options = [menu_option(option) for option in item.get('options', [])]
     else:
         options = None
     desc = item['desc'] if 'desc' in item else None
@@ -452,7 +452,7 @@ def menu_item(item: dict) -> rx.Component:
     )
 
 
-def menu_option(option: dict):
+def menu_option(option: dict) -> rx.Component:
     return rx.hstack(
         rx.spacer(),
         rx.text(option.get('option'), margin_left='1em'),
@@ -466,7 +466,7 @@ def vendor_item(menu: dict) -> rx.Component:
             rx.card(
                 rx.heading(menu.get('vendor'), margin_bottom='1em'),
                 rx.vstack(
-                    [menu_item(item) for item in menu.get('menu')]
+                    [menu_item(item) for item in menu.get('menu', [])]
                 ),
                 width='100%'
             ),

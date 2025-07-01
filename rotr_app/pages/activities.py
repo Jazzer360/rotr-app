@@ -1,3 +1,5 @@
+from typing import Callable
+
 import reflex as rx
 
 from ..components.navbar import NavState
@@ -56,19 +58,21 @@ apply_start_end(friday)
 apply_start_end(saturday)
 
 
-def timing_component(component_function):
+def timing_component(
+    func: Callable[[dict], tuple[rx.Component, rx.Component]]
+) -> Callable[[dict], rx.Component]:
     def wrapper(activity: dict):
         return rx.cond(
             (activity['end'] > NavState.now) & (
                 activity['start'] < NavState.now),
-            component_function(activity)[0],
+            func(activity)[0],
             rx.cond(
                 (
                     (activity['start'] > NavState.now) &
                     (activity['start'] == activity['end']) &
                     (activity['start'] - NavState.now < 3600)
                 ),
-                component_function(activity)[1],
+                func(activity)[1],
                 rx.fragment()
             )
         )
@@ -76,7 +80,7 @@ def timing_component(component_function):
 
 
 @timing_component
-def badge(activity: dict) -> rx.Component:
+def badge(activity: dict) -> tuple[rx.Component, rx.Component]:
     return (
         rx.badge('In Progress', align_self='flex-end'),
         rx.badge('Starting Soon', align_self='flex-end', color_scheme='grass')
@@ -84,7 +88,7 @@ def badge(activity: dict) -> rx.Component:
 
 
 @timing_component
-def time_left_text(activity: dict) -> rx.Component:
+def time_left_text(activity: dict) -> tuple[rx.Component, rx.Component]:
     return (
         rx.text(
             (activity['end'] - NavState.now) // 60,
@@ -103,7 +107,7 @@ def time_left_text(activity: dict) -> rx.Component:
 
 
 @timing_component
-def progress_bar(activity: dict) -> rx.Component:
+def progress_bar(activity: dict) -> tuple[rx.Component, rx.Component]:
     return (
         rx.progress(
             value=((NavState.now - activity['start']) /

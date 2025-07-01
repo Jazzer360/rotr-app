@@ -1,7 +1,7 @@
 import reflex as rx
 
 
-def footer():
+def footer() -> rx.Component:
     return rx.hstack(
         rx.link(
             "Privacy Notice",

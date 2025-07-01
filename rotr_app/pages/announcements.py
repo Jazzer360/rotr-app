@@ -4,7 +4,7 @@ from ..template import template
 from ..components.navbar import NavState, Announcement
 
 
-def make_card(data: Announcement):
+def make_card(data: Announcement) -> rx.Component:
     return rx.card(
             rx.vstack(
                 rx.hstack(

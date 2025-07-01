@@ -65,13 +65,13 @@ def get_messages(post_data: dict[str, str]) -> list[str]:
     return messages
 
 
-def navbar_link(link: list) -> rx.Component:
+def navbar_link(link: tuple[str, str]) -> rx.Component:
     return rx.link(
         rx.text(link[0], size="4", weight="medium"), href=link[1]
     )
 
 
-def menu_item(link: list) -> rx.Component:
+def menu_item(link: tuple[str, str]) -> rx.Component:
     return rx.menu.item(
         link[0],
         on_select=rx.redirect(link[1]),
@@ -83,8 +83,9 @@ def menu_item(link: list) -> rx.Component:
     )
 
 
-def unread_posts():
-    return NavState.last_post_read[1:].to(int) < NavState.last_post
+def unread_posts() -> bool:
+    return (NavState.last_post_read[1:].to(int)  # type: ignore
+            < NavState.last_post)
 
 
 def unread_badge() -> rx.Component:
