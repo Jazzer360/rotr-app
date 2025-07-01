@@ -24,7 +24,8 @@ friday = [
             evolving sound and commitment to crafting honest, heartfelt
             music.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/morningbird.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'morningbird.jpg'),
         'web': 'https://morningbirdsings.com/',
         'fb': 'https://www.facebook.com/robandjill/',
         'insta': '',
@@ -45,7 +46,8 @@ friday = [
             particles, parallel dimensions, and alternate realities, all
             delivered with a sense of humor and musical adventurousness.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/quantummechanics.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'quantummechanics.jpg'),
         'web': 'https://captaingravitone.com/',
         'fb': 'https://www.facebook.com/quantummechanicsband/',
         'insta': 'https://www.instagram.com/thequantummechanics_band/',
@@ -80,7 +82,8 @@ friday = [
             audience, welcoming all to the Tramps roots rock/jam band
             sound with the charisma of a faith healer.”
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/toddpartridge.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'toddpartridge.jpg'),
         'web': 'https://todd-partridge.com/',
         'fb': 'https://www.facebook.com/profile.php?id=100094025644790',
         'insta': 'https://www.instagram.com/todd_partridge/',
@@ -99,7 +102,8 @@ friday = [
             with acoustic guitar and Ukelele. They host an annual music
             festival on their farm called Cornstalk.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/lifeinprogress.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'lifeinprogress.jpg'),
         'web': 'https://cornstalkconvergence.com/',
         'fb': 'https://www.facebook.com/profile.php?id=100063881920787',
         'insta': 'https://www.instagram.com/cornstalkconvergence',
@@ -175,7 +179,8 @@ saturday = [
             rich storytelling of Nanci Griffith. She also has experience
             leading worship in churches.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/emmajosephine.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'emmajosephine.jpg'),
         'web': 'https://sites.google.com/view/justemmajomusic/home',
         'fb': 'https://www.facebook.com/emma.josephine.252982/',
         'insta': 'https://www.instagram.com/justemmajomusic/',
@@ -202,7 +207,8 @@ saturday = [
             her genuine stories and connecting with audiences through her
             music.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/janicegilbert.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'janicegilbert.jpg'),
         'web': 'https://janicegilbert.com/',
         'fb': 'https://www.facebook.com/janicegilbertmusic',
         'insta': 'https://www.instagram.com/janicegilbert23',
@@ -228,9 +234,11 @@ saturday = [
             that will bring a fun and eclectic mix of music to your event,
             the Squid City Slingers might be just what you need.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/squidcityslingers.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'squidcityslingers.jpg'),
         'web': '',
-        'fb': 'https://www.facebook.com/profile.php?id=61550201452681&mibextid=avESrC',
+        'fb': ('https://www.facebook.com/profile.php'
+               '?id=61550201452681&mibextid=avESrC'),
         'insta': 'https://www.instagram.com/squidcityslingers',
         'spotify': '',
         'apple': '',
@@ -249,9 +257,10 @@ saturday = [
             tourism campaigns (Explore Minnesota). Dan's a husband and
             father who enjoys the outdoors, good food, and connecting with
             people through his music. He's shared the stage with notable
-            artists like The Civil Wars, Andy Grammer, and Eric Hutchinson. 
+            artists like The Civil Wars, Andy Grammer, and Eric Hutchinson.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/danrodriguez.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'danrodriguez.jpg'),
         'web': 'https://www.danrodriguezmusic.com/',
         'fb': 'https://www.facebook.com/danrodriguezmusic/',
         'insta': 'https://www.instagram.com/danrodriguezmusic',
@@ -278,7 +287,8 @@ saturday = [
             her genuine stories and connecting with audiences through her
             music.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/janicegilbert.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'janicegilbert.jpg'),
         'web': 'https://janicegilbert.com/',
         'fb': 'https://www.facebook.com/janicegilbertmusic',
         'insta': 'https://www.instagram.com/janicegilbert23',
@@ -305,12 +315,14 @@ saturday = [
             Americana.
 
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/josephhuber.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'josephhuber.jpg'),
         'web': 'http://www.josephhubermusic.com/',
         'fb': '',
         'insta': 'https://www.instagram.com/josephhubermusic',
         'spotify': 'https://open.spotify.com/artist/2pzKzgyZZdp2u8e8r3T1qa',
-        'apple': 'https://music.apple.com/us/artist/joseph-huber-band/1743114017',
+        'apple': ('https://music.apple.com/us/artist/'
+                  'joseph-huber-band/1743114017'),
         'yt': 'https://www.youtube.com/channel/UCku4bBFeP60zw_CdHkufd6g',
     },
     {
@@ -356,7 +368,8 @@ saturday = [
             recognition for their electrifying live shows and their ability
             to take listeners on a mind-bending journey through sound.
             """,
-        'img': 'https://storage.googleapis.com/rotr-app-assets/squeakyfeet.jpg',
+        'img': ('https://storage.googleapis.com/rotr-app-assets/'
+                'squeakyfeet.jpg'),
         'web': 'https://www.squeakyfeetmusic.com/',
         'fb': 'https://www.facebook.com/squeakyfeetmusic/',
         'insta': 'https://www.instagram.com/squeakyfeetmusic',
@@ -409,7 +422,7 @@ def badge(band: dict) -> rx.Component:
 @on_stage_component
 def progress(band: dict) -> rx.Component:
     return rx.progress(
-        value=((NavState.now - band['start']) / 
+        value=((NavState.now - band['start']) /
                (band['end'] - band['start']) * 100),
         margin_top='8px'
     )

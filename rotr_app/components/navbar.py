@@ -10,7 +10,9 @@ links = {
     'Activities': '/activities',
     'Food': '/food',
     'Announcements': '/announcements',
-    'Survey': 'https://docs.google.com/forms/d/e/1FAIpQLSfJk8QrLR7rRrqBstlCVw6CqGKKol7OIfiQcMVCOLXR54Qx7A/viewform?usp=header',
+    'Survey': ('https://docs.google.com/forms/d/e/'
+               '1FAIpQLSfJk8QrLR7rRrqBstlCVw6CqGKKol7OIfiQcMVCOLXR54Qx7A/'
+               'viewform?usp=header'),
 }
 
 

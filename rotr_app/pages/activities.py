@@ -50,7 +50,7 @@ saturday = [
         'time': '5:30pm - 6:00pm',
         'location': 'Church'
     },
-]    
+]
 
 apply_start_end(friday)
 apply_start_end(saturday)
@@ -106,7 +106,7 @@ def time_left_text(activity: dict) -> rx.Component:
 def progress_bar(activity: dict) -> rx.Component:
     return (
         rx.progress(
-            value=((NavState.now - activity['start']) / 
+            value=((NavState.now - activity['start']) /
                    (activity['end'] - activity['start']) * 100),
             margin_top='8px'
         ),

@@ -183,14 +183,14 @@ vendors = [
                 'desc': """
                     We're not foolin' around with this one!  Double 1/4lb
                     patties layered with red onion, American cheese, Cup Truck
-                    secret sauce n' smashed again on a brioche bun. 
+                    secret sauce n' smashed again on a brioche bun.
                 """
             },
             {
                 'item': 'Burnt End Wein!',
                 'desc': """
                     What can we say?  This all-beef burnt end dog aims to
-                    please!  
+                    please!
 
                     Try our "Top Shelf Wein": Topped with pineapple relish n'
                     shiracha mayo.  It's like no other wein!
@@ -211,7 +211,7 @@ vendors = [
                     Hard boiled eggs tossed with capers, shallots, parsley,
                     Welcome Meat's bacon, parmesan-black garlic dressing n'
                     arugula, piled on a hoagie bun.  Even Grandma will be
-                    impressed! 
+                    impressed!
                 """
             },
             {
@@ -255,7 +255,7 @@ vendors = [
                 'item': 'Funfetti Cupcake',
                 'desc': """
                     Addie whips these cupcakes up from scratch n' donates $.50
-                    from every cupcake to a local non-profit!  
+                    from every cupcake to a local non-profit!
                 """
             },
             {
