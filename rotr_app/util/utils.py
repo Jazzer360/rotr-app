@@ -7,8 +7,8 @@ import pytz
 
 @cache
 def production() -> bool:
-    api_url = os.getenv('API_URL')
-    if api_url:
+    env = os.getenv('REFLEX_ENV')
+    if env and env.lower() == 'production':
         print('Running in production mode.')
         return True
     else:
