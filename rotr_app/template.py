@@ -2,8 +2,8 @@ from typing import Callable
 
 import reflex as rx
 
-from .components.navbar import navbar
-from .components.footer import footer
+from .components import navbar, footer, survey_popup
+from .components.survey_popup import SurveyState
 
 
 def template(page: Callable[[], rx.Component]) -> Callable[[], rx.Component]:
@@ -12,5 +12,9 @@ def template(page: Callable[[], rx.Component]) -> Callable[[], rx.Component]:
             navbar(),
             page(),
             footer(),
-            align='center')
+            survey_popup(),
+            align='center',
+            on_mount=SurveyState.check_survey_status,
+        )
+
     return wrapper

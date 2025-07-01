@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Callable, Optional
 
 import reflex as rx
 
@@ -10,6 +11,8 @@ links = {
     'Activities': '/activities',
     'Food': '/food',
     'Announcements': '/announcements',
+    'Volunteer': ('https://www.signupgenius.com/go/'
+                  '10C0944A8AC29A5F9C16-56668585-rhythm?useFullSite=true#/'),
     'Survey': ('https://docs.google.com/forms/d/e/'
                '1FAIpQLSfJk8QrLR7rRrqBstlCVw6CqGKKol7OIfiQcMVCOLXR54Qx7A/'
                'viewform?usp=header'),
@@ -27,7 +30,11 @@ class NavState(rx.State):
     now: int = 0
     last_post: int = 0
     last_update: int = 0
-    last_post_read: str = rx.Cookie('t0', max_age=60 * 60 * 24 * 30)
+    last_post_read: str = rx.Cookie(
+        't0',
+        name='last_post',
+        max_age=60 * 60 * 24 * 30
+    )
     announcements: list[Announcement] = []
 
     @rx.event
@@ -65,21 +72,37 @@ def get_messages(post_data: dict[str, str]) -> list[str]:
     return messages
 
 
+def get_survey_handler(link: str) -> Optional[Callable]:
+    if link == 'Survey':
+        from .survey_popup import SurveyState
+        return SurveyState.mark_survey_clicked
+    return None
+
+
 def navbar_link(link: tuple[str, str]) -> rx.Component:
+    click_handler = get_survey_handler(link[0])
     return rx.link(
-        rx.text(link[0], size="4", weight="medium"), href=link[1]
+        rx.text(link[0], size="4", weight="medium"),
+        href=link[1],
+        is_external=not link[1].startswith('/'),
+        on_click=click_handler,
     )
 
 
 def menu_item(link: tuple[str, str]) -> rx.Component:
+    click_handler = get_survey_handler(link[0])
     return rx.menu.item(
         link[0],
-        on_select=rx.redirect(link[1]),
+        on_select=rx.redirect(
+            link[1],
+            is_external=not link[1].startswith('/')
+        ),
         color=rx.cond(
             (link[0] == 'Announcements') & unread_posts(),
             'red',
             ''
-        )
+        ),
+        on_click=click_handler,
     )
 
 
