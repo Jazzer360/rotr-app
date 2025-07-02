@@ -4,20 +4,12 @@ from typing import Callable, Optional
 import reflex as rx
 
 from rotr_app.data import get_manager
+from rotr_app.data.json_loader import load_navbar_data
 from rotr_app.util.utils import festival_started
 
-
-links = {
-    'Schedule': '/',
-    'Activities': '/activities',
-    'Food': '/food',
-    'Announcements': '/announcements',
-    'Volunteer': ('https://www.signupgenius.com/go/'
-                  '10C0944A8AC29A5F9C16-56668585-rhythm?useFullSite=true#/'),
-    'Survey': ('https://docs.google.com/forms/d/e/'
-               '1FAIpQLSfJk8QrLR7rRrqBstlCVw6CqGKKol7OIfiQcMVCOLXR54Qx7A/'
-               'viewform?usp=header'),
-}
+# Load navigation links from JSON
+_navbar_data = load_navbar_data()
+links = _navbar_data['links']
 
 
 class Announcement(rx.Base):

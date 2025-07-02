@@ -1,0 +1,327 @@
+{
+  "vendors": [
+    {
+      "vendor": "Aroi Thai Cuisine",
+      "menu": [
+        {
+          "item": "Orange Chicken",
+          "price": "$10",
+          "desc": "\n                    Jasmine Rice, Batter (Rice Flour, Water), Green Onion,\n                    Sesame Seed, Homemade Sauce\n                "
+        },
+        {
+          "item": "Pad Thai",
+          "desc": "\n                    Yellow Onion, Green Onion, Egg, Rice Noodle, Bean Sprout,\n                    Cabbage, Homemade Sauce\n                ",
+          "options": [
+            {
+              "option": "Chicken",
+              "price": "$10"
+            },
+            {
+              "option": "Beef",
+              "price": "$11"
+            },
+            {
+              "option": "Shrimp",
+              "price": "$12"
+            }
+          ]
+        },
+        {
+          "item": "Thai Fried Rice",
+          "desc": "\n                    Jasmine Rice, Carrot, Egg, Black Soy Sauce (Sweet),\n                    Homemade Sauce\n                ",
+          "options": [
+            {
+              "option": "Chicken",
+              "price": "$10"
+            },
+            {
+              "option": "Beef",
+              "price": "$11"
+            },
+            {
+              "option": "Shrimp",
+              "price": "$12"
+            }
+          ]
+        },
+        {
+          "item": "Pad Kee Mao",
+          "desc": "\n                    Carrot, Yellow Onion, Green Onion, Wide Rice Noodle,\n                    Green Bell Pepper, Sweet Bell Pepper, Broccoli, Basil,\n                    Homemade Sauce\n                ",
+          "options": [
+            {
+              "option": "Chicken",
+              "price": "$10"
+            },
+            {
+              "option": "Beef",
+              "price": "$11"
+            },
+            {
+              "option": "Shrimp",
+              "price": "$12"
+            }
+          ]
+        },
+        {
+          "item": "Pad See Ew",
+          "desc": "\n                    Carrot, Yellow Onion, Wide Rice Noodle, Broccoli, Egg,\n                    Homemade Sauce\n                ",
+          "options": [
+            {
+              "option": "Chicken",
+              "price": "$10"
+            },
+            {
+              "option": "Beef",
+              "price": "$11"
+            },
+            {
+              "option": "Shrimp",
+              "price": "$12"
+            }
+          ]
+        },
+        {
+          "item": "Egg Rolls",
+          "desc": "\n                    Pork, Pastry Wrap, Cabbage, Carrot, Yellow Onion, Egg,\n                    Bean Thread, Homemade Sauce\n                ",
+          "price": "4 for $7"
+        },
+        {
+          "item": "Crab Rangoon",
+          "desc": "\n                    Imitation Crab, Cream Cheese, Garlic Powder, Onion Powder,\n                    Green Onion, Wonton Wrap, Homemade Sauce\n                ",
+          "price": "4 for $7"
+        },
+        {
+          "item": "Jasmine Rice",
+          "price": "$2"
+        },
+        {
+          "item": "Bubble Tea",
+          "price": "$5",
+          "desc": "\n                    Ice, 2% Milk, Flavor Powder, Sugar, Coffee Creamer,\n                    Tapioca Pearls, Whipped Cream\n                "
+        },
+        {
+          "item": "Thai Tea",
+          "price": "$3",
+          "desc": "\n                    Thai Tea, Water, Sugar, Heavy Cream\n                "
+        },
+        {
+          "item": "Water",
+          "price": "$1"
+        }
+      ]
+    },
+    {
+      "vendor": "Cheese Carriage",
+      "menu": [
+        {
+          "item": "Cheese Curds",
+          "price": "$8"
+        },
+        {
+          "item": "Corn Dog",
+          "price": "$6"
+        },
+        {
+          "item": "Pop & Water",
+          "price": "$3"
+        }
+      ]
+    },
+    {
+      "vendor": "The Cup Truck",
+      "menu": [
+        {
+          "item": "The 'Simp' Smashie",
+          "desc": "\n                    1/4lb custom blended Welcome Meats' beef n' bacon smash\n                    burger served on a brioche bun.  Add an extra patty and/or\n                    enjoy with American cheese!"
+        },
+        {
+          "item": "The Fancified Smashie",
+          "desc": "\n                    This 1/4lb custom-blended Welcome Meats' beef n' bacon\n                    smashburger is topped with Gruyere cheese, arugula n' dried\n                    cherry compote n' served on a brioche bun.  Stop drooling\n                    on your screens n' come see us at the truck.\n                "
+        },
+        {
+          "item": "The Ultimate Smashie",
+          "desc": "\n                    We're not foolin' around with this one!  Double 1/4lb\n                    patties layered with red onion, American cheese, Cup Truck\n                    secret sauce n' smashed again on a brioche bun.\n                "
+        },
+        {
+          "item": "Burnt End Wein!",
+          "desc": "\n                    What can we say?  This all-beef burnt end dog aims to\n                    please!\n\n                    Try our \"Top Shelf Wein\": Topped with pineapple relish n'\n                    shiracha mayo.  It's like no other wein!\n                "
+        },
+        {
+          "item": "Chopped Italian Sammie",
+          "desc": "\n                    Watch your drool for this one...hoagie bun stuffed with\n                    diced mortadella, capicola, red onion, tomato,\n                    pepperoncini, smoked Gouda cheese, lettuce n' italian mayo!\n                "
+        },
+        {
+          "item": "Not Average Egg Salad Sammie",
+          "desc": "\n                    Slow your scroll....This is NOT your average egg salad.\n                    Hard boiled eggs tossed with capers, shallots, parsley,\n                    Welcome Meat's bacon, parmesan-black garlic dressing n'\n                    arugula, piled on a hoagie bun.  Even Grandma will be\n                    impressed!\n                "
+        },
+        {
+          "item": "Wingy Dingy",
+          "desc": "\n                    Just because it's fun to say.\n\n                    4 wing n' drummies tossed in a chipotle-peach\n                    glaze....What's not to love?\n                "
+        },
+        {
+          "item": "Seasoned Shoestring fries",
+          "desc": "\n                    Fried to perfection n' seasoned with Seth's pantry of\n                    spices.\n                "
+        },
+        {
+          "item": "Fancy fries",
+          "desc": "\n                    Fried to perfection n' topped with bacon n' cheese.  What\n                    could be better?\n                "
+        },
+        {
+          "item": "Fancy Pants Cheesy Mac",
+          "desc": "\n                    Not your 'pedestrian' mac n' cheese.  Smoked Gouda n'\n                    American cheese topped with a special crunch\n                "
+        },
+        {
+          "item": "Farro-Arugula salad",
+          "desc": "\n                    Peppery arugula meets nutty farro in this bold, bitey salad\n                    that eats like it means it.!\n                "
+        },
+        {
+          "item": "Funfetti Cupcake",
+          "desc": "\n                    Addie whips these cupcakes up from scratch n' donates $.50\n                    from every cupcake to a local non-profit!\n                "
+        },
+        {
+          "item": "kookies for kidneys - Chocolate Chip Kookie",
+          "desc": "\n                    Inspired by her sister, Parker is raising money for a cause\n                    close to her heart...n' kidneys!  Try Parker's Kookies for\n                    Kidneys!  This week's flavor is chocolate chip.\n                    \n\n                    **Parker received a life-saving kidney transplant at 6\n                    years old.  At 7, she is now raising money for CKD\n                    research!**\n                "
+        },
+        {
+          "item": "Local Rhubarb crisp",
+          "desc": "\n                    No one is sad about rhubarb season!  Enjoy this fresh n'\n                    local rhubarb crisp baked perfectly in a 5-inch round pan.\n                    Enough for 2 people, or 1 lover of rhubarb!\n                "
+        },
+        {
+          "item": "Oreo pop",
+          "desc": "\n                    Think cake-pop, but made with crushed Oreos on a stick with\n                    crunchy chocolate coating.\n                "
+        },
+        {
+          "item": "Reece's peanut butter cup Ice cream Cake",
+          "desc": "\n                    Crushed Oreo base, homemade chocolate layer topped with\n                    creamy Reese's Peanut Butter Cup ice cream n' more crushed\n                    Oreos n' homemade chocolate sauce.\n                "
+        },
+        {
+          "item": "Local Strawberry Buttermilk ice cream",
+          "desc": "\n                    Sun-kissed June n' everbearing strawberries picked fresh\n                    from our garden, churned with sweet n' creamy buttermilk\n                    into frozen perfection.\n                "
+        }
+      ]
+    },
+    {
+      "vendor": "Ole's Gathering Place",
+      "menu": [
+        {
+          "item": "Smoked Pork Sandwich",
+          "price": "$8",
+          "options": [
+            {
+              "option": "w/ coleslaw, smoked baked beans",
+              "price": "$12"
+            }
+          ]
+        },
+        {
+          "item": "Smoked Brisket Sandwich",
+          "price": "$10",
+          "options": [
+            {
+              "option": "w/ coleslaw, smoked baked beans",
+              "price": "$14"
+            }
+          ]
+        },
+        {
+          "item": "Queso Bacon Mac and Cheese",
+          "price": "$10",
+          "options": [
+            {
+              "option": "w/ pork",
+              "price": "$12"
+            },
+            {
+              "option": "w/ brisket",
+              "price": "$14"
+            }
+          ]
+        },
+        {
+          "item": "Queso Nachos (onion, tomato, jalapeno)",
+          "price": "$10",
+          "options": [
+            {
+              "option": "w/ pork",
+              "price": "$12"
+            },
+            {
+              "option": "w/ brisket",
+              "price": "$14"
+            }
+          ]
+        },
+        {
+          "item": "Oledelphia (pork)",
+          "price": "$12"
+        },
+        {
+          "item": "Oledelphia (brisket)",
+          "price": "$14",
+          "options": [
+            {
+              "option": "w/ coleslaw, smoked baked beans",
+              "price": "$16"
+            }
+          ]
+        },
+        {
+          "item": "Side of colelsaw, smoked baked beans",
+          "price": "$3"
+        },
+        {
+          "item": "Pepsi, Mt. Dew, Dr. Pepper, Diet Dr. Pepper",
+          "price": "$1"
+        }
+      ]
+    },
+    {
+      "vendor": "TNT Indian Style Tacos",
+      "menu": [
+        {
+          "item": "Indian Taco",
+          "options": [
+            {
+              "option": "w/ Seasoned Beef",
+              "price": "$10"
+            },
+            {
+              "option": "w/ Pinto Beans",
+              "price": "$10"
+            },
+            {
+              "option": "w/ Beef & Beans",
+              "price": "$11"
+            }
+          ]
+        },
+        {
+          "item": "Taco Salad w/ Seasoned Beef",
+          "price": "$10"
+        },
+        {
+          "item": "Nacho Supreme w/ Seasoned Beef",
+          "price": "$10"
+        },
+        {
+          "item": "Nachos (Chips & Cheese)",
+          "price": "$6"
+        },
+        {
+          "item": "Elephant Ear (Fry Bread)",
+          "price": "$5",
+          "options": [
+            {
+              "option": "w/ Ice Cream",
+              "price": "$7"
+            }
+          ]
+        },
+        {
+          "item": "Pop & Water",
+          "price": "$2"
+        }
+      ]
+    }
+  ]
+}
