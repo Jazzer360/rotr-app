@@ -22,11 +22,6 @@ This repository is a Reflex (rx) Python web application for ROTR, structured wit
 - Use `json_loader.py` for loading static data.
 - For Firestore integration, use `firestore.py`.
 
-## Testing & Quality
-- Add or update tests for new features (if test framework present).
-- Run the app locally before submitting changes.
-- Document any new environment variables or setup steps in the README.
-
 ## Miscellaneous
 - Keep all user-facing text in English.
 - Do not include secrets or credentials in the repository.
