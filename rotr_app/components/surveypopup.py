@@ -1,9 +1,7 @@
-from datetime import date
-
 import reflex as rx
 
-from rotr_app.util.utils import date_from_day
 from rotr_app.components.navbar import links
+from rotr_app.util.utils import festival_started
 
 
 class SurveyState(rx.State):
@@ -16,12 +14,12 @@ class SurveyState(rx.State):
     @rx.event
     def check_survey_status(self):
         if self.survey_clicked == "T":
-            if date.today().isoformat() < date_from_day("F"):
+            if not festival_started():
                 self.survey_clicked = "F"
             self.show_popup = False
             return
 
-        if date.today().isoformat() < date_from_day("F"):
+        if not festival_started():
             self.show_popup = False
             return
 
