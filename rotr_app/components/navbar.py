@@ -4,6 +4,7 @@ from typing import Callable, Optional
 import reflex as rx
 
 from rotr_app.data import get_manager
+from rotr_app.util.utils import festival_started
 
 
 links = {
@@ -36,6 +37,14 @@ class NavState(rx.State):
         max_age=60 * 60 * 24 * 30
     )
     announcements: list[Announcement] = []
+
+    @rx.var
+    def show_survey(self) -> bool:
+        return festival_started()
+
+    @rx.var
+    def show_volunteer(self) -> bool:
+        return not festival_started()
 
     @rx.event
     def update(self, _=None):
@@ -86,6 +95,12 @@ def navbar_link(link: tuple[str, str]) -> rx.Component:
         href=link[1],
         is_external=not link[1].startswith('/'),
         on_click=click_handler,
+        display=rx.cond(
+            (~NavState.show_survey & (link[0] == 'Survey')) |
+            (~NavState.show_volunteer & (link[0] == 'Volunteer')),
+            'none',
+            'block'
+        )
     )
 
 
@@ -103,6 +118,12 @@ def menu_item(link: tuple[str, str]) -> rx.Component:
             ''
         ),
         on_click=click_handler,
+        display=rx.cond(
+            (~NavState.show_survey & (link[0] == 'Survey')) |
+            (~NavState.show_volunteer & (link[0] == 'Volunteer')),
+            'none',
+            'flex'
+        )
     )
 
 

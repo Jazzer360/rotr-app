@@ -50,3 +50,19 @@ def apply_start_end(data) -> None:
     for dataset in data:
         date = date_from_day(dataset['day'])
         dataset |= get_start_end(date, dataset['time'])
+
+
+def festival_started() -> bool:
+    first_band_time = "5:00PM"
+    friday_date = date_from_day('F')
+    first_band_dt = get_datetime(friday_date, first_band_time)
+    now = datetime.now(first_band_dt.tzinfo)
+    return now >= first_band_dt
+
+
+def festival_over() -> bool:
+    last_event_time = "11:59PM"
+    saturday_date = date_from_day('S')
+    last_event_dt = get_datetime(saturday_date, last_event_time)
+    now = datetime.now(last_event_dt.tzinfo)
+    return now > last_event_dt
