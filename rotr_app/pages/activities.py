@@ -3,56 +3,14 @@ from typing import Callable
 import reflex as rx
 
 from rotr_app.components.navbar import NavState
+from rotr_app.data.json_loader import load_activities_data
 from rotr_app.template import template
 from rotr_app.util import apply_start_end
 
-friday = [
-    {
-        'name': 'Delafield Documentary Film',
-        'day': 'F',
-        'time': '6:00pm - 6:30pm',
-        'location': 'Church'
-    }
-]
-
-saturday = [
-    {
-        'name': 'Yoga with Mel Mikos',
-        'day': 'S',
-        'time': '11:00am - 12:00pm',
-        'location': 'Main Stage'
-    },
-    {
-        'name': 'Delafield Documentary Film',
-        'day': 'S',
-        'time': '12:30pm - 1:00pm',
-        'location': 'Church'
-    },
-    {
-        'name': 'Flower Crowns',
-        'day': 'S',
-        'time': '3:30pm - 5:00pm',
-        'location': 'Children\'s Tent'
-    },
-    {
-        'name': 'Didgeridoo Workshop',
-        'day': 'S',
-        'time': '4:00pm - 4:30pm',
-        'location': 'Church'
-    },
-    {
-        'name': 'Face Painting',
-        'day': 'S',
-        'time': '5:00pm - 6:30pm',
-        'location': 'Children\'s Tent'
-    },
-    {
-        'name': 'Delafield Documentary Film',
-        'day': 'S',
-        'time': '5:30pm - 6:00pm',
-        'location': 'Church'
-    },
-]
+# Load activities data from JSON
+_activities_data = load_activities_data()
+friday = _activities_data['friday']
+saturday = _activities_data['saturday']
 
 apply_start_end(friday)
 apply_start_end(saturday)
