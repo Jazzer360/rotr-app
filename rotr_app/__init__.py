@@ -1,4 +1,4 @@
-from .pages import (  # noqa: F401
+from rotr_app.pages import (  # noqa: F401
     schedule,
     announcements,
     floyd,

@@ -1,8 +1,9 @@
 import reflex as rx
 
-from ..components.navbar import NavState
-from ..template import template
-from ..util.utils import apply_start_end
+from rotr_app.components.navbar import NavState
+from rotr_app.components.surveypopup import SurveyState
+from rotr_app.template import template
+from rotr_app.util.utils import apply_start_end
 
 
 friday = [
@@ -387,6 +388,7 @@ class ScheduleState(rx.State):
     @rx.event
     def show_toast(self):
         yield NavState.update
+        yield SurveyState.check_survey_status
         return rx.toast.info(
             'Click a band to learn more about them.',
             duration=5000,

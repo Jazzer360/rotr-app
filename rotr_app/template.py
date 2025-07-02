@@ -13,8 +13,7 @@ def template(page: Callable[[], rx.Component]) -> Callable[[], rx.Component]:
             page(),
             footer(),
             survey_popup(),
-            align='center',
-            on_mount=SurveyState.check_survey_status,
+            align='center'
         )
 
     return wrapper
