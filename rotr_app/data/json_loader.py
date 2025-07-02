@@ -17,13 +17,13 @@ def load_json_data(filename: str) -> Dict[str, Any]:
     """
     Load JSON data from a file in the static data directory.
     Results are cached for performance.
-    
+
     Args:
         filename: The name of the JSON file to load
-        
+
     Returns:
         The parsed JSON data as a dictionary
-        
+
     Raises:
         FileNotFoundError: If the file doesn't exist
         json.JSONDecodeError: If the file contains invalid JSON

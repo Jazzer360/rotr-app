@@ -4,6 +4,8 @@ from datetime import datetime, date
 
 import pytz
 
+from rotr_app.data.json_loader import load_schedule_data
+
 
 @cache
 def production() -> bool:
@@ -53,7 +55,8 @@ def apply_start_end(data) -> None:
 
 
 def festival_started() -> bool:
-    first_band_time = "5:00PM"
+    first_band_time = load_schedule_data()['friday'][0]['time']
+    first_band_time = first_band_time.split(' - ')[0]
     friday_date = date_from_day('F')
     first_band_dt = get_datetime(friday_date, first_band_time)
     now = datetime.now(first_band_dt.tzinfo)
@@ -61,7 +64,8 @@ def festival_started() -> bool:
 
 
 def festival_over() -> bool:
-    last_event_time = "11:59PM"
+    last_event_time = load_schedule_data()['saturday'][-1]['time']
+    last_event_time = last_event_time.split(' - ')[-1]
     saturday_date = date_from_day('S')
     last_event_dt = get_datetime(saturday_date, last_event_time)
     now = datetime.now(last_event_dt.tzinfo)
