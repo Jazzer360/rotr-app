@@ -9,7 +9,6 @@ _food_data = load_food_data()
 vendors = _food_data['vendors']
 
 
-
 def menu_item(item: dict) -> rx.Component:
     if 'options' in item:
         options = [menu_option(option) for option in item.get('options', [])]
