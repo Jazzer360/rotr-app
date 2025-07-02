@@ -131,6 +131,9 @@
       "vendor": "The Cup Truck",
       "menu": [
         {
+          "section": "The Goods"
+        },
+        {
           "item": "The 'Simp' Smashie",
           "desc": "1/4lb custom blended Welcome Meats' beef n' bacon smash burger served on a brioche bun. Add an extra patty and/or enjoy with American cheese!"
         },
@@ -159,6 +162,9 @@
           "desc": "Just because it's fun to say. 4 wing n' drummies tossed in a chipotle-peach glaze....What's not to love?"
         },
         {
+          "section": "The Sides"
+        },
+        {
           "item": "Seasoned Shoestring fries",
           "desc": "Fried to perfection n' seasoned with Seth's pantry of spices."
         },
@@ -173,6 +179,9 @@
         {
           "item": "Farro-Arugula salad",
           "desc": "Peppery arugula meets nutty farro in this bold, bitey salad that eats like it means it.!"
+        },
+        {
+          "section": "The Desserts"
         },
         {
           "item": "Funfetti Cupcake",

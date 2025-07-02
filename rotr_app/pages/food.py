@@ -17,7 +17,21 @@ def menu_item(item: dict) -> rx.Component:
     desc = item['desc'] if 'desc' in item else None
     return rx.box(
         rx.hstack(
-            rx.text(item.get('item'), size='3'),
+            rx.cond(
+                item.get('section'),
+                rx.box(
+                    rx.text(
+                        item.get('section'),
+                        size='3',
+                        font_weight='bold',
+                        text_decoration='underline'
+                    ),
+                    width='100%',
+                    display='flex',
+                    justify_content='center'
+                ),
+                rx.text(item.get('item'), size='3')
+            ),
             rx.spacer(),
             rx.text(item.get('price'), size='3')
         ),
