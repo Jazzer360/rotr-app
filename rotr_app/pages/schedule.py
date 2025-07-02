@@ -1,4 +1,5 @@
 import reflex as rx
+from typing import Callable
 
 from rotr_app.components.navbar import NavState
 from rotr_app.components.surveypopup import SurveyState
@@ -27,8 +28,10 @@ class ScheduleState(rx.State):
         )
 
 
-def on_stage_component(component_function):
-    def wrapper(band: dict):
+def on_stage_component(
+    component_function: Callable[[dict], rx.Component]
+) -> Callable[[dict], rx.Component]:
+    def wrapper(band: dict) -> rx.Component:
         return rx.cond(
             (band['start'] < NavState.now) & (band['end'] > NavState.now),
             component_function(band),
