@@ -109,7 +109,8 @@ def link(band: dict, attr: str, icontag: str, text: str) -> rx.Component:
                 rx.icon(tag=icontag),
                 rx.text(text)
             ),
-            href=band.get(attr)
+            href=band.get(attr),
+            is_external=True,
         )
     )
 
