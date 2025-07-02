@@ -155,6 +155,7 @@ def navbar() -> rx.Component:
                     rx.color_mode.button(),
                     justify="end",
                     spacing="5",
+                    align_items="center",
                 ),
                 justify="between",
                 align_items="center",
