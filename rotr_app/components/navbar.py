@@ -103,7 +103,7 @@ def show_link(link):
 def menu_item(link: tuple[str, str]) -> rx.Component:
     click_handler = get_survey_handler(link[0])
     return rx.menu.item(
-        link[0],
+        rx.text(link[0], size="4", weight="medium"),
         on_select=rx.redirect(
             link[1],
             is_external=not link[1].startswith('/')
