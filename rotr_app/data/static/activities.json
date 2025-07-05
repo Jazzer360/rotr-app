@@ -1,6 +1,12 @@
 {
   "friday": [
     {
+      "name": "Opening Ceremony",
+      "day": "F",
+      "time": "4:55pm",
+      "location": "Main Stage"
+    },
+    {
       "name": "Delafield Documentary Film",
       "day": "F",
       "time": "6:00pm - 7:00pm",
@@ -14,6 +20,12 @@
     }
   ],
   "saturday": [
+    {
+      "name": "Coffee Social with Cinnamon Buns",
+      "day": "S",
+      "time": "10:30am - 11:00am",
+      "location": "Merch Tent"
+    },
     {
       "name": "Yoga with Mel Mikos",
       "day": "S",
