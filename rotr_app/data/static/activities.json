@@ -3,8 +3,14 @@
     {
       "name": "Delafield Documentary Film",
       "day": "F",
-      "time": "6:00pm - 6:30pm",
+      "time": "6:00pm - 7:00pm",
       "location": "Church"
+    },
+    {
+      "name": "Decorate Your Busy Bag!",
+      "day": "F",
+      "time": "6:00pm - 7:30pm",
+      "location": "Activities Tent"
     }
   ],
   "saturday": [
@@ -17,14 +23,26 @@
     {
       "name": "Delafield Documentary Film",
       "day": "S",
-      "time": "12:30pm - 1:00pm",
+      "time": "12:30pm - 1:30pm",
       "location": "Church"
+    },
+    {
+      "name": "Spoon Workshop",
+      "day": "S",
+      "time": "1:45pm - 2:45pm",
+      "location": "Merch Tent"
+    },
+    {
+      "name": "Activities Tent Open",
+      "day": "S",
+      "time": "2:00pm - 6:00pm",
+      "location": "Activities Tent"
     },
     {
       "name": "Flower Crowns",
       "day": "S",
       "time": "3:30pm - 5:00pm",
-      "location": "Children's Tent"
+      "location": "Activities Tent"
     },
     {
       "name": "Didgeridoo Workshop",
@@ -35,13 +53,19 @@
     {
       "name": "Face Painting",
       "day": "S",
-      "time": "5:00pm - 6:30pm",
-      "location": "Children's Tent"
+      "time": "4:30pm - 5:30pm",
+      "location": "Activities Tent"
+    },
+    {
+      "name": "Children's Event Parade",
+      "day": "S",
+      "time": "5:30pm",
+      "location": "Activities Tent"
     },
     {
       "name": "Delafield Documentary Film",
       "day": "S",
-      "time": "5:30pm - 6:00pm",
+      "time": "5:30pm - 6:30pm",
       "location": "Church"
     }
   ]
