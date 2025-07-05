@@ -17,19 +17,19 @@ def footer() -> rx.Component:
                 ),
                 rx.spacer(),
                 rx.link(
-                    "Privacy Notice",
+                    'Privacy Notice',
                     href='/privacy.html',
-                    text_align="right",
-                    white_space="normal",
+                    text_align='right',
+                    white_space='normal',
                     padding_right='1em',
                 ),
-                align="center",
-                width="100%"
+                align='center',
+                width='100%'
             ),
-            size="1",
+            size='1',
             padding_left='0px',
             padding_right='0px',
             padding_top='0px'
         ),
-        width="100%"
+        width='100%'
     )

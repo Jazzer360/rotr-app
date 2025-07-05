@@ -7,11 +7,11 @@ from firebase_admin import firestore
 
 def announcement_watcher(col_snapshot, changes, read_time):
     for change in changes:
-        if change.type.name == "ADDED":
+        if change.type.name == 'ADDED':
             get_manager().add(change.document)
-        elif change.type.name == "MODIFIED":
+        elif change.type.name == 'MODIFIED':
             get_manager().modify(change.document)
-        elif change.type.name == "REMOVED":
+        elif change.type.name == 'REMOVED':
             get_manager().remove(change.document)
     print('Updated announcements from callback...')
 

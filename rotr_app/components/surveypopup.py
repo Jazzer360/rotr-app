@@ -6,16 +6,16 @@ from rotr_app.util.utils import festival_started
 
 class SurveyState(rx.State):
     survey_clicked: str = rx.Cookie(
-        name="survey_clicked", max_age=60 * 60 * 24 * 7)
+        name='survey_clicked', max_age=60 * 60 * 24 * 7)
     visit_count: str = rx.Cookie(
-        name="visit_count", max_age=60 * 60 * 24 * 7)
+        name='visit_count', max_age=60 * 60 * 24 * 7)
     show_popup: bool = False
 
     @rx.event
     def check_survey_status(self):
-        if self.survey_clicked == "T":
+        if self.survey_clicked == 'T':
             if not festival_started():
-                self.survey_clicked = "F"
+                self.survey_clicked = 'F'
             self.show_popup = False
             return
 
@@ -29,10 +29,10 @@ class SurveyState(rx.State):
             visits = 0
 
         if visits == 0:
-            self.visit_count = "v1"
+            self.visit_count = 'v1'
             self.show_popup = False
         else:
-            self.visit_count = "v" + str(visits + 1)
+            self.visit_count = 'v' + str(visits + 1)
             if visits > 0 and (visits + 1) % 3 == 0:
                 self.show_popup = True
             else:
@@ -40,7 +40,7 @@ class SurveyState(rx.State):
 
     @rx.event
     def mark_survey_clicked(self):
-        self.survey_clicked = "T"
+        self.survey_clicked = 'T'
         self.show_popup = False
 
     @rx.event
@@ -51,32 +51,32 @@ class SurveyState(rx.State):
 def survey_popup():
     return rx.dialog.root(
         rx.dialog.content(
-            rx.dialog.title("Help Us Improve!"),
+            rx.dialog.title('Help Us Improve!'),
             rx.dialog.description(
                 "We'd love to get your feedback. "
-                "Would you be willing to take a short survey?"
+                'Would you be willing to take a short survey?'
             ),
             rx.flex(
                 rx.dialog.close(
                     rx.button(
-                        "No thanks",
+                        'No thanks',
                         on_click=SurveyState.close_popup,
-                        variant="soft",
-                        color_scheme="gray",
+                        variant='soft',
+                        color_scheme='gray',
                     ),
                 ),
                 rx.link(
                     rx.button(
-                        "Take Survey",
+                        'Take Survey',
                         on_click=SurveyState.mark_survey_clicked,
                     ),
                     href=links['Survey'],
                     is_external=True,
                 ),
-                spacing="3",
-                margin_top="16px",
-                justify="end",
-                flex_wrap="wrap",
+                spacing='3',
+                margin_top='16px',
+                justify='end',
+                flex_wrap='wrap',
             ),
         ),
         open=SurveyState.show_popup,

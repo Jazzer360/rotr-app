@@ -83,7 +83,7 @@ def get_survey_handler(link: str) -> Optional[Callable]:
 def navbar_link(link: tuple[str, str]) -> rx.Component:
     click_handler = get_survey_handler(link[0])
     return rx.link(
-        rx.text(link[0], size="4", weight="medium"),
+        rx.text(link[0], size='4', weight='medium'),
         href=link[1],
         is_external=not link[1].startswith('/'),
         on_click=click_handler,
@@ -103,7 +103,7 @@ def show_link(link):
 def menu_item(link: tuple[str, str]) -> rx.Component:
     click_handler = get_survey_handler(link[0])
     return rx.menu.item(
-        rx.text(link[0], size="4", weight="medium"),
+        rx.text(link[0], size='4', weight='medium'),
         on_select=rx.redirect(
             link[1],
             is_external=not link[1].startswith('/')
@@ -146,33 +146,33 @@ def navbar() -> rx.Component:
         rx.desktop_only(
             rx.hstack(
                 rx.hstack(
-                    rx.heading("Rhythm of the River", size="7", weight="bold"),
-                    align_items="center",
+                    rx.heading('Rhythm of the River', size='7', weight='bold'),
+                    align_items='center',
                 ),
                 rx.hstack(
                     [navbar_link((label, ref))
                         for label, ref in links.items()],
                     rx.color_mode.button(),
-                    justify="end",
-                    spacing="5",
-                    align_items="center",
+                    justify='end',
+                    spacing='5',
+                    align_items='center',
                 ),
-                justify="between",
-                align_items="center",
+                justify='between',
+                align_items='center',
             ),
         ),
         rx.mobile_and_tablet(
             rx.hstack(
                 rx.hstack(
-                    rx.heading("Rhythm of the River", size="6", weight="bold"),
-                    align_items="center",
+                    rx.heading('Rhythm of the River', size='6', weight='bold'),
+                    align_items='center',
                     flex_grow='1'
                 ),
                 rx.color_mode.button(),
                 rx.menu.root(
                     rx.menu.trigger(
                         rx.box(
-                            rx.icon("menu", size=30),
+                            rx.icon('menu', size=30),
                             rx.cond(unread_posts(), unread_badge())
                         )
                     ),
@@ -180,16 +180,16 @@ def navbar() -> rx.Component:
                         [menu_item((label, ref))
                             for label, ref in links.items()]
                     ),
-                    justify="end",
+                    justify='end',
                 ),
-                justify="between",
-                align_items="center",
+                justify='between',
+                align_items='center',
             ),
         ),
-        bg=rx.color("accent", 3),
-        padding="1em",
-        # position="fixed",
-        # top="0px",
-        # z_index="5",
-        width="100%",
+        bg=rx.color('accent', 3),
+        padding='1em',
+        # position='fixed',
+        # top='0px',
+        # z_index='5',
+        width='100%',
     )

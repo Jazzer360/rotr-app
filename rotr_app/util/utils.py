@@ -44,7 +44,7 @@ def get_start_end(date: str, time_range: str) -> dict[str, int]:
 
 def date_from_day(day) -> str:
     if production():
-        return "2025-07-11" if day == "F" else "2025-07-12"
+        return '2025-07-11' if day == 'F' else '2025-07-12'
     return date.today().isoformat()
 
 

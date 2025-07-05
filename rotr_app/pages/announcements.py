@@ -37,7 +37,7 @@ def message_paragraph(txt: str) -> rx.Component:
 
 @rx.page(
     route='/announcements',
-    title="Announcements",
+    title='Announcements',
     on_load=NavState.set_read)
 @template
 def announcements():
