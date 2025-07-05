@@ -17,32 +17,19 @@ steps:
       - --project=$PROJECT_ID
       - --only=hosting
 
-  # Add this step to debug the variable value
-  - name: 'ubuntu'
-    entrypoint: 'bash'
-    args:
-    - -c
-    - |
-      echo "----------------------------------------"
-      echo "Project ID is: $PROJECT_ID"
-      echo "Service Name is: $_SERVICE_NAME"
-      echo "Commit SHA is: $COMMIT_SHA"
-      echo "Final image tag will be: ${_AR_REPO}/${_SERVICE_NAME}:${COMMIT_SHA}"
-      echo "----------------------------------------"
-
   # Build backend container for Artifact Registry
   - name: gcr.io/cloud-builders/docker
     args:
       - build
       - -t
-      - $_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA
+      - us-central1-docker.pkg.dev/$PROJECT_ID/rotr-app-repo/$_SERVICE_NAME:$COMMIT_SHA
       - .
 
   # Push backend container to Artifact Registry
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - $_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA
+      - us-central1-docker.pkg.dev/$PROJECT_ID/rotr-app-repo/$_SERVICE_NAME:$COMMIT_SHA
 
   # Deploy container to Cloud Run from Artifact Registry
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -51,7 +38,7 @@ steps:
       - run
       - deploy
       - $_SERVICE_NAME
-      - --image=$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA
+      - --image=us-central1-docker.pkg.dev/$PROJECT_ID/rotr-app-repo/$_SERVICE_NAME:$COMMIT_SHA
       - --region=$_DEPLOY_REGION
       - --memory=$_MEMORY
 
@@ -64,8 +51,6 @@ substitutions:
   _SERVICE_NAME: rotr-app
   _DEPLOY_REGION: us-central1
   _MEMORY: 512Mi
-  # Artifact Registry repository (update this to your repo location)
-  _AR_REPO: us-central1-docker.pkg.dev/$PROJECT_ID/rotr-app-repo
 
 tags:
   - gcp-cloud-build-deploy-cloud-run
