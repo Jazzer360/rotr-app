@@ -1,6 +1,6 @@
 steps:
   # Install project dependencies and build frontend
-  - name: python:3.12
+  - name: python:3.13
     entrypoint: bash
     args:
       - -c
