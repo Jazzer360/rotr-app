@@ -17,6 +17,18 @@ steps:
       - --project=$PROJECT_ID
       - --only=hosting
 
+  # Add this step to debug the variable value
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+    - -c
+    - |
+      echo "----------------------------------------"
+      echo "Project ID is: $PROJECT_ID"
+      echo "Service Name is: $_SERVICE_NAME"
+      echo "Commit SHA is: $COMMIT_SHA"
+      echo "Final image tag will be: ${_AR_REPO}/${_SERVICE_NAME}:${COMMIT_SHA}"
+      echo "----------------------------------------"
 
   # Build backend container for Artifact Registry
   - name: gcr.io/cloud-builders/docker
