@@ -1,10 +1,12 @@
 import datetime
+import pytz
 
 import reflex as rx
 
 
 def footer() -> rx.Component:
-    now = datetime.datetime.now()
+    central = pytz.timezone('America/Chicago')
+    now = datetime.datetime.now(central)
     date_str = now.strftime('%Y-%m-%d %H:%M')
     return rx.box(
         rx.container(
