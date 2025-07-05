@@ -7,7 +7,7 @@ steps:
       - |
         pip install --no-cache-dir -r requirements.txt
         export REFLEX_ENV=production
-        export API_URL=https://$_SERVICE_NAME-$PROJECT_NUMBER.$_DEPLOY_REGION.run.app
+        export API_URL=https://rotr-app-763868835094.us-central1.run.app
         reflex export --no-zip --frontend-only
 
   # Deploy to firebase hosting
