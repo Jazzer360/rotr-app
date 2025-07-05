@@ -86,7 +86,11 @@ def activity_card(activity: dict) -> rx.Component:
                     badge(activity),
                     width='100%'
                 ),
-                rx.text(activity['location']),
+                rx.hstack(
+                    rx.icon('map-pin', size=16),
+                    rx.text(activity['location']),
+                    align='center'
+                ),
                 rx.hstack(
                     rx.text(activity['time']),
                     time_left_text(activity),
