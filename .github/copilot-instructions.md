@@ -11,6 +11,7 @@ This repository is a Reflex (rx) Python web application for ROTR, structured wit
 - Use type hints for all new functions and classes.
 - Do not include comments in the code unless absolutely necessary; instead, use descriptive variable and function names.
 - Follow PEP8 style guidelines.
+- Use single quotes for strings, except when the string contains a single quote character, in which case use double quotes.
 
 ## Component Usage
 - Import shared UI elements from `rotr_app/components`.
