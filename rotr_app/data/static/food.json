@@ -122,7 +122,8 @@
           "price": "$6"
         },
         {
-          "item": "Pop & Water",
+          "item": "Drinks",
+          "desc": "Pop, Water",
           "price": "$3"
         }
       ]
@@ -131,36 +132,69 @@
       "vendor": "The Cup Truck",
       "menu": [
         {
+          "section": "The Goods"
+        },
+        {
           "item": "The 'Simp' Smashie",
-          "desc": "1/4lb custom blended Welcome Meats' beef n' bacon smash burger served on a brioche bun. Add an extra patty and/or enjoy with American cheese!"
+          "desc": "1/4lb custom blended Welcome Meats' beef n' bacon smash burger served on a brioche bun. Add an extra patty and/or enjoy with American cheese!",
+          "price": "$10",
+          "options": [
+            {
+              "option": "Add American cheese",
+              "price": "$1"
+            },
+            {
+              "option": "Add an extra patty",
+              "price": "$3"
+            }
+          ]
         },
         {
           "item": "The Fancified Smashie",
-          "desc": "This 1/4lb custom-blended Welcome Meats' beef n' bacon smashburger is topped with Gruyere cheese, arugula n' dried cherry compote n' served on a brioche bun. Stop drooling on your screens n' come see us at the truck."
+          "desc": "This 1/4lb custom-blended Welcome Meats' beef n' bacon smashburger is topped with Gruyere cheese, arugula n' dried cherry compote n' served on a brioche bun. Stop drooling on your screens n' come see us at the truck.",
+          "price": "$15"
         },
         {
           "item": "The Ultimate Smashie",
-          "desc": "We're not foolin' around with this one! Double 1/4lb patties layered with red onion, American cheese, Cup Truck secret sauce n' smashed again on a brioche bun."
+          "desc": "We're not foolin' around with this one! Double 1/4lb patties layered with red onion, American cheese, Cup Truck secret sauce n' smashed again on a brioche bun.",
+          "price": "$16"
         },
         {
           "item": "Burnt End Wein!",
-          "desc": "What can we say? This all-beef burnt end dog aims to please! Try our \"Top Shelf Wein\": Topped with pineapple relish n' shiracha mayo. It's like no other wein!"
+          "desc": "What can we say? This all-beef burnt end dog aims to please! Try our \"Top Shelf Wein\": Topped with pineapple relish n' shiracha mayo. It's like no other wein!",
+          "options": [
+            {
+              "option": "Plain",
+              "price": "$6"
+            },
+            {
+              "option": "Top Shelf",
+              "price": "$8"
+            }
+          ]
         },
         {
           "item": "Chopped Italian Sammie",
-          "desc": "Watch your drool for this one...hoagie bun stuffed with diced mortadella, capicola, red onion, tomato, pepperoncini, smoked Gouda cheese, lettuce n' italian mayo!"
+          "desc": "Watch your drool for this one...hoagie bun stuffed with diced mortadella, capicola, red onion, tomato, pepperoncini, smoked Gouda cheese, lettuce n' italian mayo!",
+          "price": "$15"
         },
         {
           "item": "Not Average Egg Salad Sammie",
-          "desc": "Slow your scroll....This is NOT your average egg salad. Hard boiled eggs tossed with capers, shallots, parsley, Welcome Meat's bacon, parmesan-black garlic dressing n' arugula, piled on a hoagie bun. Even Grandma will be impressed!"
+          "desc": "Slow your scroll....This is NOT your average egg salad. Hard boiled eggs tossed with capers, shallots, parsley, Welcome Meat's bacon, parmesan-black garlic dressing n' arugula, piled on a hoagie bun. Even Grandma will be impressed!",
+          "price": "$8"
         },
         {
           "item": "Wingy Dingy",
-          "desc": "Just because it's fun to say. 4 wing n' drummies tossed in a chipotle-peach glaze....What's not to love?"
+          "desc": "Just because it's fun to say. 4 wing n' drummies tossed in a chipotle-peach glaze....What's not to love?",
+          "price": "$8"
+        },
+        {
+          "section": "The Sides"
         },
         {
           "item": "Seasoned Shoestring fries",
-          "desc": "Fried to perfection n' seasoned with Seth's pantry of spices."
+          "desc": "Fried to perfection n' seasoned with Seth's pantry of spices.",
+          "price": "$4"
         },
         {
           "item": "Fancy fries",
@@ -168,27 +202,35 @@
         },
         {
           "item": "Fancy Pants Cheesy Mac",
-          "desc": "Not your 'pedestrian' mac n' cheese. Smoked Gouda n' American cheese topped with a special crunch"
+          "desc": "Not your 'pedestrian' mac n' cheese. Smoked Gouda n' American cheese topped with a special crunch",
+          "price": "$6"
         },
         {
           "item": "Farro-Arugula salad",
           "desc": "Peppery arugula meets nutty farro in this bold, bitey salad that eats like it means it.!"
         },
         {
+          "section": "The Desserts"
+        },
+        {
           "item": "Funfetti Cupcake",
-          "desc": "Addie whips these cupcakes up from scratch n' donates $.50 from every cupcake to a local non-profit!"
+          "desc": "Addie whips these cupcakes up from scratch n' donates $.50 from every cupcake to a local non-profit!",
+          "price": "$3"
         },
         {
           "item": "kookies for kidneys - Chocolate Chip Kookie",
-          "desc": "Inspired by her sister, Parker is raising money for a cause close to her heart...n' kidneys! Try Parker's Kookies for Kidneys! This week's flavor is chocolate chip. **Parker received a life-saving kidney transplant at 6 years old. At 7, she is now raising money for CKD research!**"
+          "desc": "Inspired by her sister, Parker is raising money for a cause close to her heart...n' kidneys! Try Parker's Kookies for Kidneys! This week's flavor is chocolate chip. **Parker received a life-saving kidney transplant at 6 years old. At 7, she is now raising money for CKD research!**",
+          "price": "$2"
         },
         {
           "item": "Local Rhubarb crisp",
-          "desc": "No one is sad about rhubarb season! Enjoy this fresh n' local rhubarb crisp baked perfectly in a 5-inch round pan. Enough for 2 people, or 1 lover of rhubarb!"
+          "desc": "No one is sad about rhubarb season! Enjoy this fresh n' local rhubarb crisp baked perfectly in a 5-inch round pan. Enough for 2 people, or 1 lover of rhubarb!",
+          "price": "$12"
         },
         {
           "item": "Oreo pop",
-          "desc": "Think cake-pop, but made with crushed Oreos on a stick with crunchy chocolate coating."
+          "desc": "Think cake-pop, but made with crushed Oreos on a stick with crunchy chocolate coating.",
+          "price": "$3"
         },
         {
           "item": "Reece's peanut butter cup Ice cream Cake",
@@ -197,6 +239,14 @@
         {
           "item": "Local Strawberry Buttermilk ice cream",
           "desc": "Sun-kissed June n' everbearing strawberries picked fresh from our garden, churned with sweet n' creamy buttermilk into frozen perfection."
+        },
+        {
+          "section": "Drinks"
+        },
+        {
+          "item": "Drinks",
+          "desc": "Coke, Diet Coke, Sprite, Water",
+          "price": "$2"
         }
       ]
     },
@@ -270,7 +320,8 @@
           "price": "$3"
         },
         {
-          "item": "Pepsi, Mt. Dew, Dr. Pepper, Diet Dr. Pepper",
+          "item": "Drinks",
+          "desc": "Pepsi, Mt. Dew, Dr. Pepper, Diet Dr. Pepper",
           "price": "$1"
         }
       ]
@@ -318,7 +369,8 @@
           ]
         },
         {
-          "item": "Pop & Water",
+          "item": "Drinks",
+          "desc": "Pop, Water",
           "price": "$2"
         }
       ]
