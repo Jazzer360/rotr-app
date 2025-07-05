@@ -11,7 +11,7 @@ steps:
         reflex export --no-zip --frontend-only
 
   # Deploy to firebase hosting
-  - name: gcr.io/$PROJECT_ID/firebase
+  - name: us-docker.pkg.dev/firebase-cli/us/firebase
     args: 
       - deploy
       - --project=$PROJECT_ID
