@@ -97,7 +97,8 @@ def band_card(band: dict) -> rx.Component:
         ),
         progress(band),
         color=rx.cond(band['end'] < NavState.now, 'gray', ''),
-        margin_left=rx.cond(band['stage'] == 'Main', '0px', '20px')
+        margin_left=rx.cond(band['stage'] == 'Main', '0px', '20px'),
+        cursor='pointer'
     )
 
 
@@ -132,7 +133,8 @@ def band_entry(band: dict) -> rx.Component:
     return rx.container(
         rx.dialog.root(
             rx.dialog.trigger(
-                band_card(band)
+                band_card(band),
+                cursor='pointer'
             ),
             rx.dialog.content(
                 rx.hstack(
