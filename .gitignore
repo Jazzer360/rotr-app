@@ -1,9 +1,10 @@
-.states
 *.db
 *.py[cod]
-.venv
-.env
-.web
+.states/
+.venv/
+.env/
+.web/
+.vscode/
 __pycache__/
 assets/external/
 backend.zip
