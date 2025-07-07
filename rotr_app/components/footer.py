@@ -20,10 +20,14 @@ def footer() -> rx.Component:
                 rx.spacer(),
                 rx.link(
                     'Privacy Notice',
-                    href='/privacy.html',
+                    href=(
+                        'https://storage.googleapis.com/rotr-app-assets/'
+                        'privacy.html'
+                    ),
                     text_align='right',
                     white_space='normal',
                     padding_right='1em',
+                    is_external=True
                 ),
                 align='center',
                 width='100%'
