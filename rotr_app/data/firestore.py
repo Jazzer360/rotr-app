@@ -41,7 +41,7 @@ class DataManager:
         self.update_time()
 
     def update_time(self):
-        self.last_post = max(map(int, self.posts.keys()))
+        self.last_post = max(map(int, self.posts.keys())) if self.posts else 0
         self.last_update = now()
 
     def save_post(self, *, user, subject, message):
