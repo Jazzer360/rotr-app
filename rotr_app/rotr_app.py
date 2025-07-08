@@ -14,5 +14,4 @@ app = rx.App(
     head_components=[
         rx.script(tag_manager)
     ],
-    theme=rx.theme(appearance='dark')
 )
