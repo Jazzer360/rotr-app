@@ -1,0 +1,24 @@
+{
+  "vendors": [
+    {
+      "vendor": "Mystic Arts & Crafts",
+      "description": "Handcrafted jewelry, crystals, and spiritual art pieces including dream catchers and healing stones."
+    },
+    {
+      "vendor": "River Valley Pottery",
+      "description": "Local ceramic art, pottery bowls, vases, and custom commissioned pieces made from regional clay."
+    },
+    {
+      "vendor": "Woodland Weavers",
+      "description": "Hand-woven textiles, tapestries, scarves, and organic fiber art using traditional techniques."
+    },
+    {
+      "vendor": "Sunset Canvas Gallery",
+      "description": "Original paintings, prints, and canvas art featuring local landscapes and nature scenes."
+    },
+    {
+      "vendor": "Iron & Stone Metalworks",
+      "description": "Handforged metal sculptures, garden art, decorative ironwork, and stone carvings."
+    }
+  ]
+}
