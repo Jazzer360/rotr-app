@@ -151,7 +151,7 @@
         },
         {
           "item": "The Fancified Smashie",
-          "desc": "This 1/4lb custom-blended Welcome Meats' beef n' bacon smashburger is topped with Gruyere cheese, arugula n' dried cherry compote n' served on a brioche bun. Stop drooling on your screens n' come see us at the truck.",
+          "desc": "This 1/4lb custom-blended Welcome Meats' beef n' bacon smashburger is topped with smoked mozzarella cheese, vinegar slaw n' local green sauce (beautiful blend of local kale, arugula, parsley n' garlic scape) n' served on a brioche bun. Stop drooling on your screens n' come see us at the truck. 🍔",
           "price": "$15"
         },
         {
@@ -161,7 +161,7 @@
         },
         {
           "item": "Burnt End Wein!",
-          "desc": "What can we say? This all-beef burnt end dog aims to please! Try our \"Top Shelf Wein\": Topped with pineapple relish n' shiracha mayo. It's like no other wein!",
+          "desc": "What can we say? This all-beef burnt end dog aims to please!",
           "options": [
             {
               "option": "Plain",
