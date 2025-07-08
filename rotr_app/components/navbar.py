@@ -32,10 +32,12 @@ class NavState(rx.State):
 
     @rx.var
     def show_survey(self) -> bool:
+        _ = self.now
         return festival_started()
 
     @rx.var
     def show_volunteer(self) -> bool:
+        _ = self.now
         return not festival_started()
 
     @rx.event
@@ -88,14 +90,14 @@ def navbar_link(link: tuple[str, str]) -> rx.Component:
         is_external=not link[1].startswith('/'),
         on_click=click_handler,
         display=rx.cond(
-            show_link(link),
+            hide_link(link),
             'none',
             'block'
         )
     )
 
 
-def show_link(link):
+def hide_link(link):
     return ((~NavState.show_survey & (link[0] == 'Survey')) |
             (~NavState.show_volunteer & (link[0] == 'Volunteer')))
 
@@ -115,7 +117,7 @@ def menu_item(link: tuple[str, str]) -> rx.Component:
         ),
         on_click=click_handler,
         display=rx.cond(
-            show_link(link),
+            hide_link(link),
             'none',
             'flex'
         )
