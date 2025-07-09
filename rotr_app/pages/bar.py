@@ -13,8 +13,13 @@ items = _bar_data['items']
 def bar_selection(selection: dict) -> rx.Component:
     return rx.box(
         rx.hstack(
-            rx.text(selection.get('name'), size='2', font_weight='bold', margin_left='2em'),
-            rx.spacer(),
+            rx.text(
+                selection.get('name'),
+                size='2',
+                font_weight='bold',
+                margin_left='2em',
+                padding_top='1em',
+            )
         ),
         rx.text(
             selection.get('description'),
@@ -27,7 +32,10 @@ def bar_selection(selection: dict) -> rx.Component:
 
 
 def bar_item(item: dict) -> rx.Component:
-    selections = [bar_selection(selection) for selection in item.get('selection', [])]
+    selections = [
+        bar_selection(selection)
+        for selection in item.get('selection', [])
+    ]
     return rx.box(
         rx.hstack(
             rx.text(item.get('item'), size='3'),

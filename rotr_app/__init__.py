@@ -1,6 +1,1 @@
-from rotr_app.pages import (  # noqa: F401
-    schedule,
-    announcements,
-    floyd,
-    activities,
-    food)
+import rotr_app.pages  # noqa: F401
