@@ -12,21 +12,19 @@ items = _bar_data['items']
 
 def bar_selection(selection: dict) -> rx.Component:
     return rx.box(
-        rx.hstack(
-            rx.text(
-                selection.get('name'),
-                size='2',
-                font_weight='bold',
-                margin_left='2em',
-                padding_top='1em',
-            )
+        rx.text(
+            selection.get('name'),
+            size='2',
+            font_weight='bold',
+            margin_left='2em',
+            padding_top='1em',
         ),
         rx.text(
             selection.get('description'),
             size='2',
             margin_left='3em',
             font_style='italic'
-        ) if selection.get('description') else None,
+        ),
         width='100%'
     )
 
@@ -51,9 +49,14 @@ def bar_vendor() -> rx.Component:
     return rx.container(
         rx.vstack(
             rx.card(
-                rx.heading(vendor_name, margin_bottom='1em'),
+                rx.heading(
+                    vendor_name,
+                    margin_bottom='1em',
+                    padding_top='.2em'
+                ),
                 rx.vstack(
-                    [bar_item(item) for item in items]
+                    [bar_item(item) for item in items],
+                    padding_bottom='.2em'
                 ),
                 width='100%'
             ),
