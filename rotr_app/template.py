@@ -12,7 +12,8 @@ def template(page: Callable[[], rx.Component]) -> Callable[[], rx.Component]:
             page(),
             footer(),
             survey_popup(),
-            align='center'
+            align='center',
+            spacing='2'
         )
 
     return wrapper

@@ -121,7 +121,7 @@ def activity_entry(activity: dict) -> rx.Component:
 @template
 def activities_page() -> rx.Component:
     return rx.vstack(
-        rx.heading('Friday'),
+        rx.heading('Friday', margin_top='.4em'),
         rx.box(
             [activity_entry(activity) for activity in friday],
             width='100%'

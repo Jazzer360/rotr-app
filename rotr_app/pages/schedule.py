@@ -162,7 +162,7 @@ def band_entry(band: dict) -> rx.Component:
 @template
 def schedule() -> rx.Component:
     return rx.vstack(
-        rx.heading('Friday'),
+        rx.heading('Friday', margin_top='.4em'),
         rx.box(
             [band_entry(band) for band in friday],
             width='100%'
