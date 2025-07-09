@@ -57,8 +57,9 @@ def bar_vendor() -> rx.Component:
                 ),
                 rx.text(
                     'To cut down on waste, we would appreciate if you either '
-                    'bring your own cup or purchase one at the bar. Cups are '
-                    '$15, or you can get a cup, koozie, and drink for $25.',
+                    'bring your own cup or purchase one at the merch tent. '
+                    'Cups are $15, or you can get a cup, koozie, and drink '
+                    'for $25.',
                     size='2',
                     font_style='italic',
                     margin_bottom='1em'
