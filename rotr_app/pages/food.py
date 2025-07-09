@@ -58,7 +58,12 @@ def vendor_item(menu: dict) -> rx.Component:
     return rx.container(
         rx.vstack(
             rx.card(
-                rx.heading(menu.get('vendor'), margin_bottom='1em'),
+                rx.heading(
+                    menu.get('vendor'),
+                    align='center',
+                    margin_top='.2em'
+                ),
+                rx.divider(margin_top='1em', margin_bottom='1em'),
                 rx.vstack(
                     [menu_item(item) for item in menu.get('menu', [])]
                 ),

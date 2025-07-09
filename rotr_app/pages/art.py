@@ -13,12 +13,17 @@ def vendor_item(vendor: dict) -> rx.Component:
     return rx.container(
         rx.vstack(
             rx.card(
-                rx.heading(vendor.get('vendor'), margin_bottom='1em'),
+                rx.heading(
+                    vendor.get('vendor'),
+                    margin_bottom='.4em',
+                    margin_top='.2em',
+                    align='center'
+                ),
                 rx.text(
                     vendor.get('description'),
                     size='3',
                     font_style='italic',
-                    padding_left='1em'
+                    align='center'
                 ),
                 width='100%'
             ),

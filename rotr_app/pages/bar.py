@@ -51,9 +51,19 @@ def bar_vendor() -> rx.Component:
             rx.card(
                 rx.heading(
                     vendor_name,
-                    margin_bottom='1em',
-                    padding_top='.2em'
+                    margin_bottom='.5em',
+                    padding_top='.2em',
+                    align='center'
                 ),
+                rx.text(
+                    'To cut down on waste, we would appreciate if you either '
+                    'bring your own cup or purchase one at the bar. Cups are '
+                    '$15, or you can get a cup, koozie, and drink for $25.',
+                    size='2',
+                    font_style='italic',
+                    margin_bottom='1em'
+                ),
+                rx.divider(margin_top='1em', margin_bottom='1em'),
                 rx.vstack(
                     [bar_item(item) for item in items],
                     padding_bottom='.2em'
