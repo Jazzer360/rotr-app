@@ -27,5 +27,9 @@ def load_food_data() -> Dict[str, List[Dict[str, Any]]]:
     return load_json_data('food.json')
 
 
+def load_art_data() -> Dict[str, List[Dict[str, Any]]]:
+    return load_json_data('art.json')
+
+
 def load_navbar_data() -> Dict[str, Dict[str, str]]:
     return load_json_data('navbar.json')
