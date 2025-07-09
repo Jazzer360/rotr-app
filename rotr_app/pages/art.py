@@ -17,7 +17,8 @@ def vendor_item(vendor: dict) -> rx.Component:
                 rx.text(
                     vendor.get('description'),
                     size='3',
-                    font_style='italic'
+                    font_style='italic',
+                    padding_left='1em'
                 ),
                 width='100%'
             ),
