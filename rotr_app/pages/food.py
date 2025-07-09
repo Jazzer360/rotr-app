@@ -67,7 +67,9 @@ def vendor_item(menu: dict) -> rx.Component:
                 rx.vstack(
                     [menu_item(item) for item in menu.get('menu', [])]
                 ),
-                width='100%'
+                width='100%',
+                padding='1.5em',
+                padding_top='1em'
             ),
             align='center'
         ),

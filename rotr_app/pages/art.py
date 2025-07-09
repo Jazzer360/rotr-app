@@ -25,7 +25,9 @@ def vendor_item(vendor: dict) -> rx.Component:
                     font_style='italic',
                     align='center'
                 ),
-                width='100%'
+                width='100%',
+                padding='1.5em',
+                padding_top='1em'
             ),
             align='center'
         ),

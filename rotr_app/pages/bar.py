@@ -69,6 +69,8 @@ def bar_vendor() -> rx.Component:
                     [bar_item(item) for item in items],
                     padding_bottom='.2em'
                 ),
+                padding='1.5em',
+                padding_top='1em',
                 width='100%'
             ),
             align='center'
