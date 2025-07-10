@@ -159,7 +159,7 @@ def navbar() -> rx.Component:
     return rx.box(
         rx.moment(interval=5000, on_change=NavState.update, display='none'),
         rx.moment(
-            interval=10000,
+            interval=60000,
             on_change=NavState.check_version,
             display='none'
         ),
