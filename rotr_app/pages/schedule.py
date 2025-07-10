@@ -19,7 +19,6 @@ apply_start_end(saturday)
 class ScheduleState(rx.State):
     @rx.event
     def show_toast(self):
-        yield NavState.update
         yield SurveyState.check_survey_status
         return rx.toast.info(
             'Click a band to learn more about them.',

@@ -116,8 +116,7 @@ def activity_entry(activity: dict) -> rx.Component:
 
 @rx.page(
     route='/activities',
-    title='Activity Schedule',
-    on_load=NavState.update)
+    title='Activity Schedule')
 @template
 def activities_page() -> rx.Component:
     return rx.vstack(

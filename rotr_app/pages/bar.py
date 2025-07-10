@@ -1,6 +1,5 @@
 import reflex as rx
 
-from rotr_app.components.navbar import NavState
 from rotr_app.data.json_loader import load_bar_data
 from rotr_app.template import template
 
@@ -83,8 +82,7 @@ def bar_vendor() -> rx.Component:
 
 @rx.page(
     route='/bar',
-    title='Bar',
-    on_load=NavState.update)
+    title='Bar')
 @template
 def bar_page() -> rx.Component:
     return rx.box(

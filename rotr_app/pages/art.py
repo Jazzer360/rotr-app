@@ -1,6 +1,5 @@
 import reflex as rx
 
-from rotr_app.components.navbar import NavState
 from rotr_app.data.json_loader import load_art_data
 from rotr_app.template import template
 
@@ -39,8 +38,7 @@ def vendor_item(vendor: dict) -> rx.Component:
 
 @rx.page(
     route='/art',
-    title='Art Vendors',
-    on_load=NavState.update)
+    title='Art Vendors')
 @template
 def art_page() -> rx.Component:
     return rx.box(

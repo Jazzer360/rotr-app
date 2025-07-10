@@ -45,8 +45,28 @@ class NavState(rx.State):
         return not festival_started()
 
     @rx.event
+    def set_read(self):
+        self.last_post_read = 't' + str(self.last_post)
+
+    @rx.event
+    def show_announcement_toast(self):
+        return rx.toast.warning('New announcements posted.')
+
+    @rx.event
+    def check_version(self, _=None):
+        if FRONTEND_VERSION != self.current_version:
+            if self.current_version == '':
+                self.current_version = FRONTEND_VERSION
+            else:
+                self.current_version = FRONTEND_VERSION
+                return rx.call_script('window.location.reload()')
+
+    @rx.event
     def update(self, _=None):
         self.now = int(datetime.now().timestamp())
+
+    @rx.event
+    def check_announcements(self, _=None):
         if (self.last_update != get_manager().last_update):
             print('Found new announcements')
             self.last_update = get_manager().last_update
@@ -61,23 +81,6 @@ class NavState(rx.State):
             self.announcements = posts
             if int(self.last_post_read[1:]) < self.last_post:
                 return NavState.show_announcement_toast
-
-    @rx.event
-    def set_read(self):
-        self.last_post_read = 't' + str(self.last_post)
-
-    @rx.event
-    def show_announcement_toast(self):
-        return rx.toast.warning('New announcements posted.')
-
-    @rx.event
-    def set_frontend_version(self):
-        self.current_version = FRONTEND_VERSION
-
-    @rx.event
-    def check_version(self, _=None):
-        if FRONTEND_VERSION != self.current_version:
-            return rx.call_script('window.location.reload()')
 
 
 def get_messages(post_data: dict[str, str]) -> list[str]:
@@ -157,10 +160,22 @@ def unread_badge() -> rx.Component:
 
 def navbar() -> rx.Component:
     return rx.box(
-        rx.moment(interval=5000, on_change=NavState.update, display='none'),
+        rx.moment(
+            interval=20000,
+            on_mount=NavState.check_announcements,
+            on_change=NavState.check_announcements,
+            display='none'
+        ),
         rx.moment(
             interval=60000,
+            on_mount=NavState.check_version,
             on_change=NavState.check_version,
+            display='none'
+        ),
+        rx.moment(
+            interval=5000,
+            on_mount=NavState.update,
+            on_change=NavState.update,
             display='none'
         ),
         rx.desktop_only(
@@ -208,6 +223,5 @@ def navbar() -> rx.Component:
         ),
         bg=rx.color('accent', 3),
         padding='1em',
-        width='100%',
-        on_mount=NavState.set_frontend_version,
+        width='100%'
     )
