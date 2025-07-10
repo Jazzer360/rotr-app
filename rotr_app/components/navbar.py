@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from typing import Callable, Optional
 
@@ -10,6 +11,8 @@ from rotr_app.util.utils import festival_started
 # Load navigation links from JSON
 _navbar_data = load_navbar_data()
 links = _navbar_data['links']
+
+FRONTEND_VERSION = os.environ.get('COMMIT_SHA', '')
 
 
 class Announcement(rx.Base):
@@ -29,6 +32,7 @@ class NavState(rx.State):
         max_age=60 * 60 * 24 * 30
     )
     announcements: list[Announcement] = []
+    current_version: str = rx.SessionStorage(name='current_version')
 
     @rx.var
     def show_survey(self) -> bool:
@@ -65,6 +69,15 @@ class NavState(rx.State):
     @rx.event
     def show_announcement_toast(self):
         return rx.toast.warning('New announcements posted.')
+
+    @rx.event
+    def set_frontend_version(self):
+        self.current_version = FRONTEND_VERSION
+
+    @rx.event
+    def check_version(self):
+        if FRONTEND_VERSION != self.current_version:
+            return rx.call_script('window.location.reload()')
 
 
 def get_messages(post_data: dict[str, str]) -> list[str]:
@@ -145,6 +158,11 @@ def unread_badge() -> rx.Component:
 def navbar() -> rx.Component:
     return rx.box(
         rx.moment(interval=5000, on_change=NavState.update, display='none'),
+        rx.moment(
+            interval=10000,
+            on_change=NavState.check_version,
+            display='none'
+        ),
         rx.desktop_only(
             rx.hstack(
                 rx.hstack(
@@ -190,8 +208,6 @@ def navbar() -> rx.Component:
         ),
         bg=rx.color('accent', 3),
         padding='1em',
-        # position='fixed',
-        # top='0px',
-        # z_index='5',
         width='100%',
+        on_mount=NavState.set_frontend_version,
     )

@@ -23,6 +23,8 @@ steps:
       - build
       - -t
       - us-central1-docker.pkg.dev/$PROJECT_ID/rotr-app-repo/$_SERVICE_NAME:$COMMIT_SHA
+      - --build-arg
+      - COMMIT_SHA=$COMMIT_SHA
       - .
 
   # Push backend container to Artifact Registry
