@@ -75,7 +75,7 @@ class NavState(rx.State):
         self.current_version = FRONTEND_VERSION
 
     @rx.event
-    def check_version(self):
+    def check_version(self, _=None):
         if FRONTEND_VERSION != self.current_version:
             return rx.call_script('window.location.reload()')
 
