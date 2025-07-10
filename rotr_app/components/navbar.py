@@ -98,6 +98,11 @@ def get_survey_handler(link: str) -> Optional[Callable]:
     return None
 
 
+def hide_link(link) -> bool:
+    return ((~NavState.show_survey & (link[0] == 'Survey')) |
+            (~NavState.show_volunteer & (link[0] == 'Volunteer')))
+
+
 def navbar_link(link: tuple[str, str]) -> rx.Component:
     click_handler = get_survey_handler(link[0])
     return rx.link(
@@ -111,11 +116,6 @@ def navbar_link(link: tuple[str, str]) -> rx.Component:
             'block'
         )
     )
-
-
-def hide_link(link):
-    return ((~NavState.show_survey & (link[0] == 'Survey')) |
-            (~NavState.show_volunteer & (link[0] == 'Volunteer')))
 
 
 def menu_item(link: tuple[str, str]) -> rx.Component:
