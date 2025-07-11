@@ -106,7 +106,16 @@ def hide_link(link) -> bool:
 def navbar_link(link: tuple[str, str]) -> rx.Component:
     click_handler = get_survey_handler(link[0])
     return rx.link(
-        rx.text(link[0], size='4', weight='medium'),
+        rx.text(
+            link[0],
+            size='4',
+            weight='medium',
+            color=rx.cond(
+                (link[0] == 'Announcements') & unread_posts(),
+                'red',
+                ''
+            )
+        ),
         href=link[1],
         is_external=not link[1].startswith('/'),
         on_click=click_handler,
