@@ -47,7 +47,7 @@ def announcements():
                 rx.foreach(NavState.announcements, make_card),
                 width='100%'
             ),
-            padding_top='0px',
+            padding_top='8px',
             size='2'
         ),
         width='100%'
