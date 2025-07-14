@@ -12,6 +12,10 @@
           "price": "$6"
         },
         {
+          "item": "Hot Dog",
+          "price": "$5"
+        },
+        {
           "item": "Drinks",
           "desc": "Pop, Water",
           "price": "$3"
@@ -70,7 +74,8 @@
         },
         {
           "item": "Smoked Ham Sand-O",
-          "desc": "Smoked ham gets cozy with herb ricotta, sweet-hot pepper jelly, and arugula—like a garden party with a spicy secret. Vegetarian?  No problem! We'll load you up with non-ham ingredients."
+          "desc": "Smoked ham gets cozy with herb ricotta, sweet-hot pepper jelly, and arugula—like a garden party with a spicy secret. Vegetarian?  No problem! We'll load you up with non-ham ingredients.",
+          "price": "$12"
         },
         {
           "item": "Wingy Dingy",
@@ -92,7 +97,8 @@
         },
         {
           "item": "Farro n' Local Kale Salad",
-          "desc": "Dried cherries, toasted walnuts, manchego cheese n' hot honey bacon vinaigrette. Wholesome enough for a yoga retreat, wild enough for Rhythm of the River. Vegetarian? We'll skip the bacon n' top this salad with a local cider vinaigrette"
+          "desc": "Dried cherries, toasted walnuts, manchego cheese n' hot honey bacon vinaigrette. Wholesome enough for a yoga retreat, wild enough for Rhythm of the River. Vegetarian? We'll skip the bacon n' top this salad with a local cider vinaigrette",
+          "price": "$6"
         },
         {
           "section": "The Desserts"
@@ -110,7 +116,7 @@
         {
           "item": "Local Rhubarb Crisp",
           "desc": "No one is sad about rhubarb season! Enjoy this fresh n' local rhubarb crisp baked perfectly in a 5-inch round pan. Enough for 2 people, or 1 lover of rhubarb!",
-          "price": "$12"
+          "price": "$6"
         },
         {
           "item": "Oreo Pop",
@@ -119,15 +125,18 @@
         },
         {
           "item": "Mint Chip Ice cream Cake",
-          "desc": "Crushed Oreo base, homemade chocolate layer topped with creamy Reese's Peanut Butter Cup ice cream n' more crushed Oreos n' homemade chocolate sauce."
+          "desc": "Crushed Oreo base, homemade chocolate layer topped with creamy Reese's Peanut Butter Cup ice cream n' more crushed Oreos n' homemade chocolate sauce.",
+          "price": "$6"
         },
         {
           "item": "Local Strawberry Buttermilk ice cream",
-          "desc": "Sun-kissed June n' everbearing strawberries picked fresh from our garden, churned with sweet n' creamy buttermilk into frozen perfection."
+          "desc": "Sun-kissed June n' everbearing strawberries picked fresh from our garden, churned with sweet n' creamy buttermilk into frozen perfection.",
+          "price": "$3"
         },
         {
           "item": "Lemon Poppyseed Cake",
-          "desc": "Bright, zesty lemon poppyseed cake—like sunshine in cake form"
+          "desc": "Bright, zesty lemon poppyseed cake—like sunshine in cake form",
+          "price": "$6"
         },
         {
           "section": "Drinks"
@@ -223,25 +232,29 @@
           "options": [
             {
               "option": "w/ Seasoned Beef",
-              "price": "$10"
+              "price": "$13"
             },
             {
               "option": "w/ Pinto Beans",
-              "price": "$10"
+              "price": "$13"
+            },
+            {
+              "option": "w/ Chicken",
+              "price": "$14"
             },
             {
               "option": "w/ Beef & Beans",
-              "price": "$11"
+              "price": "$14"
             }
           ]
         },
         {
           "item": "Taco Salad w/ Seasoned Beef",
-          "price": "$10"
+          "price": "$13"
         },
         {
           "item": "Nacho Supreme w/ Seasoned Beef",
-          "price": "$10"
+          "price": "$13"
         },
         {
           "item": "Nachos (Chips & Cheese)",
@@ -249,18 +262,18 @@
         },
         {
           "item": "Elephant Ear (Fry Bread)",
-          "price": "$5",
+          "price": "$6",
           "options": [
             {
               "option": "w/ Ice Cream",
-              "price": "$7"
+              "price": "$8"
             }
           ]
         },
         {
           "item": "Drinks",
           "desc": "Pop, Water",
-          "price": "$2"
+          "price": "$3"
         }
       ]
     }
